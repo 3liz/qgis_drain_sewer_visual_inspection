@@ -1,0 +1,14 @@
+[general]
+name=Drain sewer visual inspection
+description=Drain and sewer systems visual inspection coding system (EN 13508-2)
+about=Drain and sewer systems visual inspection coding system (EN 13508-2)
+version=0.1
+qgisMinimumVersion=3.4
+author=3liz
+email=info@3liz.com
+tags=drain,sewer,pipe,pipeline,inspection,EN13508,water,hydraulic,pvi
+icon=resources/icons/icon.png
+
+homepage=https://github.com/3liz/qgis_drain_sewer_visual_inspection
+repository=https://github.com/3liz/qgis_drain_sewer_visual_inspection
+tracker=https://github.com/3liz/qgis_drain_sewer_visual_inspection/issues

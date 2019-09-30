@@ -1,0 +1,18 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,,Identifiant
+2,a,10,String,0,0,,Code principal
+3,b,10,String,0,0,,Caractérisation 1
+4,c,10,String,0,0,,Caractérisation 2
+5,d,10,String,0,0,,Quantification 1
+6,e,10,String,0,0,,Quantification 2
+7,f,10,String,0,0,,Remarques
+8,g,10,String,0,0,,Emplacement circonférentiel 1
+9,h,10,String,0,0,,Emplacement circonférentiel 2
+10,i,6,Real,0,0,,Emplacement longitudinal ou vertical
+11,j,10,String,0,0,,Code de défaut continu
+12,k,10,String,0,0,,Assemblage
+13,l,10,String,0,0,,Champ de description de l'emplacement
+14,m,10,String,0,0,,Référence de photographie
+15,n,10,String,0,0,,Référence de vidéo
+16,id_troncon,2,Integer,0,0,,Identifiant de troncon
+17,id_file,2,Integer,0,0,,Identifiant de fichier

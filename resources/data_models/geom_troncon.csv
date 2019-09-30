@@ -1,0 +1,5 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,,Identifiant
+2,label,10,String,0,0,,Référence
+3,id_geom_regard_amont,2,Integer,0,0,,Identifiant de la géométrie de regard amont
+4,id_geom_regard_aval,2,Integer,0,0,,Identifiant de la géométrie de regard aval

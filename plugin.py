@@ -2,9 +2,11 @@
 
 import logging
 
+from qgis.core import QgsApplication
 from qgis.PyQt.QtCore import QCoreApplication, QTranslator
 from qgis.PyQt.QtWidgets import QAction, QMessageBox
 
+from .processing_algorithms.provider import Provider
 from .qgis_plugin_tools.custom_logging import setup_logger, plugin_name
 from .qgis_plugin_tools.i18n import setup_translation, tr
 
@@ -21,15 +23,23 @@ class DrainSewerVisualInspection:
 
         self.iface = iface
         self.action = None
-
-        ts_file = setup_translation()
-        self.translator = QTranslator()
-        self.translator.load(ts_file)
-        QCoreApplication.installTranslator(self.translator)
+        self.provider = None
 
         setup_logger(plugin_name())
 
+        ts_file = setup_translation()
+        if ts_file:
+            self.translator = QTranslator()
+            self.translator.load(ts_file)
+            QCoreApplication.installTranslator(self.translator)
+
+    def initProcessing(self):
+        """Init Processing provider."""
+        self.provider = Provider()
+        QgsApplication.processingRegistry().addProvider(self.provider)
+
     def initGui(self):
+        self.initProcessing()
         self.action = QAction(tr('Go!'), self.iface.mainWindow())
         self.action.triggered.connect(self.run)
         self.iface.addToolBarIcon(self.action)
@@ -37,6 +47,7 @@ class DrainSewerVisualInspection:
     def unload(self):
         self.iface.removeToolBarIcon(self.action)
         del self.action
+        QgsApplication.processingRegistry().removeProvider(self.provider)
 
     def run(self):
         QMessageBox.information(None, tr('Minimal plugin'), tr('Do something useful here'))

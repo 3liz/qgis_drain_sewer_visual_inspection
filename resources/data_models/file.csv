@@ -1,0 +1,9 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,,Id
+2,basename,10,String,0,0,,Nom
+3,encoding,10,String,0,0,,Encodage
+4,lang,10,String,0,0,,Langue
+5,version,10,String,0,0,,Version
+6,hashcontent,10,String,0,0,,Hash
+7,date_debut,10,String,0,0,,
+8,date_fin,10,String,0,0,,

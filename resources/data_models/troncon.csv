@@ -1,0 +1,70 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,,Identifiant
+2,aaa,10,String,0,0,,Référence de tronçon
+3,aab,10,String,0,0,,Référence du nœud de départ
+4,aac,10,String,0,0,,Coordonnées du nœud de départ
+5,aad,10,String,0,0,,Référence du nœud 1
+6,aae,10,String,0,0,,Coordonnées du nœud 1
+7,aaf,10,String,0,0,,Référence du nœud 2
+8,aag,10,String,0,0,,Coordonnées du nœud 2
+9,aah,10,String,0,0,,Emplacement longitudinal du point de départ de la canalisation latérale
+10,aai,10,String,0,0,,Emplacement circonférentiel du point de départ de la canalisation latérale
+11,aaj,10,String,0,0,,Emplacement
+12,aak,10,String,0,0,,Sens de l'écoulement
+13,aal,10,String,0,0,,Type d'emplacement
+14,aam,10,String,0,0,,Autorité responsable
+15,aan,10,String,0,0,,Ville ou village
+16,aao,10,String,0,0,,Quartier
+17,aap,10,String,0,0,,Nom du réseau d'assainissement
+18,aaq,10,String,0,0,,Propriété foncière
+19,aat,10,String,0,0,,Référence du nœud 3
+20,aau,10,String,0,0,,Coordonnées du nœud 3
+21,aav,10,String,0,0,,
+22,aba,10,String,0,0,,Norme
+23,abb,10,String,0,0,,Système de codage initial
+24,abc,10,String,0,0,,Point de référence longitudinal
+25,abe,10,String,0,0,,Méthode d'inspection
+26,abf,10,String,0,0,,Date d'inspection
+27,abg,10,String,0,0,,Heure d'inspection
+28,abh,10,String,0,0,,Nom de l'inspecteur
+29,abi,10,String,0,0,,Référence de fonction de l’inspecteur
+30,abj,10,String,0,0,,Référence de fonction de l’employeur
+31,abk,10,String,0,0,,Support de stockage des images vidéo
+32,abl,10,String,0,0,,Support de stockage des photographies
+33,abm,10,String,0,0,,Système de position sur la bande vidéo
+34,abn,10,String,0,0,,Référence de photographie
+35,abo,10,String,0,0,,Référence de vidéo
+36,abp,10,String,0,0,,
+37,abq,6,Real,0,0,,Longueur
+38,abr,10,String,0,0,,
+39,abs,10,String,0,0,,
+40,aca,10,String,0,0,,Forme
+41,acb,10,String,0,0,,Hauteur
+42,acc,10,String,0,0,,Largeur
+43,acd,10,String,0,0,,Matériau
+44,ace,10,String,0,0,,Type de revêtement
+45,acf,10,String,0,0,,Matériau de revêtement
+46,acg,10,String,0,0,,Longueur unitaire de conduite
+47,ach,10,String,0,0,,Profondeur au nœud de départ
+48,aci,10,String,0,0,,Profondeur au nœud d’arrivée
+49,acj,10,String,0,0,,Type de branchement ou de collecteur
+50,ack,10,String,0,0,,Utilisation du branchement ou du collecteur
+51,acl,10,String,0,0,,Position stratégique
+52,acm,10,String,0,0,,Nettoyage
+53,acn,10,String,0,0,,Année de mise en service
+54,ada,10,String,0,0,,Précipitations
+55,adb,10,String,0,0,,Température
+56,adc,10,String,0,0,,Régulation du débit
+57,ade,10,String,0,0,,Remarque générale
+58,aea,10,String,0,0,,Modification Référence de vidéo
+59,aeb,10,String,0,0,,Modification Référence de photographie
+60,aec,10,String,0,0,,Modification Section transversale
+61,aed,10,String,0,0,,Modification Matériau
+62,aee,10,String,0,0,,Modification Revêtement
+63,aef,10,String,0,0,,Modification Longueur unitaire de conduite
+64,aeg,10,String,0,0,,Modification Précipitations
+65,id_regard1,2,Integer,0,0,,Identifant regard 1
+66,id_regard2,2,Integer,0,0,,Identifant regard 2
+67,id_regard3,2,Integer,0,0,,Identifant regard 3
+68,id_geom_troncon,2,Integer,0,0,,Identifiant de la géométrie de troncon
+69,id_file,2,Integer,0,0,,Identifiant du fichier

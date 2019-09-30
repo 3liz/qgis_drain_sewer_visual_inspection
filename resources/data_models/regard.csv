@@ -1,0 +1,55 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,,Identifiant
+2,caa,10,String,0,0,,Référence de nœud
+3,cab,10,String,0,0,,Coordonnées du nœud
+4,caj,10,String,0,0,,Emplacement
+5,cal,10,String,0,0,,Type d'emplacement
+6,cam,10,String,0,0,,Autorité responsable
+7,can,10,String,0,0,,Ville ou village
+8,cao,10,String,0,0,,Quartier
+9,cap,10,String,0,0,,Nom du réseau d’assainissement
+10,caq,10,String,0,0,,Propriété foncière
+11,car,10,String,0,0,,Type de nœud
+12,cas,10,String,0,0,,Niveau du tampon
+13,cba,10,String,0,0,,Norme
+14,cbb,10,String,0,0,,Système de codage initial
+15,cbc,10,String,0,0,,Point de référence vertical
+16,cbd,10,String,0,0,,Point de référence circonférentiel
+17,cbe,10,String,0,0,,Méthode d'inspection
+18,cbf,10,String,0,0,,Date d'inspection
+19,cbg,10,String,0,0,,Heure d'inspection
+20,cbh,10,String,0,0,,Nom de l'inspecteur
+21,cbi,10,String,0,0,,Référence de fonction de l’inspecteur
+22,cbj,10,String,0,0,,Référence de fonction de l’employeur
+23,cbk,10,String,0,0,,Stockage des images vidéo
+24,cbl,10,String,0,0,,Format de stockage des photographies
+25,cbm,10,String,0,0,,Système d'enregistrement de la position sur bande
+26,cbn,10,String,0,0,,Référence de photographie
+27,cbo,10,String,0,0,,
+28,cca,10,String,0,0,,Forme de l’accès
+29,ccb,10,String,0,0,,Largeur de l’accès
+30,ccc,10,String,0,0,,Longueur de l’accès
+31,ccd,10,String,0,0,,Matériau
+32,ccg,10,String,0,0,,Longueur unitaire des éléments de chambre
+33,cck,10,String,0,0,,Utilisation du réseau d'assainissement
+34,ccl,10,String,0,0,,Position stratégique
+35,ccm,10,String,0,0,,Nettoyage
+36,ccn,10,String,0,0,,Année de mise en service
+37,cco,10,String,0,0,,Forme du tampon
+38,ccp,10,String,0,0,,Matériau du tampon
+39,ccq,10,String,0,0,,Largeur du tampon
+40,ccr,10,String,0,0,,Longueur du tampon
+41,ccs,10,String,0,0,,Types de système de descente
+42,cda,10,String,0,0,,Précipitations
+43,cdb,10,String,0,0,,Température
+44,cdc,10,String,0,0,,Régulation du débit
+45,cdd,10,String,0,0,,Atmosphère
+46,cde,10,String,0,0,,Remarque générale
+47,cea,10,String,0,0,,Modification Référence de vidéo
+48,ceb,10,String,0,0,,Modification Référence de photographie
+49,ced,10,String,0,0,,Modification Matériau
+50,cef,10,String,0,0,,Modification Longueur unitaire de chambre
+51,ceg,10,String,0,0,,Modification Précipitations
+52,ceh,10,String,0,0,,Modification Types de système de descente
+53,id_geom_regard,2,Integer,0,0,,Identifiant de la géométrie de regard
+54,id_file,2,Integer,0,0,,Identifiant du fichier

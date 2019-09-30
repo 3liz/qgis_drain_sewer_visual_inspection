@@ -3,13 +3,13 @@
 import os.path
 
 from pathlib import Path
-from shutil import copyfile
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsProcessingContext,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFileDestination,
+    QgsProcessingParameterCrs,
     QgsProcessingOutputMultipleLayers,
     QgsProcessingException,
 )
@@ -32,40 +32,26 @@ __revision__ = '$Format:%H$'
 
 
 class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
-    """
-    This is an example algorithm that takes a vector layer and
-    creates a new identical one.
-
-    It is meant to be used as an example of how to create your own
-    processing_algorithms and explain methods and variables used to do it. An
-    algorithm like this will be available in all elements, and there
-    is not need for additional work.
-
-    All Processing processing_algorithms should extend the QgsProcessingAlgorithm
-    class.
-    """
-
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
-
-    # OUTPUT = 'OUTPUT'
-    # INPUT = 'INPUT'
 
     FILE_GPKG = 'FILE_GPKG'
+    CRS = 'CRS'
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'
 
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         self.addParameter(
             QgsProcessingParameterFileDestination(
                 self.FILE_GPKG,
                 self.tr('Geopackage file'),
                 fileFilter='gpkg'
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterCrs(
+                self.CRS,
+                self.tr('Coordinate Reference System'),
+                defaultValue='EPSG:2154'
             )
         )
 
@@ -77,13 +63,11 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
         base_name = self.parameterAsFile(parameters, self.FILE_GPKG, context)
-        parent_base_name = str(Path(base_name).parent)
-        if not base_name.endswith('.gpkg'):
-            base_name = os.path.join(parent_base_name, Path(base_name).stem+'.gpkg')
+        if not base_name.lower().endswith('.gpkg'):
+            base_name += '.gpkg'
+
+        crs = self.parameterAsCrs(parameters, self.CRS, context)
 
         tables = [
             'file',
@@ -93,8 +77,6 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             'geom_regard',
             'geom_troncon',
             'geom_obs',
-            'calc_obs',
-            'calc_geom_troncon',
         ]
 
         geometries = {
@@ -105,13 +87,10 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             'geom_regard': 'Point',
             'geom_troncon': 'LineString',
             'geom_obs': 'Point',
-            'calc_obs': 'None',
-            'calc_geom_troncon': 'None',
         }
 
         encoding = 'UTF-8'
-        driverName = QgsVectorFileWriter.driverForExtension('gpkg')
-        crs = QgsCoordinateReferenceSystem('EPSG:2154')
+        driver_name = QgsVectorFileWriter.driverForExtension('gpkg')
 
         for table in tables:
             # create virtual layer
@@ -138,11 +117,11 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
 
             # add fields
             pr.addAttributes(fields)
-            vl.updateFields()  # tell the vector layer to fetch changes from the provider
+            vl.updateFields()
 
             # set create file layer options
             options = QgsVectorFileWriter.SaveVectorOptions()
-            options.driverName = driverName
+            options.driverName = driver_name
             options.fileEncoding = encoding
 
             options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteFile
@@ -167,14 +146,9 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             del pr
             del vl
 
-        # copie du ficher xls
-        copyfile(
-            resources_path('data_models', 'norme13508_2_simplified_with_rule.xls'),
-            os.path.join(parent_base_name, 'regles_norme13508_2.xls'))
-
         output_layers = []
         for table in tables:
-            # Connexion à la couche troncon_rerau_classif dans le Geopackage
+            # connection troncon_rereau_classif in geopackage
             dest_layer = QgsVectorLayer('{}|layername={}'.format(base_name, table), table, 'ogr')
             if not dest_layer.isValid():
                 raise QgsProcessingException(
@@ -183,7 +157,8 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             feedback.pushInfo('The layer {} has been created'.format(table))
 
             output_layers.append(dest_layer)
-            # Ajout de la couche au projet
+
+            # Add layer to project
             context.temporaryLayerStore().addMapLayer(dest_layer)
             context.addLayerToLoadOnCompletion(
                 dest_layer.id(),
@@ -193,25 +168,6 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
                     self.OUTPUT_LAYERS
                 )
             )
-
-        # lecture du fichier xls pour la norme
-        dest_layer = QgsVectorLayer(os.path.join(parent_base_name, 'regles_norme13508_2.xls'), 'regles_norme13508_2', 'ogr')
-        if not dest_layer.isValid():
-            raise QgsProcessingException(
-                self.tr('* ERROR: Can\'t load XLS layer in {}').format(parent_base_name))
-
-        output_layers.append(dest_layer)
-
-        # Ajout de la couche troncon_rerau_classif au projet
-        context.temporaryLayerStore().addMapLayer(dest_layer)
-        context.addLayerToLoadOnCompletion(
-            dest_layer.id(),
-            QgsProcessingContext.LayerDetails(
-                'regles_norme13508_2',
-                context.project(),
-                self.OUTPUT_LAYERS
-            )
-        )
 
         # Create a view
         view_name = 'view_regard_geolocalized'
@@ -244,10 +200,11 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
         view_layer = QgsVectorLayer('{}|layername={}'.format(base_name, view_name), view_name, 'ogr')
         if not view_layer.isValid():
             raise QgsProcessingException(
-                self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name , base_name))
+                self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, base_name))
 
         output_layers.append(view_layer)
-        # Ajout de la couche au projet
+
+        # Add layer to project
         context.temporaryLayerStore().addMapLayer(view_layer)
         context.addLayerToLoadOnCompletion(
             view_layer.id(),
@@ -258,40 +215,24 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        return {self.FILE_GPKG: base_name, self.OUTPUT_LAYERS: output_layers}
+        return {
+            self.FILE_GPKG: base_name,
+            self.OUTPUT_LAYERS: output_layers
+        }
+
+    def shortHelpString(self) -> str:
+        return self.tr('Create the geopackage with all layers which are needed.')
 
     def name(self):
-        """
-        Returns the algorithm name, used for identifying the algorithm. This
-        string should be fixed for the algorithm, and must not be localised.
-        The name should be unique within each provider. Names should contain
-        lowercase alphanumeric characters only and no spaces or other
-        formatting characters.
-        """
         return 'create_geopackage'
 
     def displayName(self):
-        """
-        Returns the translated algorithm name, which should be used for any
-        user-visible display of the algorithm name.
-        """
         return self.tr('00 Create geopackage')
 
     def group(self):
-        """
-        Returns the name of the group this algorithm belongs to. This string
-        should be localised.
-        """
         return self.tr('Configuration')
 
     def groupId(self):
-        """
-        Returns the unique ID of the group this algorithm belongs to. This
-        string should be fixed for the algorithm, and must not be localised.
-        The group id should be unique within each provider. Group id should
-        contain lowercase alphanumeric characters only and no spaces or other
-        formatting characters.
-        """
         return 'configuration'
 
     @staticmethod

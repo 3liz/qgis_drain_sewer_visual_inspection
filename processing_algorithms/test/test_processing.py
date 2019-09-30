@@ -1,6 +1,10 @@
 from qgis.testing import unittest, start_app
 from qgis.core import QgsApplication, QgsCoordinateReferenceSystem
 
+import sys
+if not hasattr(sys, 'argv'):
+    sys.argv = ['']
+
 start_app()
 
 try:

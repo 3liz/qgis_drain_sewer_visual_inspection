@@ -1,7 +1,12 @@
 from qgis.testing import unittest, start_app
 from qgis.core import QgsApplication, QgsCoordinateReferenceSystem
 
-import processing
+start_app()
+
+try:
+    import processing
+except ImportError:
+    from qgis import processing
 
 from ..provider import Provider
 
@@ -9,7 +14,6 @@ from ..provider import Provider
 class ProcessingTest(unittest.TestCase):
 
     def setUpClass(cls) -> None:
-        start_app()
         QgsApplication.processingRegistry().addProvider(Provider())
         processing.Processing.initialize()
 

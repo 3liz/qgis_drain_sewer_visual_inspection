@@ -8,7 +8,7 @@ from ..provider import Provider
 
 class ProcessingTest(unittest.TestCase):
 
-    def setUp(self) -> None:
+    def setUpClass(cls) -> None:
         start_app()
         QgsApplication.processingRegistry().addProvider(Provider())
         processing.Processing.initialize()

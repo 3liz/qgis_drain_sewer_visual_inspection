@@ -17,7 +17,7 @@ def _run_tests(test_suite, package_name):
     print('QGIS : {}'.format(Qgis.QGIS_VERSION_INT))
     print('Python GDAL : {}'.format(gdal.VersionInfo('VERSION_NUM')))
     print('QT : {}'.format(Qt.QT_VERSION_STR))
-    # print('Python path : {}'.format(sys.path))
+    print('Python path : {}'.format(sys.path))
     print('########')
     unittest.TextTestRunner(verbosity=3, stream=sys.stdout).run(test_suite)
 

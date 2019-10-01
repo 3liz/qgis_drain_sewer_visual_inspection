@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QCoreApplication, QSettings
 from qgis.testing import unittest, start_app
 from qgis.core import QgsApplication, QgsCoordinateReferenceSystem
 
@@ -17,9 +18,22 @@ from ..provider import Provider
 
 class ProcessingTest(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls) -> None:
-        QgsApplication.processingRegistry().addProvider(Provider())
+    def __init__(self, methodName):
+        """Run before all tests and set up environment"""
+        super().__init__(methodName)
+
+        # Don't mess with actual user settings
+        QCoreApplication.setOrganizationName("Trying")
+        QCoreApplication.setOrganizationDomain("qgis.org")
+        QCoreApplication.setApplicationName("QGIS-DSVI")
+        QSettings().clear()
+
+        # make Provider settings available
+        self.provider = Provider()
+        self.provider.load()
+
+    def setUp(self) -> None:
+        QgsApplication.processingRegistry().addProvider(self.provider)
         processing.Processing.initialize()
 
     def test_processing(self):

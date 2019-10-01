@@ -26,27 +26,25 @@ class ProcessingTest(unittest.TestCase):
         super().__init__(methodName)
 
         # Don't mess with actual user settings
-        QCoreApplication.setOrganizationName("Trying")
-        QCoreApplication.setOrganizationDomain("qgis.org")
-        QCoreApplication.setApplicationName("QGIS-DSVI")
+        QCoreApplication.setOrganizationName('MyOrganization')
+        QCoreApplication.setOrganizationDomain('qgis.org')
+        QCoreApplication.setApplicationName('QGIS-DSVI')
         QSettings().clear()
 
         # make Provider settings available
         self.provider = Provider()
-        self.provider.load()
+        # self.provider.load()
 
     def setUp(self) -> None:
         QgsApplication.processingRegistry().addProvider(self.provider)
         processing.Processing.initialize()
 
-    def test_processing(self):
-        for alg in QgsApplication.processingRegistry().algorithms():
-            print(alg.id(), "->", alg.displayName())
-
     def test_create_geopackage(self):
+        """Test the workflow about DSVI."""
         path = os.path.join(tempfile.mkdtemp(), 'test.gpkg')
         params = {
             'FILE_GPKG': path,
             'CRS': QgsCoordinateReferenceSystem('EPSG:2154')}
         result = processing.run(
             'drain_sewer_visual_inspection:create_geopackage', params)
+        print(result)

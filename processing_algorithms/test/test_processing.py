@@ -31,9 +31,7 @@ class ProcessingTest(unittest.TestCase):
         QCoreApplication.setApplicationName('QGIS-DSVI')
         QSettings().clear()
 
-        # make Provider settings available
         self.provider = Provider()
-        # self.provider.load()
 
     def setUp(self) -> None:
         QgsApplication.processingRegistry().addProvider(self.provider)
@@ -47,4 +45,7 @@ class ProcessingTest(unittest.TestCase):
             'CRS': QgsCoordinateReferenceSystem('EPSG:2154')}
         result = processing.run(
             'drain_sewer_visual_inspection:create_geopackage', params)
-        print(result)
+
+        self.assertTrue(os.path.exists(result['FILE_GPKG']))
+        for layer in result['OUTPUT_LAYERS']:
+            self.assertTrue(layer.isValid())

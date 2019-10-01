@@ -1,4 +1,7 @@
-from PyQt5.QtCore import QCoreApplication, QSettings
+import tempfile
+import os
+
+from qgis.PyQt.QtCore import QCoreApplication, QSettings
 from qgis.testing import unittest, start_app
 from qgis.core import QgsApplication, QgsCoordinateReferenceSystem
 
@@ -41,8 +44,9 @@ class ProcessingTest(unittest.TestCase):
             print(alg.id(), "->", alg.displayName())
 
     def test_create_geopackage(self):
+        path = os.path.join(tempfile.mkdtemp(), 'test.gpkg')
         params = {
-            'FILE_GPKG': '/tmp/processing_605a277cecad4784a82aca33d9c21c03/c06e4a949d014c95a76bcd38a93e7e3d/FILE_GPKG.file',
+            'FILE_GPKG': path,
             'CRS': QgsCoordinateReferenceSystem('EPSG:2154')}
         result = processing.run(
             'drain_sewer_visual_inspection:create_geopackage', params)

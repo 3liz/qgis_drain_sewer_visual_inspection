@@ -49,3 +49,15 @@ class ProcessingTest(unittest.TestCase):
         self.assertTrue(os.path.exists(result['FILE_GPKG']))
         for layer in result['OUTPUT_LAYERS']:
             self.assertTrue(layer.isValid())
+
+        params = {
+            'TABLE_FICHIER': '{}|layername=file'.format(path),
+            'TABLE_TRONCON': '{}|layername=troncon'.format(path),
+            'TABLE_OBSERVATIONS': '{}|layername=obs'.format(path),
+            'TABLE_REGARD': '{}|layername=regard'.format(path),
+            'COUCHE_GEOM_REGARD': '{}|layername=geom_regard'.format(path),
+            'COUCHE_GEOM_TRONCON': '{}|layername=geom_troncon'.format(path),
+            'COUCHE_GEOM_OBSERVATION': '{}|layername=geom_obs'.format(path),
+            'VIEW_REGARD_GEOLOCALIZED': '{}|layername=view_regard_geolocalized'.format(path),
+        }
+        processing.run('drain_sewer_visual_inspection:config_dsvi_project', params)

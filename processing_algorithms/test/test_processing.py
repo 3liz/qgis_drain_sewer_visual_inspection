@@ -17,6 +17,7 @@ from ..provider import Provider
 
 class ProcessingTest(unittest.TestCase):
 
+    @classmethod
     def setUpClass(cls) -> None:
         QgsApplication.processingRegistry().addProvider(Provider())
         processing.Processing.initialize()

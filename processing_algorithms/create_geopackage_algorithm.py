@@ -152,7 +152,7 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
 
             feedback.pushInfo('The layer {} has been created'.format(table))
 
-            output_layers.append(dest_layer)
+            output_layers.append(dest_layer.id())
 
             # Add layer to project
             context.temporaryLayerStore().addMapLayer(dest_layer)
@@ -198,7 +198,7 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             raise QgsProcessingException(
                 self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, base_name))
 
-        output_layers.append(view_layer)
+        output_layers.append(view_layer.id())
 
         # Add layer to project
         context.temporaryLayerStore().addMapLayer(view_layer)

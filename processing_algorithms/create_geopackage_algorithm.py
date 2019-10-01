@@ -1,8 +1,6 @@
 """Create geopackage algorithm."""
 
-import os.path
-
-from pathlib import Path
+import os
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
@@ -14,7 +12,6 @@ from qgis.core import (
     QgsProcessingException,
 )
 from qgis.core import (
-    QgsCoordinateReferenceSystem,
     QgsFields,
     QgsField,
     QgsVectorLayer,
@@ -36,7 +33,6 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
     FILE_GPKG = 'FILE_GPKG'
     CRS = 'CRS'
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'
-
 
     def initAlgorithm(self, config):
         self.addParameter(
@@ -156,7 +152,7 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
 
             feedback.pushInfo('The layer {} has been created'.format(table))
 
-            output_layers.append(dest_layer)
+            output_layers.append(dest_layer.id())
 
             # Add layer to project
             context.temporaryLayerStore().addMapLayer(dest_layer)
@@ -202,7 +198,7 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             raise QgsProcessingException(
                 self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, base_name))
 
-        output_layers.append(view_layer)
+        output_layers.append(view_layer.id())
 
         # Add layer to project
         context.temporaryLayerStore().addMapLayer(view_layer)

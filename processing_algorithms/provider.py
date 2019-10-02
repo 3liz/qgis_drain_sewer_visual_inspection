@@ -8,7 +8,6 @@ __revision__ = '$Format:%H$'
 from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
-# from .import_itv_algorithm import ImportItvAlgorithm
 # from .create_temp_geom_troncon_algorithm import CreateTempGeomTronconAlgorithm
 # from .create_geom_troncon_algorithm import CreateGeomTronconAlgorithm
 # from .create_temp_geom_obs_algorithm import CreateTempGeomObsAlgorithm
@@ -16,9 +15,13 @@ from qgis.PyQt.QtGui import QIcon
 # from .calc_obs_rerau_algorithm import CalcObsRerauAlgorithm
 # from .calc_troncon_rerau_algorithm import CalcTronconRerauAlgorithm
 # from .calc_troncon_rerau_classif_algorithm import CalcTronconRerauClassifAlgorithm
-from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
+
 from .create_geopackage_algorithm import CreateGeopackageAlgorithm
 from .config_project_algorithm import ConfigProjectAlgorithm
+from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
+from .import_itv_algorithm import ImportItvAlgorithm
+
+
 from ..qgis_plugin_tools.resources import resources_path
 
 
@@ -32,7 +35,7 @@ class Provider(QgsProcessingProvider):
         self.addAlgorithm(CreateGeopackageAlgorithm())
         self.addAlgorithm(ConfigProjectAlgorithm())
         self.addAlgorithm(ImportGeomRegardAlgorithm())
-        # self.addAlgorithm(ImportItvAlgorithm())
+        self.addAlgorithm(ImportItvAlgorithm())
         # self.addAlgorithm(CreateTempGeomTronconAlgorithm())
         # self.addAlgorithm(CreateGeomTronconAlgorithm())
         # self.addAlgorithm(CreateTempGeomObsAlgorithm())

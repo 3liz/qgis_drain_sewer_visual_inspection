@@ -34,10 +34,7 @@ class ProcessingTest(unittest.TestCase):
         QCoreApplication.setApplicationName('QGIS-DSVI')
         QSettings().clear()
         self.provider = Provider()
-
-    def setUp(self) -> None:
         QgsApplication.processingRegistry().addProvider(self.provider)
-        # processing.Processing.initialize()
 
     def test_layer(self):
         """Quick test for the layer."""

@@ -320,6 +320,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
             layer = s['layer']
             for n in s['namedStyles']:
                 layer.loadNamedStyle(resources_path('styles', n['file']), categories=n['type'])
+                # layer.saveStyleToDatabase('style', 'default style', True, '')
                 layer.triggerRepaint()
 
         # Creation de la symbologie g_obs
@@ -355,6 +356,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
             )
         )
         g_obs.setRenderer(QgsRuleBasedRenderer(g_obs_rootrule))
+        feedback.pushInfo('Project has been setup')
         return {}
 
     def shortHelpString(self) -> str:

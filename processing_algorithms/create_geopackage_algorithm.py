@@ -211,6 +211,8 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
+        feedback.pushInfo('The geopackage {} has been created'.format(base_name))
+
         return {
             self.FILE_GPKG: base_name,
             self.OUTPUT_LAYERS: output_layers

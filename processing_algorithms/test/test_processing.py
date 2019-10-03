@@ -1,6 +1,8 @@
 import tempfile
 import os
 
+from shutil import copyfile
+
 from qgis.PyQt.QtCore import QCoreApplication, QSettings
 from qgis.testing import unittest, start_app
 from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer
@@ -12,9 +14,9 @@ if not hasattr(sys, 'argv'):
 start_app()
 
 try:
-    import processing
-except ImportError:
     from qgis import processing
+except ImportError:
+    import processing
 
 from ..provider import Provider
 from ...qgis_plugin_tools.resources import plugin_test_data_path
@@ -31,12 +33,8 @@ class ProcessingTest(unittest.TestCase):
         QCoreApplication.setOrganizationDomain('qgis.org')
         QCoreApplication.setApplicationName('QGIS-DSVI')
         QSettings().clear()
-
         self.provider = Provider()
-
-    def setUp(self) -> None:
         QgsApplication.processingRegistry().addProvider(self.provider)
-        processing.Processing.initialize()
 
     def test_layer(self):
         """Quick test for the layer."""
@@ -72,6 +70,8 @@ class ProcessingTest(unittest.TestCase):
             'VIEW_REGARD_GEOLOCALIZED': '{}|layername=view_regard_geolocalized'.format(geopackage_path),
         }
         result = processing.run('drain_sewer_visual_inspection:config_dsvi_project', params)
+        self.assertEqual(len(result), 0)
+        print('First algo done')
 
         # Import regard into geopackage
         layer_path = plugin_test_data_path('manholes_to_import.geojson')
@@ -82,4 +82,32 @@ class ProcessingTest(unittest.TestCase):
             'CHAMP_NOM_REGARD': 'name',
             'COUCHE_GEOM_REGARD': '{}|layername=geom_regard'.format(geopackage_path)
         }
-        result = processing.run("drain_sewer_visual_inspection:import_geom_regard", params)
+        result = processing.run('drain_sewer_visual_inspection:import_geom_regard', params)
+        self.assertEqual(result['MAN_HOLES'], layer.featureCount())
+
+        # The next part is using some confidential private data
+        list_files = []
+        path = plugin_test_data_path('confidential')
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                if file.endswith('.txt'):
+                    list_files.append(os.path.join(root, file))
+                if file.endswith('.TXT'):
+                    list_files.append(os.path.join(root, file))
+
+        print('Going to import {} files:'.format(len(list_files)))
+        for itv_file in list_files:
+            print('Importing {}'.format(itv_file))
+            params = {
+                'Fichier_itv': itv_file,
+                'Table_Fichier': '{}|layername=file'.format(geopackage_path),
+                'Table_Troncon': '{}|layername=troncon'.format(geopackage_path),
+                'Table_Observations': '{}|layername=obs'.format(geopackage_path),
+                'Table_Regard': '{}|layername=regard'.format(geopackage_path),
+            }
+            result = processing.run('drain_sewer_visual_inspection:import_dsvi_data', params)
+            self.assertEqual(result['SUCCESS'], 1)
+
+        print(geopackage_path)
+
+        copyfile(geopackage_path, plugin_test_data_path('confidential', 'test.gpkg'))

@@ -1,6 +1,7 @@
 import tempfile
 import os
-import logging
+
+from shutil import copyfile
 
 from qgis.PyQt.QtCore import QCoreApplication, QSettings
 from qgis.testing import unittest, start_app
@@ -13,15 +14,12 @@ if not hasattr(sys, 'argv'):
 start_app()
 
 try:
-    import processing
-except ImportError:
     from qgis import processing
+except ImportError:
+    import processing
 
 from ..provider import Provider
 from ...qgis_plugin_tools.resources import plugin_test_data_path
-from ...qgis_plugin_tools.custom_logging import plugin_name
-
-LOGGER = logging.getLogger(plugin_name())
 
 
 class ProcessingTest(unittest.TestCase):
@@ -35,12 +33,11 @@ class ProcessingTest(unittest.TestCase):
         QCoreApplication.setOrganizationDomain('qgis.org')
         QCoreApplication.setApplicationName('QGIS-DSVI')
         QSettings().clear()
-
         self.provider = Provider()
 
     def setUp(self) -> None:
         QgsApplication.processingRegistry().addProvider(self.provider)
-        processing.Processing.initialize()
+        # processing.Processing.initialize()
 
     def test_layer(self):
         """Quick test for the layer."""
@@ -76,8 +73,8 @@ class ProcessingTest(unittest.TestCase):
             'VIEW_REGARD_GEOLOCALIZED': '{}|layername=view_regard_geolocalized'.format(geopackage_path),
         }
         result = processing.run('drain_sewer_visual_inspection:config_dsvi_project', params)
-
-        LOGGER.info('First algo done')
+        self.assertEqual(len(result), 0)
+        print('First algo done')
 
         # Import regard into geopackage
         layer_path = plugin_test_data_path('manholes_to_import.geojson')
@@ -112,3 +109,7 @@ class ProcessingTest(unittest.TestCase):
             }
             result = processing.run('drain_sewer_visual_inspection:import_dsvi_data', params)
             self.assertEqual(result['SUCCESS'], 1)
+
+        print(geopackage_path)
+
+        copyfile(geopackage_path, plugin_test_data_path('confidential', 'test.gpkg'))

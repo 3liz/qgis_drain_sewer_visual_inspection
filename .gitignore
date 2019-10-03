@@ -108,3 +108,4 @@ venv.bak/
 
 test/data/confidential/*/*.txt
 test/data/confidential/*/*.TXT
+test/data/confidential/*.gpkg

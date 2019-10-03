@@ -34,25 +34,28 @@ __revision__ = '$Format:%H$'
 
 class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
-    FICHIER_ITV = 'FICHIER_ITV'
-    TABLE_FICHIER = 'TABLE_FICHIER'
-    TABLE_TRONCON = 'TABLE_TRONCON'
-    TABLE_OBSERVATIONS = 'TABLE_OBSERVATIONS'
-    TABLE_REGARD = 'TABLE_REGARD'
+    # OUTPUT = 'OUTPUT'
+    # INPUT = 'INPUT'
+
+    Fichier_itv = 'Fichier_itv'
+    Table_Fichier = 'Table_Fichier'
+    Table_Troncon = 'Table_Troncon'
+    Table_Observations = 'Table_Observations'
+    Table_Regard = 'Table_Regard'
 
     SUCCESS = 'SUCCESS'
 
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFile(
-                self.FICHIER_ITV,
+                self.Fichier_itv,
                 self.tr('Fichier d\'ITV')
             )
         )
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_FICHIER,
+                self.Table_Fichier,
                 self.tr('Tableau des fichiers d\'ITV importés'),
                 [QgsProcessing.TypeVector]
             )
@@ -60,7 +63,7 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_TRONCON,
+                self.Table_Troncon,
                 self.tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -68,7 +71,7 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_OBSERVATIONS,
+                self.Table_Observations,
                 self.tr('Tableau des observations d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -76,7 +79,7 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_REGARD,
+                self.Table_Regard,
                 self.tr('Tableau des regards d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -85,11 +88,11 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
         self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, self.tr('Succès')))
 
     def processAlgorithm(self, parameters, context, feedback):
-        path = self.parameterAsFile(parameters, self.FICHIER_ITV, context)
-        t_file = self.parameterAsVectorLayer(parameters, self.TABLE_FICHIER, context)
-        t_troncon = self.parameterAsVectorLayer(parameters, self.TABLE_TRONCON, context)
-        t_obs = self.parameterAsVectorLayer(parameters, self.TABLE_OBSERVATIONS, context)
-        t_regard = self.parameterAsVectorLayer(parameters, self.TABLE_REGARD, context)
+        path = self.parameterAsFile(parameters, self.Fichier_itv, context)
+        t_file = self.parameterAsVectorLayer(parameters, self.Table_Fichier, context)
+        t_troncon = self.parameterAsVectorLayer(parameters, self.Table_Troncon, context)
+        t_obs = self.parameterAsVectorLayer(parameters, self.Table_Observations, context)
+        t_regard = self.parameterAsVectorLayer(parameters, self.Table_Regard, context)
 
         paths = path.split(';')
         if len(paths) != 1:
@@ -102,12 +105,13 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
         # add date fields to itv file table
         # relation_aggregate( 'itv_tronco_id_file_itv_file20_id', 'max', "abf")
-        with edit(t_file):
-            res = t_file.dataProvider().addAttributes(
-                [QgsField("date_debut", QVariant.String),
-                QgsField("date_fin", QVariant.String)])
-            if res:
-                t_file.updateFields()
+        if 'date_debut' not in t_file.dataProvider().fields().names():
+            with edit(t_file):
+                res = t_file.dataProvider().addAttributes(
+                    [QgsField("date_debut", QVariant.String),
+                    QgsField("date_fin", QVariant.String)])
+                if res:
+                    t_file.updateFields()
 
         feat_file = None
         with open(path, 'rb') as f:
@@ -129,10 +133,7 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
         exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
         exp_context.appendScope(QgsExpressionContextUtils.layerScope(t_file))
 
-        exp_str = QgsExpression.createFieldEqualityExpression(
-            'basename',
-            feat_file['basename']
-        ) +' AND ' + \
+        exp_str = QgsExpression.createFieldEqualityExpression('basename', feat_file['basename'])+' AND '+ \
             QgsExpression.createFieldEqualityExpression('hashcontent', feat_file['hashcontent'])
         exp = QgsExpression(exp_str)
 
@@ -210,7 +211,11 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SUCCESS: 0}
-                line = line.decode()
+                try:
+                    line = line.decode()
+                except UnicodeDecodeError:
+                    print('Error while reading {}'.format(path))
+                    raise
                 #remove break line
                 line = line.replace('\n', '').replace('\r', '')
                 if line.startswith('#'):

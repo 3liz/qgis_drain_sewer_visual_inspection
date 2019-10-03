@@ -355,6 +355,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
             )
         )
         g_obs.setRenderer(QgsRuleBasedRenderer(g_obs_rootrule))
+        feedback.pushInfo('Project has been setup')
         return {}
 
     def shortHelpString(self) -> str:

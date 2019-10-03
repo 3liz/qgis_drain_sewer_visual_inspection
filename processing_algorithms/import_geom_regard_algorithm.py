@@ -99,6 +99,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
                 raise QgsProcessingException(
                     self.tr('* ERROR: Commit %s.') % g_regard.commitErrors())
 
+        feedback.pushInfo('Manholes have been imported')
         return {self.SUCCESS: 1}
 
     def shortHelpString(self) -> str:

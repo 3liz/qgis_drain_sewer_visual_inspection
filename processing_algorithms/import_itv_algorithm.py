@@ -34,25 +34,25 @@ __revision__ = '$Format:%H$'
 
 class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
-    Fichier_itv = 'Fichier_itv'
-    Table_Fichier = 'Table_Fichier'
-    Table_Troncon = 'Table_Troncon'
-    Table_Observations = 'Table_Observations'
-    Table_Regard = 'Table_Regard'
+    INPUT = 'INPUT'
+    FILE_TABLE = 'FILE_TABLE'
+    SEGMENT_TABLE = 'SEGMENT_TABLE'
+    OBSERVATIONS_TABLE = 'OBSERVATIONS_TABLE'
+    MANHOLES_TABLE = 'MANHOLES_TABLE'
 
     SUCCESS = 'SUCCESS'
 
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFile(
-                self.Fichier_itv,
+                self.INPUT,
                 self.tr('Fichier d\'ITV')
             )
         )
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.Table_Fichier,
+                self.FILE_TABLE,
                 self.tr('Tableau des fichiers d\'ITV importés'),
                 [QgsProcessing.TypeVector]
             )
@@ -60,7 +60,7 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.Table_Troncon,
+                self.SEGMENT_TABLE,
                 self.tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -68,7 +68,7 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.Table_Observations,
+                self.OBSERVATIONS_TABLE,
                 self.tr('Tableau des observations d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -76,7 +76,7 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.Table_Regard,
+                self.MANHOLES_TABLE,
                 self.tr('Tableau des regards d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -85,11 +85,11 @@ class ImportItvAlgorithm(QgsProcessingAlgorithm):
         self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, self.tr('Succès')))
 
     def processAlgorithm(self, parameters, context, feedback):
-        path = self.parameterAsFile(parameters, self.Fichier_itv, context)
-        t_file = self.parameterAsVectorLayer(parameters, self.Table_Fichier, context)
-        t_troncon = self.parameterAsVectorLayer(parameters, self.Table_Troncon, context)
-        t_obs = self.parameterAsVectorLayer(parameters, self.Table_Observations, context)
-        t_regard = self.parameterAsVectorLayer(parameters, self.Table_Regard, context)
+        path = self.parameterAsFile(parameters, self.INPUT, context)
+        t_file = self.parameterAsVectorLayer(parameters, self.FILE_TABLE, context)
+        t_troncon = self.parameterAsVectorLayer(parameters, self.SEGMENT_TABLE, context)
+        t_obs = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_TABLE, context)
+        t_regard = self.parameterAsVectorLayer(parameters, self.MANHOLES_TABLE, context)
 
         paths = path.split(';')
         if len(paths) != 1:

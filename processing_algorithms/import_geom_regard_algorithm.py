@@ -24,33 +24,33 @@ __revision__ = '$Format:%H$'
 class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
 
 
-    COUCHE_A_IMPORTER = 'COUCHE_A_IMPORTER'
-    CHAMP_NOM_REGARD = 'CHAMP_NOM_REGARD'
-    COUCHE_GEOM_REGARD = 'COUCHE_GEOM_REGARD'
+    INPUT = 'INPUT'
+    MANHOLE_NAME_FIELD = 'MANHOLE_NAME_FIELD'
+    GEOM_MANHOLES = 'GEOM_MANHOLES'
 
     MAN_HOLES = 'MAN_HOLES'
 
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.COUCHE_A_IMPORTER,
+                self.INPUT,
                 self.tr('Couche des regards à importer'),
                 [QgsProcessing.TypeVectorPoint]
             )
         )
         self.addParameter(
             QgsProcessingParameterField(
-                self.CHAMP_NOM_REGARD,
+                self.MANHOLE_NAME_FIELD,
                 self.tr('Champs du nom des regards à conserver'),
                 None,
-                self.COUCHE_A_IMPORTER,
+                self.INPUT,
                 QgsProcessingParameterField.Any
             )
         )
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.COUCHE_GEOM_REGARD,
+                self.GEOM_MANHOLES,
                 self.tr('Couche des géométries de regards'),
                 [QgsProcessing.TypeVectorPoint]
             )
@@ -59,9 +59,9 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
         self.addOutput(QgsProcessingOutputNumber(self.MAN_HOLES, self.tr('Number of imported man holes')))
 
     def processAlgorithm(self, parameters, context, feedback):
-        g_import = self.parameterAsSource(parameters, self.COUCHE_A_IMPORTER, context)
-        g_label = self.parameterAsString(parameters, self.CHAMP_NOM_REGARD, context)
-        g_regard = self.parameterAsVectorLayer(parameters, self.COUCHE_GEOM_REGARD, context)
+        g_import = self.parameterAsSource(parameters, self.INPUT, context)
+        g_label = self.parameterAsString(parameters, self.MANHOLE_NAME_FIELD, context)
+        g_regard = self.parameterAsVectorLayer(parameters, self.GEOM_MANHOLES, context)
 
         # Construction des objets regards
         xform = QgsCoordinateTransform(g_import.sourceCrs(), g_regard.crs(), context.project())
@@ -71,7 +71,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
         for feat in g_import.getFeatures():
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.MAN_HOLES: i}
+                return {self.MAN_HOLES: 0}
 
             geometry = feat.geometry()
             if geometry is None:
@@ -88,7 +88,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
 
         # Stop the algorithm if cancel button has been clicked
         if feedback.isCanceled():
-            return {self.MAN_HOLES: i}
+            return {self.MAN_HOLES: 0}
 
         # Ajout des objets regards
         if features:

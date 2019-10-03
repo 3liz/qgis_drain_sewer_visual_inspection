@@ -28,16 +28,16 @@ __revision__ = '$Format:%H$'
 
 class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
-    TABLE_FICHIER = 'TABLE_FICHIER'
-    TABLE_TRONCON = 'TABLE_TRONCON'
-    TABLE_OBSERVATIONS = 'TABLE_OBSERVATIONS'
-    TABLE_REGARD = 'TABLE_REGARD'
+    FILE_TABLE = 'FILE_TABLE'
+    SEGMENTS_TABLE = 'SEGMENTS_TABLE'
+    OBSERVATIONS_TABLE = 'OBSERVATIONS_TABLE'
+    MANHOLES_TABLE = 'MANHOLES_TABLE'
 
-    COUCHE_GEOM_REGARD = 'COUCHE_GEOM_REGARD'
-    COUCHE_GEOM_TRONCON = 'COUCHE_GEOM_TRONCON'
-    COUCHE_GEOM_OBSERVATION = 'COUCHE_GEOM_OBSERVATION'
+    GEOM_MANHOLES = 'GEOM_MANHOLES'
+    GEOM_SEGMENT = 'GEOM_SEGMENT'
+    GEOM_OBSERVATION = 'GEOM_OBSERVATION'
 
-    VIEW_REGARD_GEOLOCALIZED = 'VIEW_REGARD_GEOLOCALIZED'
+    VIEW_MANHOLES_GEOLOCALIZED = 'VIEW_MANHOLES_GEOLOCALIZED'
 
     SUCCESS = 'SUCCESS'
 
@@ -45,7 +45,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_FICHIER,
+                self.FILE_TABLE,
                 self.tr('Tableau des fichiers d\'ITV importés'),
                 [QgsProcessing.TypeVector],
                 defaultValue='file'
@@ -54,7 +54,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_TRONCON,
+                self.SEGMENTS_TABLE,
                 self.tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector],
                 defaultValue='troncon'
@@ -63,7 +63,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_OBSERVATIONS,
+                self.OBSERVATIONS_TABLE,
                 self.tr('Tableau des observations d\'ITV'),
                 [QgsProcessing.TypeVector],
                 defaultValue='obs'
@@ -72,7 +72,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.TABLE_REGARD,
+                self.MANHOLES_TABLE,
                 self.tr('Tableau des regards d\'ITV'),
                 [QgsProcessing.TypeVector],
                 defaultValue='regard'
@@ -81,7 +81,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.COUCHE_GEOM_REGARD,
+                self.GEOM_MANHOLES,
                 self.tr('Couche des géométries de regards'),
                 [QgsProcessing.TypeVectorPoint],
                 defaultValue='geom_regard'
@@ -90,7 +90,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.COUCHE_GEOM_TRONCON,
+                self.GEOM_SEGMENT,
                 self.tr('Couche des géométries de tronçons'),
                 [QgsProcessing.TypeVectorLine],
                 defaultValue='geom_troncon'
@@ -99,7 +99,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.COUCHE_GEOM_OBSERVATION,
+                self.GEOM_OBSERVATION,
                 self.tr('Couche des géométries d\'observations'),
                 [QgsProcessing.TypeVectorPoint],
                 defaultValue='geom_obs'
@@ -108,7 +108,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.VIEW_REGARD_GEOLOCALIZED,
+                self.VIEW_MANHOLES_GEOLOCALIZED,
                 self.tr('Couche des regards géolocalisés'),
                 [QgsProcessing.TypeVectorPoint],
                 defaultValue='view_regard_geolocalized'
@@ -119,16 +119,16 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
 
-        t_file = self.parameterAsVectorLayer(parameters, self.TABLE_FICHIER, context)
-        t_troncon = self.parameterAsVectorLayer(parameters, self.TABLE_TRONCON, context)
-        t_obs = self.parameterAsVectorLayer(parameters, self.TABLE_OBSERVATIONS, context)
-        t_regard = self.parameterAsVectorLayer(parameters, self.TABLE_REGARD, context)
+        t_file = self.parameterAsVectorLayer(parameters, self.FILE_TABLE, context)
+        t_troncon = self.parameterAsVectorLayer(parameters, self.SEGMENTS_TABLE, context)
+        t_obs = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_TABLE, context)
+        t_regard = self.parameterAsVectorLayer(parameters, self.MANHOLES_TABLE, context)
 
-        g_regard = self.parameterAsVectorLayer(parameters, self.COUCHE_GEOM_REGARD, context)
-        g_troncon = self.parameterAsVectorLayer(parameters, self.COUCHE_GEOM_TRONCON, context)
-        g_obs = self.parameterAsVectorLayer(parameters, self.COUCHE_GEOM_OBSERVATION, context)
+        g_regard = self.parameterAsVectorLayer(parameters, self.GEOM_MANHOLES, context)
+        g_troncon = self.parameterAsVectorLayer(parameters, self.GEOM_SEGMENT, context)
+        g_obs = self.parameterAsVectorLayer(parameters, self.GEOM_OBSERVATION, context)
 
-        v_regard = self.parameterAsVectorLayer(parameters, self.VIEW_REGARD_GEOLOCALIZED, context)
+        v_regard = self.parameterAsVectorLayer(parameters, self.VIEW_MANHOLES_GEOLOCALIZED, context)
 
         # define variables
         variables = context.project().customVariables()

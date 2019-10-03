@@ -60,14 +60,14 @@ class ProcessingTest(unittest.TestCase):
 
         # Setting up the project
         params = {
-            'TABLE_FICHIER': '{}|layername=file'.format(geopackage_path),
-            'TABLE_TRONCON': '{}|layername=troncon'.format(geopackage_path),
-            'TABLE_OBSERVATIONS': '{}|layername=obs'.format(geopackage_path),
-            'TABLE_REGARD': '{}|layername=regard'.format(geopackage_path),
-            'COUCHE_GEOM_REGARD': '{}|layername=geom_regard'.format(geopackage_path),
-            'COUCHE_GEOM_TRONCON': '{}|layername=geom_troncon'.format(geopackage_path),
-            'COUCHE_GEOM_OBSERVATION': '{}|layername=geom_obs'.format(geopackage_path),
-            'VIEW_REGARD_GEOLOCALIZED': '{}|layername=view_regard_geolocalized'.format(geopackage_path),
+            'FILE_TABLE': '{}|layername=file'.format(geopackage_path),
+            'SEGMENTS_TABLE': '{}|layername=troncon'.format(geopackage_path),
+            'OBSERVATIONS_TABLE': '{}|layername=obs'.format(geopackage_path),
+            'MANHOLES_TABLE': '{}|layername=regard'.format(geopackage_path),
+            'GEOM_MANHOLES': '{}|layername=geom_regard'.format(geopackage_path),
+            'GEOM_SEGMENT': '{}|layername=geom_troncon'.format(geopackage_path),
+            'GEOM_OBSERVATION': '{}|layername=geom_obs'.format(geopackage_path),
+            'VIEW_MANHOLES_GEOLOCALIZED': '{}|layername=view_regard_geolocalized'.format(geopackage_path),
         }
         result = processing.run('drain_sewer_visual_inspection:config_dsvi_project', params)
         self.assertEqual(len(result), 0)
@@ -78,9 +78,9 @@ class ProcessingTest(unittest.TestCase):
         layer = QgsVectorLayer(layer_path, 'test', 'ogr')
         self.assertTrue(layer.isValid())
         params = {
-            'COUCHE_A_IMPORTER': layer,
-            'CHAMP_NOM_REGARD': 'name',
-            'COUCHE_GEOM_REGARD': '{}|layername=geom_regard'.format(geopackage_path)
+            'INPUT': layer,
+            'MANHOLE_NAME_FIELD': 'name',
+            'GEOM_MANHOLES': '{}|layername=geom_regard'.format(geopackage_path)
         }
         result = processing.run('drain_sewer_visual_inspection:import_geom_regard', params)
         self.assertEqual(result['MAN_HOLES'], layer.featureCount())
@@ -99,11 +99,11 @@ class ProcessingTest(unittest.TestCase):
         for itv_file in list_files:
             print('Importing {}'.format(itv_file))
             params = {
-                'Fichier_itv': itv_file,
-                'Table_Fichier': '{}|layername=file'.format(geopackage_path),
-                'Table_Troncon': '{}|layername=troncon'.format(geopackage_path),
-                'Table_Observations': '{}|layername=obs'.format(geopackage_path),
-                'Table_Regard': '{}|layername=regard'.format(geopackage_path),
+                'INPUT': itv_file,
+                'FILE_TABLE': '{}|layername=file'.format(geopackage_path),
+                'SEGMENT_TABLE': '{}|layername=troncon'.format(geopackage_path),
+                'OBSERVATIONS_TABLE': '{}|layername=obs'.format(geopackage_path),
+                'MANHOLES_TABLE': '{}|layername=regard'.format(geopackage_path),
             }
             result = processing.run('drain_sewer_visual_inspection:import_dsvi_data', params)
             self.assertEqual(result['SUCCESS'], 1)

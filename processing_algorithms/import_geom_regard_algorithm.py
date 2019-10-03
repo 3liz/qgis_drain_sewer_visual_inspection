@@ -28,7 +28,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
     CHAMP_NOM_REGARD = 'CHAMP_NOM_REGARD'
     COUCHE_GEOM_REGARD = 'COUCHE_GEOM_REGARD'
 
-    SUCCESS = 'SUCCESS'
+    MAN_HOLES = 'MAN_HOLES'
 
     def initAlgorithm(self, config):
         self.addParameter(
@@ -56,7 +56,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, self.tr('Succès')))
+        self.addOutput(QgsProcessingOutputNumber(self.MAN_HOLES, self.tr('Number of imported man holes')))
 
     def processAlgorithm(self, parameters, context, feedback):
         g_import = self.parameterAsSource(parameters, self.COUCHE_A_IMPORTER, context)
@@ -67,10 +67,11 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
         xform = QgsCoordinateTransform(g_import.sourceCrs(), g_regard.crs(), context.project())
         features = []
         fields = provider_fields(g_regard.fields())
+        i = 0
         for feat in g_import.getFeatures():
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.MAN_HOLES: i}
 
             geometry = feat.geometry()
             if geometry is None:
@@ -83,10 +84,11 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
             geometry.transform(xform)
             feat_i.setGeometry(geometry)
             features.append(feat_i)
+            i += 1
 
         # Stop the algorithm if cancel button has been clicked
         if feedback.isCanceled():
-            return {self.SUCCESS: 0}
+            return {self.MAN_HOLES: i}
 
         # Ajout des objets regards
         if features:
@@ -99,8 +101,8 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
                 raise QgsProcessingException(
                     self.tr('* ERROR: Commit %s.') % g_regard.commitErrors())
 
-        feedback.pushInfo('Manholes have been imported')
-        return {self.SUCCESS: 1}
+        feedback.pushInfo('{} manholes have been imported'.format(i))
+        return {self.MAN_HOLES: i}
 
     def shortHelpString(self) -> str:
         return self.tr('It will import the geometry and the specified field into the layer "geom_regard".')

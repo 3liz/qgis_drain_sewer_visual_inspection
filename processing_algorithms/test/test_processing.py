@@ -83,6 +83,7 @@ class ProcessingTest(unittest.TestCase):
             'COUCHE_GEOM_REGARD': '{}|layername=geom_regard'.format(geopackage_path)
         }
         result = processing.run('drain_sewer_visual_inspection:import_geom_regard', params)
+        self.assertEqual(result['MAN_HOLES'], layer.featureCount())
 
         # The next part is using some confidential private data
         list_files = []

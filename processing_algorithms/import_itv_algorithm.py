@@ -34,9 +34,6 @@ __revision__ = '$Format:%H$'
 
 class ImportItvAlgorithm(QgsProcessingAlgorithm):
 
-    # OUTPUT = 'OUTPUT'
-    # INPUT = 'INPUT'
-
     Fichier_itv = 'Fichier_itv'
     Table_Fichier = 'Table_Fichier'
     Table_Troncon = 'Table_Troncon'

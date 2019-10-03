@@ -19,7 +19,7 @@ from qgis.PyQt.QtGui import QIcon
 from .create_geopackage_algorithm import CreateGeopackageAlgorithm
 from .config_project_algorithm import ConfigProjectAlgorithm
 from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
-from .import_itv_algorithm import ImportItvAlgorithm
+from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
 
 
 from ..qgis_plugin_tools.resources import resources_path
@@ -35,7 +35,7 @@ class Provider(QgsProcessingProvider):
         self.addAlgorithm(CreateGeopackageAlgorithm())
         self.addAlgorithm(ConfigProjectAlgorithm())
         self.addAlgorithm(ImportGeomRegardAlgorithm())
-        self.addAlgorithm(ImportItvAlgorithm())
+        self.addAlgorithm(ImportDsviFileAlgorithm())
         # self.addAlgorithm(CreateTempGeomTronconAlgorithm())
         # self.addAlgorithm(CreateGeomTronconAlgorithm())
         # self.addAlgorithm(CreateTempGeomObsAlgorithm())

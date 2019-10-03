@@ -1,4 +1,4 @@
-"""Import ITV files algorithm."""
+"""Import DSVI/ITV files algorithm."""
 
 import os.path
 import hashlib
@@ -32,7 +32,7 @@ __email__ = "info@3liz.org"
 __revision__ = '$Format:%H$'
 
 
-class ImportItvAlgorithm(QgsProcessingAlgorithm):
+class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
     INPUT = 'INPUT'
     FILE_TABLE = 'FILE_TABLE'

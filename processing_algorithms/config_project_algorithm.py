@@ -13,7 +13,6 @@ from qgis.core import (
     QgsSimpleMarkerSymbolLayerBase,
     QgsMarkerSymbol,
     QgsProcessing,
-    QgsProcessingException,
     QgsProcessingAlgorithm,
     QgsProcessingParameterVectorLayer,
 )
@@ -27,7 +26,6 @@ __revision__ = '$Format:%H$'
 
 
 class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
-
     FILE_TABLE = 'FILE_TABLE'
     SEGMENTS_TABLE = 'SEGMENTS_TABLE'
     OBSERVATIONS_TABLE = 'OBSERVATIONS_TABLE'

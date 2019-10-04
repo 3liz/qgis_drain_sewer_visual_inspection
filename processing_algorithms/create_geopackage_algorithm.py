@@ -4,6 +4,12 @@ import os
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
+    QgsFields,
+    QgsField,
+    QgsVectorLayer,
+    QgsVectorFileWriter,
+)
+from qgis.core import (
     QgsProcessingContext,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFileDestination,
@@ -11,14 +17,7 @@ from qgis.core import (
     QgsProcessingOutputMultipleLayers,
     QgsProcessingException,
 )
-from qgis.core import (
-    QgsFields,
-    QgsField,
-    QgsVectorLayer,
-    QgsVectorFileWriter,
-)
 from qgis.utils import spatialite_connect
-
 
 from ..qgis_plugin_tools.resources import resources_path
 
@@ -29,7 +28,6 @@ __revision__ = '$Format:%H$'
 
 
 class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
-
     FILE_GPKG = 'FILE_GPKG'
     CRS = 'CRS'
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'

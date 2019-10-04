@@ -1,12 +1,11 @@
-import tempfile
 import os
 import sys
-
+import tempfile
 from shutil import copyfile
 
 from qgis.PyQt.QtCore import QCoreApplication, QSettings
-from qgis.testing import unittest, start_app
 from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer
+from qgis.testing import unittest, start_app
 
 if not hasattr(sys, 'argv'):
     sys.argv = ['']
@@ -21,9 +20,9 @@ except ImportError:
 from ..provider import Provider
 from ...qgis_plugin_tools.resources import plugin_test_data_path
 
-__copyright__ = "Copyright 2019, 3Liz"
-__license__ = "GPL version 3"
-__email__ = "info@3liz.org"
+__copyright__ = 'Copyright 2019, 3Liz'
+__license__ = 'GPL version 3'
+__email__ = 'info@3liz.org'
 __revision__ = '$Format:%H$'
 
 

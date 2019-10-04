@@ -1,20 +1,18 @@
 """Processing provider."""
 
-from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
+from qgis.core import QgsProcessingProvider
+
+from .config_project_algorithm import ConfigProjectAlgorithm
+from .create_geom_obs_algorithm import CreateGeomObsAlgorithm
+from .create_geom_segment_algorithm import CreateGeomTronconAlgorithm
+from .create_geopackage_algorithm import CreateGeopackageAlgorithm
+from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
+from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
+from ..qgis_plugin_tools.resources import resources_path
 
 # from .create_temp_geom_troncon_algorithm import CreateTempGeomTronconAlgorithm
 # from .create_temp_geom_obs_algorithm import CreateTempGeomObsAlgorithm
-
-from .create_geopackage_algorithm import CreateGeopackageAlgorithm
-from .config_project_algorithm import ConfigProjectAlgorithm
-from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
-from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
-from .create_geom_segment_algorithm import CreateGeomTronconAlgorithm
-from .create_geom_obs_algorithm import CreateGeomObsAlgorithm
-
-
-from ..qgis_plugin_tools.resources import resources_path
 
 __copyright__ = "Copyright 2019, 3Liz"
 __license__ = "GPL version 3"

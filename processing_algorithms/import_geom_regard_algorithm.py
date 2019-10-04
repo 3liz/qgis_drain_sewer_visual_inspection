@@ -1,5 +1,9 @@
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
+    QgsFeature,
+    QgsCoordinateTransform,
+)
+from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFeatureSource,
@@ -7,10 +11,6 @@ from qgis.core import (
     QgsProcessingParameterVectorLayer,
     QgsProcessingOutputNumber,
     QgsProcessingException,
-)
-from qgis.core import (
-    QgsFeature,
-    QgsCoordinateTransform,
 )
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
@@ -22,8 +22,6 @@ __revision__ = '$Format:%H$'
 
 
 class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
-
-
     INPUT = 'INPUT'
     MANHOLE_NAME_FIELD = 'MANHOLE_NAME_FIELD'
     GEOM_MANHOLES = 'GEOM_MANHOLES'

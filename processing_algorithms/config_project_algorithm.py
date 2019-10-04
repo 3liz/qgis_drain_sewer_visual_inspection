@@ -11,12 +11,12 @@ from qgis.core import (
     QgsSvgMarkerSymbolLayer,
     QgsSimpleMarkerSymbolLayer,
     QgsSimpleMarkerSymbolLayerBase,
-    QgsMarkerSymbol)
-from qgis.core import (
+    QgsMarkerSymbol,
     QgsProcessing,
+    QgsProcessingException,
     QgsProcessingAlgorithm,
     QgsProcessingParameterVectorLayer,
-    QgsProcessingOutputNumber)
+)
 
 from ..qgis_plugin_tools.resources import resources_path
 

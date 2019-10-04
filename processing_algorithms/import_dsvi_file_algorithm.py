@@ -579,7 +579,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         return 'import_dsvi_data'
 
     def displayName(self):
-        return self.tr('Import DSVI data')
+        return self.tr('00 Import DSVI data')
 
     def group(self):
         return self.tr('Drain Sewer Visual Inspection data')

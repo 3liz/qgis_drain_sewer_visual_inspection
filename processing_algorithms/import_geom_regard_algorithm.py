@@ -15,9 +15,9 @@ from qgis.core import (
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
 
-__copyright__ = "Copyright 2019, 3Liz"
-__license__ = "GPL version 3"
-__email__ = "info@3liz.org"
+__copyright__ = 'Copyright 2019, 3Liz'
+__license__ = 'GPL version 3'
+__email__ = 'info@3liz.org'
 __revision__ = '$Format:%H$'
 
 
@@ -102,7 +102,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
                     self.tr('* ERROR: Commit %s.') % g_regard.commitErrors())
 
         feedback.pushInfo('{} manholes have been imported'.format(i))
-        return {self.MAN_HOLES: i}
+        return {self.MAN_HOLES: None}
 
     def shortHelpString(self) -> str:
         return self.tr('It will import the geometry and the specified field into the layer "geom_regard".')

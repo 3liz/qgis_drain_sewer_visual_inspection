@@ -27,17 +27,17 @@ __revision__ = '$Format:%H$'
 
 class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
-    Table_Troncon = 'Table_Troncon'
-    Couche_Geom_Troncon = 'Couche_Geom_Troncon'
-    Table_Observation = 'Table_Observation'
-    Couche_Geom_Observation = 'Couche_Geom_Observation'
+    SEGMENTS_TABLE = 'SEGMENTS_TABLE'
+    GEOM_SEGMENTS = 'GEOM_SEGMENTS'
+    OBSERVATION_TABLE = 'OBSERVATION_TABLE'
+    GEOM_OBSERVATION = 'GEOM_OBSERVATION'
 
-    SUCCESS = 'SUCCESS'
+    OBSERVATIONS_CREATED = 'OBSERVATIONS_CREATED'
 
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.Table_Troncon,
+                self.SEGMENTS_TABLE,
                 self.tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -45,7 +45,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.Couche_Geom_Troncon,
+                self.GEOM_SEGMENTS,
                 self.tr('Couche des géométries de tronçons'),
                 [QgsProcessing.TypeVectorLine]
             )
@@ -53,7 +53,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.Table_Observation,
+                self.OBSERVATION_TABLE,
                 self.tr('Tableau des observations'),
                 [QgsProcessing.TypeVector]
             )
@@ -61,20 +61,20 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.Couche_Geom_Observation,
+                self.GEOM_OBSERVATION,
                 self.tr('Couche des géométries d\'observations'),
                 [QgsProcessing.TypeVectorPoint]
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, self.tr('Succès')))
+        self.addOutput(QgsProcessingOutputNumber(self.OBSERVATIONS_CREATED, self.tr('Succès')))
 
     def processAlgorithm(self, parameters, context, feedback):
 
-        t_troncon = self.parameterAsSource(parameters, self.Table_Troncon, context)
-        g_troncon = self.parameterAsSource(parameters, self.Couche_Geom_Troncon, context)
-        t_obs = self.parameterAsSource(parameters, self.Table_Observation, context)
-        g_obs = self.parameterAsVectorLayer(parameters, self.Couche_Geom_Observation, context)
+        t_troncon = self.parameterAsSource(parameters, self.SEGMENTS_TABLE, context)
+        g_troncon = self.parameterAsSource(parameters, self.GEOM_SEGMENTS, context)
+        t_obs = self.parameterAsSource(parameters, self.OBSERVATION_TABLE, context)
+        g_obs = self.parameterAsVectorLayer(parameters, self.GEOM_OBSERVATION, context)
 
         # Get troncon ids and file ids
         exp_context = QgsExpressionContext()
@@ -102,7 +102,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.OBSERVATIONS_CREATED: None}
 
         if not has_geo_troncon:
             raise QgsProcessingException(
@@ -128,7 +128,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         for obs in t_obs.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.OBSERVATIONS_CREATED: None}
 
             troncon = troncons[obs['id_troncon']]
 
@@ -163,7 +163,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.OBSERVATIONS_CREATED: None}
 
         # build observation geometry based on table
         exp_context = QgsExpressionContext()
@@ -188,7 +188,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         for obs in t_obs.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.OBSERVATIONS_CREATED: None}
 
             troncon = troncons[obs['id_troncon']]
 
@@ -201,7 +201,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             for g in g_troncon.getFeatures(geo_req):
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
-                    return {self.SUCCESS: 0}
+                    return {self.OBSERVATIONS_CREATED: None}
 
                 geom = g.geometry()
                 pt = None
@@ -226,7 +226,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
                     self.tr('* ERROR: Commit %s.') % g_obs.commitErrors())
 
         # Returns empty dict if no outputs
-        return {self.SUCCESS: 1}
+        return {self.OBSERVATIONS_CREATED: len(features)}
 
     def name(self):
         return 'create_geom_obs'

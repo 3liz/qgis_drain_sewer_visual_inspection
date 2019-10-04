@@ -5,9 +5,6 @@ from qgis.PyQt.QtGui import QIcon
 
 # from .create_temp_geom_troncon_algorithm import CreateTempGeomTronconAlgorithm
 # from .create_temp_geom_obs_algorithm import CreateTempGeomObsAlgorithm
-# from .calc_obs_rerau_algorithm import CalcObsRerauAlgorithm
-# from .calc_troncon_rerau_algorithm import CalcTronconRerauAlgorithm
-# from .calc_troncon_rerau_classif_algorithm import CalcTronconRerauClassifAlgorithm
 
 from .create_geopackage_algorithm import CreateGeopackageAlgorithm
 from .config_project_algorithm import ConfigProjectAlgorithm
@@ -41,9 +38,6 @@ class Provider(QgsProcessingProvider):
 
         # self.addAlgorithm(CreateTempGeomTronconAlgorithm())
         # self.addAlgorithm(CreateTempGeomObsAlgorithm())
-        # self.addAlgorithm(CalcObsRerauAlgorithm())
-        # self.addAlgorithm(CalcTronconRerauAlgorithm())
-        # self.addAlgorithm(CalcTronconRerauClassifAlgorithm())
 
     def icon(self):
         return QIcon(resources_path('icons', 'icon.png'))

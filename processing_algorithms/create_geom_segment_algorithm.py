@@ -1,6 +1,5 @@
 """Create geom segment algorithm."""
 
-
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsProcessing,
@@ -22,26 +21,26 @@ from qgis.core import (
 from ..qgis_plugin_tools.tools.fields import provider_fields
 
 
-__copyright__ = "Copyright 2019, 3Liz"
-__license__ = "GPL version 3"
-__email__ = "info@3liz.org"
+__copyright__ = 'Copyright 2019, 3Liz'
+__license__ = 'GPL version 3'
+__email__ = 'info@3liz.org'
 __revision__ = '$Format:%H$'
 
 
 class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
-    Table_Regard = 'Table_Regard'
-    Couche_Geom_Regard = 'Couche_Geom_Regard'
-    Table_Troncon = 'Table_Troncon'
-    Couche_Geom_Troncon = 'Couche_Geom_Troncon'
+    MANHOLES_TABLE = 'MANHOLES_TABLE'
+    GEOM_MANHOLES = 'GEOM_MANHOLES'
+    SEGMENTS_TABLE = 'SEGMENTS_TABLE'
+    GEOM_SEGMENTS = 'GEOM_SEGMENTS'
 
-    SUCCESS = 'SUCCESS'
+    SEGMENT_CREATED = 'SEGMENT_CREATED'
 
     def initAlgorithm(self, config):
 
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.Table_Regard,
+                self.MANHOLES_TABLE,
                 self.tr('Tableau des regards d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -49,7 +48,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.Couche_Geom_Regard,
+                self.GEOM_MANHOLES,
                 self.tr('Couche des géométries de regards'),
                 [QgsProcessing.TypeVectorPoint]
             )
@@ -57,7 +56,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.Table_Troncon,
+                self.SEGMENTS_TABLE,
                 self.tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
@@ -65,20 +64,20 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.Couche_Geom_Troncon,
+                self.GEOM_SEGMENTS,
                 self.tr('Couche des géométries de tronçons'),
                 [QgsProcessing.TypeVectorLine]
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, self.tr('Succès')))
+        self.addOutput(QgsProcessingOutputNumber(self.SEGMENT_CREATED, self.tr('Number of segment created')))
 
     def processAlgorithm(self, parameters, context, feedback):
 
-        t_regard = self.parameterAsSource(parameters, self.Table_Regard, context)
-        g_regard = self.parameterAsSource(parameters, self.Couche_Geom_Regard, context)
-        t_troncon = self.parameterAsVectorLayer(parameters, self.Table_Troncon, context)
-        g_troncon = self.parameterAsVectorLayer(parameters, self.Couche_Geom_Troncon, context)
+        t_regard = self.parameterAsSource(parameters, self.MANHOLES_TABLE, context)
+        g_regard = self.parameterAsSource(parameters, self.GEOM_MANHOLES, context)
+        t_troncon = self.parameterAsVectorLayer(parameters, self.SEGMENTS_TABLE, context)
+        g_troncon = self.parameterAsVectorLayer(parameters, self.GEOM_SEGMENTS, context)
 
         exp_context = QgsExpressionContext()
         exp_context.appendScope(QgsExpressionContextUtils.globalScope())
@@ -103,9 +102,9 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         for t in t_troncon.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.SEGMENT_CREATED: None}
 
-            i = t['id']
+            segment_number = t['id']
             r1 = t['id_regard1']
             r2 = t['id_regard2']
 
@@ -115,21 +114,21 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 r_ids.append(r2)
 
             fid = t['id_file']
-            l_t_f[i] = fid
+            l_t_f[segment_number] = fid
             if fid in l_f_t:
-                l_f_t[fid] = l_f_t[fid]+[i]
+                l_f_t[fid] = l_f_t[fid]+[segment_number]
             else:
-                l_f_t[fid] = [i]
+                l_f_t[fid] = [segment_number]
 
-            troncons[i] = (r1, r2)
+            troncons[segment_number] = (r1, r2)
             if r1 in sorties:
-                sorties[r1] = sorties[r1]+[i]
+                sorties[r1] = sorties[r1]+[segment_number]
             else:
-                sorties[r1] = [i]
+                sorties[r1] = [segment_number]
             if r2 in entrees:
-                entrees[r2] = entrees[r2]+[i]
+                entrees[r2] = entrees[r2]+[segment_number]
             else:
-                entrees[r2] = [i]
+                entrees[r2] = [segment_number]
 
         exp_context = QgsExpressionContext()
         exp_context.appendScope(QgsExpressionContextUtils.globalScope())
@@ -151,24 +150,24 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         for t in t_regard.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.SEGMENT_CREATED: None}
 
-            i = t['id']
+            segment_number = t['id']
             fid = t['id_file']
 
-            if i in sorties:
-                sorties[i] = [trid for trid in sorties[i] if l_t_f[trid] == fid]
-            if i in entrees:
-                entrees[i] = [trid for trid in entrees[i] if l_t_f[trid] == fid]
+            if segment_number in sorties:
+                sorties[segment_number] = [trid for trid in sorties[segment_number] if l_t_f[trid] == fid]
+            if segment_number in entrees:
+                entrees[segment_number] = [trid for trid in entrees[segment_number] if l_t_f[trid] == fid]
 
             gid = t['id_geom_regard']
-            l_r_g[i] = gid
+            l_r_g[segment_number] = gid
             if gid not in g_ids:
                 g_ids.append(gid)
             if gid in l_g_r:
-                l_g_r[gid] = l_g_r[gid]+[i]
+                l_g_r[gid] = l_g_r[gid]+[segment_number]
             else:
-                l_g_r[gid] = [i]
+                l_g_r[gid] = [segment_number]
 
         exp_context = QgsExpressionContext()
         exp_context.appendScope(QgsExpressionContextUtils.globalScope())
@@ -189,17 +188,17 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         for g in g_regard.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.SEGMENT_CREATED: None}
 
-            i = g['id']
-            points[i] = g.geometry().asPoint()
-            pt_labels[i] = g['label']
+            segment_number = g['id']
+            points[segment_number] = g.geometry().asPoint()
+            pt_labels[segment_number] = g['label']
 
         lines = {}
         for gid in points:
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.SEGMENT_CREATED: None}
 
             if gid not in l_g_r:
                 continue
@@ -207,13 +206,13 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             for rid in l_g_r[gid]:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
-                    return {self.SUCCESS: 0}
+                    return {self.SEGMENT_CREATED: None}
 
                 if rid in sorties:
                     for tid in sorties[rid]:
                         # Stop the algorithm if cancel button has been clicked
                         if feedback.isCanceled():
-                            return {self.SUCCESS: 0}
+                            return {self.SEGMENT_CREATED: None}
 
                         if tid in lines:
                             continue
@@ -231,7 +230,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                     for tid in entrees[rid]:
                         # Stop the algorithm if cancel button has been clicked
                         if feedback.isCanceled():
-                            return {self.SUCCESS: 0}
+                            return {self.SEGMENT_CREATED: None}
 
                         if tid in lines:
                             continue
@@ -254,7 +253,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         for tid, pts in lines.items():
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.SEGMENT_CREATED: None}
 
             exp_context = QgsExpressionContext()
             exp_context.appendScope(QgsExpressionContextUtils.globalScope())
@@ -303,7 +302,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             for g in outFeats:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
-                    return {self.SUCCESS: 0}
+                    return {self.SEGMENT_CREATED: None}
 
                 if not g['id']:
                     continue
@@ -314,12 +313,12 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                     l_t_g[tid] = g['id']
                     # Stop the algorithm if cancel button has been clicked
                     if feedback.isCanceled():
-                        return {self.SUCCESS: 0}
+                        return {self.SEGMENT_CREATED: None}
 
         for tid, pts in lines.items():
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.SEGMENT_CREATED: None}
 
             if tid in l_t_g:
                 continue
@@ -342,7 +341,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 l_t_g[tid] = g['id']
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
-                    return {self.SUCCESS: 0}
+                    return {self.SEGMENT_CREATED: None}
 
         if not l_t_g.keys():
             raise QgsProcessingException(
@@ -365,19 +364,21 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         # Mise a jour de la table de tronçon
         request = QgsFeatureRequest(exp, exp_context)
         t_troncon.startEditing()
+        segment_number = 0
         for t in t_troncon.getFeatures(request):
             t.setAttribute('id_geom_troncon', l_t_g[t['id']])
             t_troncon.updateFeature(t)
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
-                return {self.SUCCESS: 0}
+                return {self.SEGMENT_CREATED: None}
+            segment_number += 1
 
         if not t_troncon.commitChanges():
             raise QgsProcessingException(
                 self.tr('* ERROR: Commit %s.') % t_troncon.commitErrors())
 
         # Returns empty dict if no outputs
-        return {self.SUCCESS: 1}
+        return {self.SEGMENT_CREATED: segment_number}
 
     def shortHelpString(self) -> str:
         return self.tr('Generate segments from manholes.')

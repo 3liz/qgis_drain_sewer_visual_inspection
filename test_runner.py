@@ -5,6 +5,11 @@ from osgeo import gdal
 from qgis.PyQt import Qt
 from qgis.core import Qgis
 
+__copyright__ = 'Copyright 2019, 3Liz'
+__license__ = 'GPL version 3'
+__email__ = 'info@3liz.org'
+__revision__ = '$Format:%H$'
+
 
 def _run_tests(test_suite, package_name):
     """Core function to test a test suite.

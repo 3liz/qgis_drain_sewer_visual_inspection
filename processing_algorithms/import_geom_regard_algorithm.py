@@ -100,7 +100,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
                     self.tr('* ERROR: Commit %s.') % g_regard.commitErrors())
 
         feedback.pushInfo('{} manholes have been imported'.format(i))
-        return {self.MAN_HOLES: None}
+        return {self.MAN_HOLES: i}
 
     def shortHelpString(self) -> str:
         return self.tr('It will import the geometry and the specified field into the layer "geom_regard".')

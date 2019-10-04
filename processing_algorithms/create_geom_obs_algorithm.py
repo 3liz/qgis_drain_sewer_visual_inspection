@@ -2,19 +2,19 @@
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
+    QgsFeature,
+    QgsFeatureRequest,
+    QgsExpression,
+    QgsExpressionContext,
+    QgsExpressionContextUtils,
+)
+from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterVectorLayer,
     QgsProcessingOutputNumber,
     QgsProcessingException,
-)
-from qgis.core import (
-    QgsFeature,
-    QgsFeatureRequest,
-    QgsExpression,
-    QgsExpressionContext,
-    QgsExpressionContextUtils,
 )
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
@@ -26,7 +26,6 @@ __revision__ = '$Format:%H$'
 
 
 class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
-
     SEGMENTS_TABLE = 'SEGMENTS_TABLE'
     GEOM_SEGMENTS = 'GEOM_SEGMENTS'
     OBSERVATION_TABLE = 'OBSERVATION_TABLE'
@@ -91,7 +90,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
                 self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
-        request.setSubsetOfAttributes(['id', 'aab', 'aad', 'aaf', 'abq', 'id_file', 'id_geom_troncon'],t_troncon.fields())
+        request.setSubsetOfAttributes(['id', 'aab', 'aad', 'aaf', 'abq', 'id_file', 'id_geom_troncon'], t_troncon.fields())
         has_geo_troncon = False
         troncons = {}
         file_ids = []

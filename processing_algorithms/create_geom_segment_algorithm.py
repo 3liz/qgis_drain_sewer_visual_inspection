@@ -2,14 +2,6 @@
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
-    QgsProcessing,
-    QgsProcessingAlgorithm,
-    QgsProcessingParameterFeatureSource,
-    QgsProcessingParameterVectorLayer,
-    QgsProcessingOutputNumber,
-    QgsProcessingException,
-)
-from qgis.core import (
     QgsFeature,
     QgsFeatureRequest,
     QgsExpression,
@@ -17,9 +9,16 @@ from qgis.core import (
     QgsExpressionContextUtils,
     QgsGeometry,
 )
+from qgis.core import (
+    QgsProcessing,
+    QgsProcessingAlgorithm,
+    QgsProcessingParameterFeatureSource,
+    QgsProcessingParameterVectorLayer,
+    QgsProcessingOutputNumber,
+    QgsProcessingException,
+)
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
-
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -28,7 +27,6 @@ __revision__ = '$Format:%H$'
 
 
 class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
-
     MANHOLES_TABLE = 'MANHOLES_TABLE'
     GEOM_MANHOLES = 'GEOM_MANHOLES'
     SEGMENTS_TABLE = 'SEGMENTS_TABLE'
@@ -116,17 +114,17 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             fid = t['id_file']
             l_t_f[segment_number] = fid
             if fid in l_f_t:
-                l_f_t[fid] = l_f_t[fid]+[segment_number]
+                l_f_t[fid] = l_f_t[fid] + [segment_number]
             else:
                 l_f_t[fid] = [segment_number]
 
             troncons[segment_number] = (r1, r2)
             if r1 in sorties:
-                sorties[r1] = sorties[r1]+[segment_number]
+                sorties[r1] = sorties[r1] + [segment_number]
             else:
                 sorties[r1] = [segment_number]
             if r2 in entrees:
-                entrees[r2] = entrees[r2]+[segment_number]
+                entrees[r2] = entrees[r2] + [segment_number]
             else:
                 entrees[r2] = [segment_number]
 
@@ -135,7 +133,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
         exp_context.appendScope(t_regard.createExpressionContextScope())
 
-        exp_str = '"id_geom_regard" IS NOT NULL AND "id" IN (%s)' % ','.join([str(i) for i in r_ids]+['-1'])
+        exp_str = '"id_geom_regard" IS NOT NULL AND "id" IN (%s)' % ','.join([str(i) for i in r_ids] + ['-1'])
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
@@ -165,7 +163,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             if gid not in g_ids:
                 g_ids.append(gid)
             if gid in l_g_r:
-                l_g_r[gid] = l_g_r[gid]+[segment_number]
+                l_g_r[gid] = l_g_r[gid] + [segment_number]
             else:
                 l_g_r[gid] = [segment_number]
 
@@ -174,7 +172,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
         exp_context.appendScope(g_regard.createExpressionContextScope())
 
-        exp_str = '"id" IN (%s)' % ','.join([str(i) for i in g_ids]+['-1'])
+        exp_str = '"id" IN (%s)' % ','.join([str(i) for i in g_ids] + ['-1'])
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
@@ -282,7 +280,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 geom_point_keys.append((pts[0], pts[1]))
 
             feat_t = QgsFeature(fields)
-            feat_t.setAttribute('label', str(pt_labels[pts[0]])+'-'+str(pt_labels[pts[1]]))
+            feat_t.setAttribute('label', str(pt_labels[pts[0]]) + '-' + str(pt_labels[pts[1]]))
             feat_t.setAttribute('id_geom_regard_amont', pts[0])
             feat_t.setAttribute('id_geom_regard_aval', pts[1])
             feat_t.setGeometry(QgsGeometry.fromPolylineXY([points[pts[0]], points[pts[1]]]))

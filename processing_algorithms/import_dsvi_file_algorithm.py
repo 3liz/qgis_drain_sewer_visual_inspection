@@ -1,9 +1,9 @@
 """Import DSVI/ITV files algorithm."""
 
-import os.path
-import hashlib
 import csv
+import hashlib
 import io
+import os.path
 
 from qgis.PyQt.QtCore import QCoreApplication, QVariant
 from qgis.core import (
@@ -33,7 +33,6 @@ __revision__ = '$Format:%H$'
 
 
 class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
-
     INPUT = 'INPUT'
     FILE_TABLE = 'FILE_TABLE'
     SEGMENT_TABLE = 'SEGMENT_TABLE'
@@ -106,7 +105,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             with edit(t_file):
                 res = t_file.dataProvider().addAttributes(
                     [QgsField("date_debut", QVariant.String),
-                    QgsField("date_fin", QVariant.String)])
+                     QgsField("date_fin", QVariant.String)])
                 if res:
                     t_file.updateFields()
 
@@ -130,8 +129,8 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
         exp_context.appendScope(QgsExpressionContextUtils.layerScope(t_file))
 
-        exp_str = QgsExpression.createFieldEqualityExpression('basename', feat_file['basename'])+' AND '+ \
-            QgsExpression.createFieldEqualityExpression('hashcontent', feat_file['hashcontent'])
+        exp_str = QgsExpression.createFieldEqualityExpression('basename', feat_file['basename']) + ' AND ' + \
+                  QgsExpression.createFieldEqualityExpression('hashcontent', feat_file['hashcontent'])
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
@@ -213,7 +212,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                 except UnicodeDecodeError:
                     print('Error while reading {}'.format(path))
                     raise
-                #remove break line
+                # remove break line
                 line = line.replace('\n', '').replace('\r', '')
                 if line.startswith('#'):
                     if line.startswith('#A'):
@@ -273,7 +272,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                     # Entête de troncon ou regard
                     if line.startswith('#B'):
                         b = io.StringIO(line[5:])
-                        for r in csv.reader(b,d):
+                        for r in csv.reader(b, d):
                             header = r
                             break
                         array = line[1:4]
@@ -285,7 +284,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                         else:
                             obs_for_troncon = False
                         b = io.StringIO(line[3:])
-                        for r in csv.reader(b,d):
+                        for r in csv.reader(b, d):
                             header = r
                             break
                         array = line[1:2]
@@ -298,24 +297,24 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                         continue
                 # La ligne contient des donnees
                 else:
-                    if not header: #an error in the file structure
+                    if not header:  # an error in the file structure
                         continue
                     b = io.StringIO(line)
-                    for r in csv.reader(b,d):
+                    for r in csv.reader(b, d):
                         data = r
                         row = list(zip([h.lower() for h in header], [t for t in data]))
                         # observation
                         if array == 'C':
                             if obs_for_troncon:
-                                observations.append(row+[('id_troncon', t_id)])
+                                observations.append(row + [('id_troncon', t_id)])
                         # Premiere ligne de description d'un troncon ou regard
                         elif array == 'B01':
                             if header[0].startswith('A'):
                                 t_id += 1
-                                troncons.append([('id', t_id)]+row)
+                                troncons.append([('id', t_id)] + row)
                             elif header[0].startswith('C'):
                                 r_id += 1
-                                regards.append([('id', r_id)]+row)
+                                regards.append([('id', r_id)] + row)
                         # Ligne complémentaire de description
                         else:
                             if header[0].startswith('A'):
@@ -350,17 +349,17 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
             d = dict(tr)
             if d['aad'] and \
-               d['aad'] not in regard_node_refs and \
-               d['aad'] not in node_refs:
+                    d['aad'] not in regard_node_refs and \
+                    d['aad'] not in node_refs:
                 node_refs.append(d['aad'])
             if d['aaf'] and \
-               d['aaf'] not in regard_node_refs and \
-               d['aaf'] not in node_refs:
+                    d['aaf'] not in regard_node_refs and \
+                    d['aaf'] not in node_refs:
                 node_refs.append(d['aaf'])
             if 'aat' in d and \
-               d['aat'] and \
-               d['aat'] not in regard_node_refs and \
-               d['aat'] not in node_refs:
+                    d['aat'] and \
+                    d['aat'] not in regard_node_refs and \
+                    d['aat'] not in node_refs:
                 node_refs.append(d['aat'])
             if 'abf' in d and d['abf'] not in itv_dates:
                 itv_dates.append(d['abf'])
@@ -372,7 +371,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                 return {self.SUCCESS: 0}
 
             max_r_id += 1
-            regards.append([('id', max_r_id),('caa',n_ref)])
+            regards.append([('id', max_r_id), ('caa', n_ref)])
             regard_ref_id[n_ref] = max_r_id
 
         # Ajout des identifiants de regards aux tronçons
@@ -384,15 +383,15 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
             d = dict(tr)
             if d['aad'] and \
-               d['aad'] in regard_refs:
-                tr += [('id_regard1',regard_ref_id[d['aad']])]
+                    d['aad'] in regard_refs:
+                tr += [('id_regard1', regard_ref_id[d['aad']])]
             if d['aaf'] and \
-               d['aaf'] in regard_refs:
-                tr += [('id_regard2',regard_ref_id[d['aaf']])]
+                    d['aaf'] in regard_refs:
+                tr += [('id_regard2', regard_ref_id[d['aaf']])]
             if 'aat' in d.keys() and \
-               d['aat'] and \
-               d['aat'] in regard_refs:
-                tr += [('id_regard3',regard_ref_id[d['aat']])]
+                    d['aat'] and \
+                    d['aat'] in regard_refs:
+                tr += [('id_regard3', regard_ref_id[d['aat']])]
 
         # Verification des champs
         fields = provider_fields(t_troncon.fields())
@@ -401,7 +400,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            for k,v in r:
+            for k, v in r:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SUCCESS: 0}
@@ -416,7 +415,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                             float(v.replace(DECIMAL, '.'))
                         except:
                             raise QgsProcessingException(
-                                self.tr('* ERREUR dans le fichier : le champs de tronçon "%s" est numérique mais pas la valeur "%s"') % (k,v))
+                                self.tr('* ERREUR dans le fichier : le champs de tronçon "%s" est numérique mais pas la valeur "%s"') % (k, v))
 
         fields = provider_fields(t_obs.fields())
         for r in observations:
@@ -424,7 +423,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            for k,v in r:
+            for k, v in r:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SUCCESS: 0}
@@ -439,7 +438,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                             float(v.replace(DECIMAL, '.'))
                         except:
                             raise QgsProcessingException(
-                                self.tr('* ERREUR dans le fichier : le champs d\'observation "%s" est numérique mais pas la valeur "%s"') % (k,v))
+                                self.tr('* ERREUR dans le fichier : le champs d\'observation "%s" est numérique mais pas la valeur "%s"') % (k, v))
 
         fields = provider_fields(t_regard.fields())
         for r in regards:
@@ -447,7 +446,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            for k,v in r:
+            for k, v in r:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SUCCESS: 0}
@@ -462,7 +461,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                             float(v.replace(DECIMAL, '.'))
                         except:
                             raise QgsProcessingException(
-                                self.tr('* ERREUR dans le fichier : le champs de regard "%s" est numérique mais pas la valeur "%s"') % (k,v))
+                                self.tr('* ERREUR dans le fichier : le champs de regard "%s" est numérique mais pas la valeur "%s"') % (k, v))
 
         # Finalisation objet fichier
         feat_file.setAttribute('encoding', ENCODING)
@@ -496,7 +495,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         for r in troncons:
             feat_t = QgsFeature(fields)
             feat_t.setAttribute('id_file', feat_file['id'])
-            for k,v in r:
+            for k, v in r:
                 field = fields.field(k)
                 if isinstance(v, str) and field.isNumeric():
                     if v:
@@ -522,7 +521,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         for r in observations:
             feat_o = QgsFeature(fields)
             feat_o.setAttribute('id_file', feat_file['id'])
-            for k,v in r:
+            for k, v in r:
                 field = fields.field(k)
                 if isinstance(v, str) and field.isNumeric():
                     if v:
@@ -548,7 +547,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         for r in regards:
             feat_r = QgsFeature(fields)
             feat_r.setAttribute('id_file', feat_file['id'])
-            for k,v in r:
+            for k, v in r:
                 field = fields.field(k)
                 if isinstance(v, str) and field.isNumeric():
                     if v:
@@ -567,7 +566,6 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             if not t_regard.commitChanges():
                 raise QgsProcessingException(
                     self.tr('* ERROR: Commit %s.') % t_regard.commitErrors())
-
 
         # Returns empty dict if no outputs
         return {self.SUCCESS: 1}

@@ -1,11 +1,10 @@
 """Create geopackage algorithm."""
 
+import logging
 import os
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
-    QgsFields,
-    QgsField,
     QgsVectorLayer,
     QgsVectorFileWriter,
 )
@@ -19,12 +18,15 @@ from qgis.core import (
 )
 from qgis.utils import spatialite_connect
 
+from ..qgis_plugin_tools.custom_logging import plugin_name
 from ..qgis_plugin_tools.resources import resources_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
 __email__ = 'info@3liz.org'
 __revision__ = '$Format:%H$'
+
+LOGGER = logging.getLogger(plugin_name())
 
 
 class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
@@ -74,10 +76,10 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
         ]
 
         geometries = {
-            'file': 'None',
-            'troncon': 'None',
-            'obs': 'None',
-            'regard': 'None',
+            'file': None,
+            'troncon': None,
+            'obs': None,
+            'regard': None,
             'geom_regard': 'Point',
             'geom_troncon': 'LineString',
             'geom_obs': 'Point',
@@ -89,13 +91,10 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
         for table in tables:
             # create virtual layer
             vl_path = geometries[table]
-            if vl_path != 'None':
-                vl_path = "{}?crs={}".format(geometries[table], crs.authid())
-            vl = QgsVectorLayer(vl_path, table, 'memory')
-            pr = vl.dataProvider()
-
-            # define fields
-            fields = QgsFields()
+            if vl_path:
+                vl_path = '{}?crs={}&'.format(geometries[table], crs.authid())
+            else:
+                vl_path = 'None?'
 
             csv_path = resources_path('data_models', '{}.csv'.format(table))
             csv = QgsVectorLayer(csv_path, table, 'ogr')
@@ -104,14 +103,18 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
                 raise QgsProcessingException(
                     self.tr('* ERROR: Can\'t load CSV {}').format(csv_path))
 
+            fields = []
             for c in csv.getFeatures():
-                fields.append(QgsField(name=c['name'], type=c['type']))
-
+                fields.append('field={}:{}'.format(c['name'], c['typeName']))
             del csv
 
-            # add fields
-            pr.addAttributes(fields)
-            vl.updateFields()
+            vl_path += '&'.join(fields)
+            LOGGER.debug('Memory layer "{}" created with {}'.format(table, vl_path))
+            vl = QgsVectorLayer(vl_path, table, 'memory')
+
+            if vl.fields().count() != len(fields):
+                raise QgsProcessingException(
+                    self.tr('* ERROR while creating fields in layer "{}"'.format(table)))
 
             # set create file layer options
             options = QgsVectorFileWriter.SaveVectorOptions()
@@ -135,10 +138,6 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             if write_result != QgsVectorFileWriter.NoError:
                 raise QgsProcessingException(
                     self.tr('* ERROR: {}').format(error_message))
-
-            del fields
-            del pr
-            del vl
 
         output_layers = []
         for table in tables:

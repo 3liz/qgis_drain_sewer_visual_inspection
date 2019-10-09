@@ -18,7 +18,7 @@ except ImportError:
     import processing
 
 from ..provider import Provider
-from ...qgis_plugin_tools.resources import plugin_test_data_path
+from ...qgis_plugin_tools.resources import plugin_test_data_path, plugin_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -49,6 +49,7 @@ class ProcessingTest(unittest.TestCase):
     def test_create_geopackage(self):
         """Test the workflow about DSVI."""
         # Geopackage for testing
+        geopackage_path = os.path.join(plugin_path(), 'test_XXX.gpkg')
         geopackage_path = os.path.join(tempfile.mkdtemp(), 'test.gpkg')
 
         # Create geopackage

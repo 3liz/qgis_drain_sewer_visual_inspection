@@ -1,14 +1,13 @@
-"""Create geopackage algorithm."""
+"""Create data schema algorithm."""
 
 import logging
-import os
 
 from collections import OrderedDict
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsVectorLayer,
-    QgsVectorFileWriter,
+    QgsVectorLayerExporter,
 )
 from qgis.core import (
     QgsProcessingContext,
@@ -40,15 +39,16 @@ MAPPING['geom_troncon'] = 'LineString'
 MAPPING['geom_obs'] = 'Point'
 
 
-class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
-    FILE_GPKG = 'FILE_GPKG'
+class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
+
+    DESTINATION = 'DESTINATION'
     CRS = 'CRS'
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'
 
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFileDestination(
-                self.FILE_GPKG,
+                self.DESTINATION,
                 self.tr('Geopackage file'),
                 fileFilter='gpkg'
             )
@@ -70,14 +70,17 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        base_name = self.parameterAsFile(parameters, self.FILE_GPKG, context)
+        base_name = self.parameterAsFile(parameters, self.DESTINATION, context)
         if not base_name.lower().endswith('.gpkg'):
             base_name += '.gpkg'
+        uri = base_name
 
         crs = self.parameterAsCrs(parameters, self.CRS, context)
 
-        encoding = 'UTF-8'
-        driver_name = QgsVectorFileWriter.driverForExtension('gpkg')
+        options = dict()
+        options['layerOptions'] = ['FID=id']
+        options['fileEncoding'] = 'UTF-8'
+        options['update'] = True
 
         for table, geom in MAPPING.items():
             # create virtual layer
@@ -106,36 +109,29 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
                 raise QgsProcessingException(
                     self.tr('* ERROR while creating fields in layer "{}"'.format(table)))
 
-            # set create file layer options
-            options = QgsVectorFileWriter.SaveVectorOptions()
-            options.driverName = driver_name
-            options.fileEncoding = encoding
-
-            options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteFile
-            if os.path.exists(base_name):
-                options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
-
-            options.layerName = vl.name()
-            options.layerOptions = ['FID=id']
-
-            # write file
-            write_result, error_message = QgsVectorFileWriter.writeAsVectorFormat(
-                vl,
-                base_name,
+            # export layer
+            options['layerName'] = vl.name()
+            exporter = QgsVectorLayerExporter(
+                uri,
+                'ogr',
+                vl.fields(),
+                vl.wkbType(),
+                vl.sourceCrs(),
+                True,
                 options)
 
             # result
-            if write_result != QgsVectorFileWriter.NoError:
+            if exporter.errorCode() != QgsVectorLayerExporter.NoError:
                 raise QgsProcessingException(
-                    self.tr('* ERROR: {}').format(error_message))
+                    self.tr('* ERROR while exporting the layer to {}:{}').format(uri, exporter.errorMessage()))
 
         output_layers = []
         for table in MAPPING.keys():
             # connection troncon_rereau_classif in geopackage
-            dest_layer = QgsVectorLayer('{}|layername={}'.format(base_name, table), table, 'ogr')
+            dest_layer = QgsVectorLayer('{}|layername={}'.format(uri, table), table, 'ogr')
             if not dest_layer.isValid():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Can\'t load layer {} in {}').format(table, base_name))
+                    self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, uri))
 
             feedback.pushInfo('The layer {} has been created'.format(table))
 
@@ -156,7 +152,7 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
         view_name = 'view_regard_geolocalized'
 
         # Get connection
-        conn = spatialite_connect(base_name)
+        conn = spatialite_connect(uri)
 
         # Do create view
         c = conn.cursor()
@@ -180,10 +176,10 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
         conn.close()
 
         # Connexion à la couche view_regard_localized dans le Geopackage
-        view_layer = QgsVectorLayer('{}|layername={}'.format(base_name, view_name), view_name, 'ogr')
+        view_layer = QgsVectorLayer('{}|layername={}'.format(uri, view_name), view_name, 'ogr')
         if not view_layer.isValid():
             raise QgsProcessingException(
-                self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, base_name))
+                self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, uri))
 
         output_layers.append(view_layer.id())
 
@@ -198,21 +194,21 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        feedback.pushInfo('The geopackage {} has been created'.format(base_name))
+        feedback.pushInfo('The data model has been created in {}'.format(uri))
 
         return {
-            self.FILE_GPKG: base_name,
+            self.DESTINATION: uri,
             self.OUTPUT_LAYERS: output_layers
         }
 
     def shortHelpString(self) -> str:
-        return self.tr('Create the geopackage with all layers which are needed.')
+        return self.tr('Create the data model with all layers which are needed.')
 
     def name(self):
-        return 'create_geopackage'
+        return 'create_data_model'
 
     def displayName(self):
-        return self.tr('00 Create geopackage')
+        return self.tr('00 Create data model')
 
     def group(self):
         return self.tr('Configuration')

@@ -3,6 +3,8 @@
 import logging
 import os
 
+from collections import OrderedDict
+
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsVectorLayer,
@@ -27,6 +29,15 @@ __email__ = 'info@3liz.org'
 __revision__ = '$Format:%H$'
 
 LOGGER = logging.getLogger(plugin_name())
+
+MAPPING = OrderedDict()
+MAPPING['file'] = None
+MAPPING['troncon'] = None
+MAPPING['obs'] = None
+MAPPING['regard'] = None
+MAPPING['geom_regard'] = 'Point'
+MAPPING['geom_troncon'] = 'LineString'
+MAPPING['geom_obs'] = 'Point'
 
 
 class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
@@ -65,34 +76,13 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
 
         crs = self.parameterAsCrs(parameters, self.CRS, context)
 
-        tables = [
-            'file',
-            'troncon',
-            'obs',
-            'regard',
-            'geom_regard',
-            'geom_troncon',
-            'geom_obs',
-        ]
-
-        geometries = {
-            'file': None,
-            'troncon': None,
-            'obs': None,
-            'regard': None,
-            'geom_regard': 'Point',
-            'geom_troncon': 'LineString',
-            'geom_obs': 'Point',
-        }
-
         encoding = 'UTF-8'
         driver_name = QgsVectorFileWriter.driverForExtension('gpkg')
 
-        for table in tables:
+        for table, geom in MAPPING.items():
             # create virtual layer
-            vl_path = geometries[table]
-            if vl_path:
-                vl_path = '{}?crs={}&'.format(geometries[table], crs.authid())
+            if geom:
+                vl_path = '{}?crs={}&'.format(geom, crs.authid())
             else:
                 vl_path = 'None?'
 
@@ -140,7 +130,7 @@ class CreateGeopackageAlgorithm(QgsProcessingAlgorithm):
                     self.tr('* ERROR: {}').format(error_message))
 
         output_layers = []
-        for table in tables:
+        for table in MAPPING.keys():
             # connection troncon_rereau_classif in geopackage
             dest_layer = QgsVectorLayer('{}|layername={}'.format(base_name, table), table, 'ogr')
             if not dest_layer.isValid():

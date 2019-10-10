@@ -4,7 +4,7 @@ import tempfile
 from shutil import copyfile
 
 from qgis.PyQt.QtCore import QCoreApplication, QSettings
-from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer
+from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer, QgsWkbTypes
 from qgis.testing import unittest, start_app
 
 if not hasattr(sys, 'argv'):
@@ -60,8 +60,19 @@ class ProcessingTest(unittest.TestCase):
             'drain_sewer_visual_inspection:create_geopackage', params)
 
         self.assertTrue(os.path.exists(result['FILE_GPKG']))
+        expected = {
+            'file': QgsWkbTypes.NullGeometry,
+            'troncon': QgsWkbTypes.NullGeometry,
+            'obs': QgsWkbTypes.NullGeometry,
+            'regard': QgsWkbTypes.NullGeometry,
+            'geom_regard': QgsWkbTypes.PointGeometry,
+            'geom_troncon': QgsWkbTypes.LineGeometry,
+            'geom_obs': QgsWkbTypes.PointGeometry,
+            'view_regard_geolocalized': QgsWkbTypes.PointGeometry,
+        }
         for layer in result['OUTPUT_LAYERS']:
             self.assertTrue(layer.isValid())
+            self.assertEqual(layer.geometryType(), expected[layer.name()])
 
         # Setting up the project
         params = {

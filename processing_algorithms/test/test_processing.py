@@ -54,12 +54,12 @@ class ProcessingTest(unittest.TestCase):
 
         # Create geopackage
         params = {
-            'FILE_GPKG': geopackage_path,
+            'DESTINATION': geopackage_path,
             'CRS': QgsCoordinateReferenceSystem('EPSG:2154')}
         result = processing.run(
-            'drain_sewer_visual_inspection:create_geopackage', params)
+            'drain_sewer_visual_inspection:create_data_model', params)
 
-        self.assertTrue(os.path.exists(result['FILE_GPKG']))
+        self.assertTrue(os.path.exists(result['DESTINATION']))
         expected = {
             'file': QgsWkbTypes.NullGeometry,
             'troncon': QgsWkbTypes.NullGeometry,

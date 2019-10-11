@@ -1,6 +1,7 @@
 """Create data schema algorithm."""
 
 import logging
+import psycopg2
 
 from collections import OrderedDict
 
@@ -8,16 +9,20 @@ from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsVectorLayer,
     QgsVectorLayerExporter,
-)
-from qgis.core import (
+    Qgis,
+    QgsWkbTypes,
+    QgsDataSourceUri,
     QgsProcessingContext,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFileDestination,
     QgsProcessingParameterCrs,
+    QgsProcessingParameterString,
     QgsProcessingOutputMultipleLayers,
     QgsProcessingException,
 )
 from qgis.utils import spatialite_connect
+from processing.tools import postgis
+
 
 from ..qgis_plugin_tools.custom_logging import plugin_name
 from ..qgis_plugin_tools.resources import resources_path
@@ -30,13 +35,13 @@ __revision__ = '$Format:%H$'
 LOGGER = logging.getLogger(plugin_name())
 
 MAPPING = OrderedDict()
-MAPPING['file'] = None
-MAPPING['troncon'] = None
-MAPPING['obs'] = None
-MAPPING['regard'] = None
-MAPPING['geom_regard'] = 'Point'
-MAPPING['geom_troncon'] = 'LineString'
-MAPPING['geom_obs'] = 'Point'
+MAPPING['file'] = [None, QgsWkbTypes.NullGeometry]
+MAPPING['troncon'] = [None, QgsWkbTypes.NullGeometry]
+MAPPING['obs'] = [None, QgsWkbTypes.NullGeometry]
+MAPPING['regard'] = [None, QgsWkbTypes.NullGeometry]
+MAPPING['geom_regard'] = ['Point', QgsWkbTypes.PointGeometry]
+MAPPING['geom_troncon'] = ['LineString', QgsWkbTypes.LineGeometry]
+MAPPING['geom_obs'] = ['Point', QgsWkbTypes.PointGeometry]
 
 
 class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
@@ -46,13 +51,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'
 
     def initAlgorithm(self, config):
-        self.addParameter(
-            QgsProcessingParameterFileDestination(
-                self.DESTINATION,
-                self.tr('Geopackage file'),
-                fileFilter='gpkg'
-            )
-        )
 
         self.addParameter(
             QgsProcessingParameterCrs(
@@ -70,22 +68,43 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        base_name = self.parameterAsFile(parameters, self.DESTINATION, context)
-        if not base_name.lower().endswith('.gpkg'):
-            base_name += '.gpkg'
-        uri = base_name
+        view_name = 'view_regard_geolocalized'
+        destination = self.parameterAsFile(parameters, self.DESTINATION, context)
+
+        try:
+            db = postgis.GeoDB.from_name(destination)
+            is_geopackage = False
+        except QgsProcessingException:
+            is_geopackage = True
+
+        if is_geopackage:
+            if not destination.lower().endswith('.gpkg'):
+                destination += '.gpkg'
+            uri = destination
+        else:
+            database_uri = db.uri
+            info = database_uri.connectionInfo(True)
+            conn = psycopg2.connect(info)
+            c = conn.cursor()
+            sql = ("DROP VIEW {};".format(view_name))
+            feedback.pushInfo(sql)
+            c.execute(sql)
+            conn.commit()
 
         crs = self.parameterAsCrs(parameters, self.CRS, context)
 
         options = dict()
-        options['layerOptions'] = ['FID=id']
-        options['fileEncoding'] = 'UTF-8'
         options['update'] = True
 
+        if is_geopackage:
+            options['layerOptions'] = ['FID=id']
+            options['fileEncoding'] = 'UTF-8'
+
+        output_layers = []
         for table, geom in MAPPING.items():
             # create virtual layer
-            if geom:
-                vl_path = '{}?crs={}&'.format(geom, crs.authid())
+            if geom[0]:
+                vl_path = '{}?crs={}&'.format(geom[0], crs.authid())
             else:
                 vl_path = 'None?'
 
@@ -111,24 +130,52 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
 
             # export layer
             options['layerName'] = vl.name()
+            if not is_geopackage:
+                uri = QgsDataSourceUri(database_uri)
+                if Qgis.QGIS_VERSION_INT >= 31000:
+                    uri.setTable(vl.name())
+                    if vl.isSpatial():
+                        uri.setGeometryColumn('geom')
+                else:
+                    uri_string = uri.uri(True)
+                    if vl.isSpatial():
+                        uri_string = uri_string.replace('table=""', 'table="{}" (geom)'.format(vl.name()))
+                    else:
+                        uri_string = uri_string.replace('table=""', 'table="{}"'.format(vl.name()))
+                    uri = QgsDataSourceUri(uri_string)
+
             exporter = QgsVectorLayerExporter(
-                uri,
-                'ogr',
+                uri if is_geopackage else uri.uri(),
+                'ogr' if is_geopackage else 'postgres',
                 vl.fields(),
                 vl.wkbType(),
-                vl.sourceCrs(),
+                vl.crs(),
                 True,
                 options)
 
             # result
             if exporter.errorCode() != QgsVectorLayerExporter.NoError:
+                source = uri if is_geopackage else uri.uri()
                 raise QgsProcessingException(
-                    self.tr('* ERROR while exporting the layer to {}:{}').format(uri, exporter.errorMessage()))
+                    self.tr('* ERROR while exporting the layer to "{}":"{}"').format(source, exporter.errorMessage()))
 
-        output_layers = []
-        for table in MAPPING.keys():
             # connection troncon_rereau_classif in geopackage
-            dest_layer = QgsVectorLayer('{}|layername={}'.format(uri, table), table, 'ogr')
+            if is_geopackage:
+                dest_layer = QgsVectorLayer('{}|layername={}'.format(uri, table), table, 'ogr')
+            else:
+                uri = QgsDataSourceUri(database_uri)
+                if Qgis.QGIS_VERSION_INT >= 31000:
+                    uri.setTable(table)
+                    if vl.isSpatial():
+                        uri.setGeometryColumn('geom')
+                else:
+                    uri_string = uri.uri(True)
+                    if vl.isSpatial():
+                        uri_string = uri_string.replace('table=""', 'table="{}" (geom)'.format(vl.name()))
+                    else:
+                        uri_string = uri_string.replace('table=""', 'table="{}"'.format(vl.name()))
+                    uri = QgsDataSourceUri(uri_string)
+                dest_layer = QgsVectorLayer(uri.uri(False), table, 'postgres')
             if not dest_layer.isValid():
                 raise QgsProcessingException(
                     self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, uri))
@@ -148,11 +195,9 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                 )
             )
 
-        # Create a view
-        view_name = 'view_regard_geolocalized'
-
         # Get connection
-        conn = spatialite_connect(uri)
+        if is_geopackage:
+            conn = spatialite_connect(uri)
 
         # Do create view
         c = conn.cursor()
@@ -162,21 +207,35 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         feedback.pushInfo(sql)
         c.execute(sql)
         conn.commit()
-        sql = ("INSERT INTO gpkg_contents (table_name, identifier, data_type, srs_id) "
-               "VALUES ( '{0}', '{0}', 'features', {1});".format(view_name, crs.postgisSrid()))
-        feedback.pushInfo(sql)
-        c.execute(sql)
-        conn.commit()
-        sql = ("INSERT INTO gpkg_geometry_columns (table_name, column_name, geometry_type_name, srs_id, z, m) "
-               "VALUES ('{0}', 'geom', 'POINT', {1}, 0, 0);".format(view_name, crs.postgisSrid()))
-        feedback.pushInfo(sql)
-        c.execute(sql)
-        conn.commit()
+
+        if is_geopackage:
+            sql = ("INSERT INTO gpkg_contents (table_name, identifier, data_type, srs_id) "
+                   "VALUES ( '{0}', '{0}', 'features', {1});".format(view_name, crs.postgisSrid()))
+            feedback.pushInfo(sql)
+            c.execute(sql)
+            conn.commit()
+            sql = ("INSERT INTO gpkg_geometry_columns (table_name, column_name, geometry_type_name, srs_id, z, m) "
+                   "VALUES ('{0}', 'geom', 'POINT', {1}, 0, 0);".format(view_name, crs.postgisSrid()))
+            feedback.pushInfo(sql)
+            c.execute(sql)
+            conn.commit()
 
         conn.close()
 
         # Connexion à la couche view_regard_localized dans le Geopackage
-        view_layer = QgsVectorLayer('{}|layername={}'.format(uri, view_name), view_name, 'ogr')
+        if is_geopackage:
+            view_layer = QgsVectorLayer('{}|layername={}'.format(uri, view_name), view_name, 'ogr')
+        else:
+            uri = QgsDataSourceUri(database_uri)
+            if Qgis.QGIS_VERSION_INT >= 31000:
+                uri.setTable(view_name)
+                uri.setGeometryColumn('geom')
+            else:
+                uri_string = uri.uri(True)
+                uri_string = uri_string.replace('table=""', 'table="{}" (geom)'.format(view_name))
+                uri = QgsDataSourceUri(uri_string)
+            uri.setKeyColumn('id')
+            view_layer = QgsVectorLayer(uri.uri(False), view_name, 'postgres')
         if not view_layer.isValid():
             raise QgsProcessingException(
                 self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, uri))
@@ -204,12 +263,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
     def shortHelpString(self) -> str:
         return self.tr('Create the data model with all layers which are needed.')
 
-    def name(self):
-        return 'create_data_model'
-
-    def displayName(self):
-        return self.tr('00 Create data model')
-
     def group(self):
         return self.tr('Configuration')
 
@@ -222,3 +275,42 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
 
     def createInstance(self):
         return self.__class__()
+
+
+class CreateGeopackage(CreateDataModelAlgorithm):
+
+    def name(self):
+        return 'create_geopackage_data_model'
+
+    def displayName(self):
+        return self.tr('01 Create geopackage data model')
+
+    def initAlgorithm(self, configuration):
+        self.addParameter(
+            QgsProcessingParameterFileDestination(
+                self.DESTINATION,
+                self.tr('Geopackage file'),
+                fileFilter='gpkg'
+            )
+        )
+        super().initAlgorithm(configuration)
+
+
+class CreatePostgisTables(CreateDataModelAlgorithm):
+
+    def name(self):
+        return 'create_postgis_data_model'
+
+    def displayName(self):
+        return self.tr('00 Create postgis data model')
+
+    def initAlgorithm(self, configuration):
+        db_param = QgsProcessingParameterString(
+            self.DESTINATION,
+            self.tr('Database (connection name)'),
+        )
+        db_param.setMetadata({
+            'widget_wrapper': {
+                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'}})
+        self.addParameter(db_param)
+        super().initAlgorithm(configuration)

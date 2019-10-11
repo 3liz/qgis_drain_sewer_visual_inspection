@@ -1,5 +1,5 @@
 idx,name,type,typeName,length,precision,comment,alias
-1,id,4,Integer64,0,0,,Identifiant
+1,id,4,Integer,0,0,,Identifiant
 2,a,10,String,0,0,,Code principal
 3,b,10,String,0,0,,Caractérisation 1
 4,c,10,String,0,0,,Caractérisation 2

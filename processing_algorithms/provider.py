@@ -6,7 +6,7 @@ from qgis.core import QgsProcessingProvider
 from .config_project_algorithm import ConfigProjectAlgorithm
 from .create_geom_obs_algorithm import CreateGeomObsAlgorithm
 from .create_geom_segment_algorithm import CreateGeomTronconAlgorithm
-from .create_data_model_algorithm import CreateDataModelAlgorithm
+from .create_data_model_algorithm import CreatePostgisTables, CreateGeopackage
 from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
 from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
 from ..qgis_plugin_tools.resources import resources_path
@@ -27,7 +27,8 @@ class Provider(QgsProcessingProvider):
         Loads all algorithms belonging to this provider.
         """
         # The order is more or less the workflow
-        self.addAlgorithm(CreateDataModelAlgorithm())
+        self.addAlgorithm(CreateGeopackage())
+        self.addAlgorithm(CreatePostgisTables())
         self.addAlgorithm(ConfigProjectAlgorithm())
         self.addAlgorithm(ImportGeomRegardAlgorithm())
         self.addAlgorithm(ImportDsviFileAlgorithm())

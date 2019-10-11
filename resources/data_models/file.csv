@@ -1,5 +1,5 @@
 idx,name,type,typeName,length,precision,comment,alias
-1,id,4,Integer64,0,0,,Id
+1,id,4,Integer,0,0,,Id
 2,basename,10,String,0,0,,Nom
 3,encoding,10,String,0,0,,Encodage
 4,lang,10,String,0,0,,Langue

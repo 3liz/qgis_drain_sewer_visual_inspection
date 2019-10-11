@@ -1,14 +1,10 @@
 import os
-import sys
 import tempfile
 from shutil import copyfile
 
 from qgis.PyQt.QtCore import QCoreApplication, QSettings
 from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer, QgsWkbTypes
 from qgis.testing import unittest, start_app
-
-if not hasattr(sys, 'argv'):
-    sys.argv = ['']
 
 start_app()
 

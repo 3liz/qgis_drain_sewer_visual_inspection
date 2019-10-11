@@ -4,7 +4,7 @@ import tempfile
 from shutil import copyfile
 
 from qgis.PyQt.QtCore import QCoreApplication, QSettings
-from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer, QgsWkbTypes
+from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer
 from qgis.testing import unittest, start_app
 
 if not hasattr(sys, 'argv'):
@@ -18,6 +18,7 @@ except ImportError:
     import processing
 
 from ..provider import Provider
+from ..create_data_model_algorithm import MAPPING
 from ...qgis_plugin_tools.resources import plugin_test_data_path, plugin_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
@@ -57,22 +58,13 @@ class ProcessingTest(unittest.TestCase):
             'DESTINATION': geopackage_path,
             'CRS': QgsCoordinateReferenceSystem('EPSG:2154')}
         result = processing.run(
-            'drain_sewer_visual_inspection:create_data_model', params)
+            'drain_sewer_visual_inspection:create_geopackage_data_model', params)
 
         self.assertTrue(os.path.exists(result['DESTINATION']))
-        expected = {
-            'file': QgsWkbTypes.NullGeometry,
-            'troncon': QgsWkbTypes.NullGeometry,
-            'obs': QgsWkbTypes.NullGeometry,
-            'regard': QgsWkbTypes.NullGeometry,
-            'geom_regard': QgsWkbTypes.PointGeometry,
-            'geom_troncon': QgsWkbTypes.LineGeometry,
-            'geom_obs': QgsWkbTypes.PointGeometry,
-            'view_regard_geolocalized': QgsWkbTypes.PointGeometry,
-        }
         for layer in result['OUTPUT_LAYERS']:
             self.assertTrue(layer.isValid())
-            self.assertEqual(layer.geometryType(), expected[layer.name()])
+            if layer.name() in MAPPING.keys():
+                self.assertEqual(layer.geometryType(), MAPPING[layer.name()][1])
 
         # Setting up the project
         params = {

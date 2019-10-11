@@ -47,6 +47,7 @@ MAPPING['geom_obs'] = ['Point', QgsWkbTypes.PointGeometry]
 class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
 
     DESTINATION = 'DESTINATION'
+    SCHEMA = 'SCHEMA'
     CRS = 'CRS'
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'
 
@@ -74,8 +75,10 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         try:
             db = postgis.GeoDB.from_name(destination)
             is_geopackage = False
+            schema = self.parameterAsFile(parameters, self.SCHEMA, context)
         except QgsProcessingException:
             is_geopackage = True
+            schema = None
 
         if is_geopackage:
             if not destination.lower().endswith('.gpkg'):
@@ -86,7 +89,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             info = database_uri.connectionInfo(True)
             conn = psycopg2.connect(info)
             c = conn.cursor()
-            sql = ("DROP VIEW {};".format(view_name))
+            sql = "DROP VIEW IF EXISTS {}.{};".format(schema, view_name)
             feedback.pushInfo(sql)
             c.execute(sql)
             conn.commit()
@@ -132,6 +135,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             options['layerName'] = vl.name()
             if not is_geopackage:
                 uri = QgsDataSourceUri(database_uri)
+                uri.setSchema(schema)
                 if Qgis.QGIS_VERSION_INT >= 31000:
                     uri.setTable(vl.name())
                     if vl.isSpatial():
@@ -164,8 +168,9 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                 dest_layer = QgsVectorLayer('{}|layername={}'.format(uri, table), table, 'ogr')
             else:
                 uri = QgsDataSourceUri(database_uri)
+                uri.setSchema(schema)
                 if Qgis.QGIS_VERSION_INT >= 31000:
-                    uri.setTable(table)
+                    uri.setTable(vl.name())
                     if vl.isSpatial():
                         uri.setGeometryColumn('geom')
                 else:
@@ -177,8 +182,9 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                     uri = QgsDataSourceUri(uri_string)
                 dest_layer = QgsVectorLayer(uri.uri(False), table, 'postgres')
             if not dest_layer.isValid():
+                source = uri if is_geopackage else uri.uri()
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, uri))
+                    self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, source))
 
             feedback.pushInfo('The layer {} has been created'.format(table))
 
@@ -201,9 +207,9 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
 
         # Do create view
         c = conn.cursor()
-        sql = ("CREATE VIEW {} AS SELECT r.id, r.caa, r.id_geom_regard, r.id_file, g.geom "
-               "FROM regard r, geom_regard g "
-               "WHERE r.id_geom_regard = g.id;".format(view_name))
+        sql = ("CREATE VIEW {1}.{0} AS SELECT r.id, r.caa, r.id_geom_regard, r.id_file, g.geom "
+               "FROM {1}.regard r, {1}.geom_regard g "
+               "WHERE r.id_geom_regard = g.id;".format(view_name, schema))
         feedback.pushInfo(sql)
         c.execute(sql)
         conn.commit()
@@ -227,6 +233,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             view_layer = QgsVectorLayer('{}|layername={}'.format(uri, view_name), view_name, 'ogr')
         else:
             uri = QgsDataSourceUri(database_uri)
+            uri.setSchema(schema)
             if Qgis.QGIS_VERSION_INT >= 31000:
                 uri.setTable(view_name)
                 uri.setGeometryColumn('geom')
@@ -237,8 +244,9 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             uri.setKeyColumn('id')
             view_layer = QgsVectorLayer(uri.uri(False), view_name, 'postgres')
         if not view_layer.isValid():
+            source = uri if is_geopackage else uri.uri()
             raise QgsProcessingException(
-                self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, uri))
+                self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, source))
 
         output_layers.append(view_layer.id())
 
@@ -313,4 +321,14 @@ class CreatePostgisTables(CreateDataModelAlgorithm):
             'widget_wrapper': {
                 'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'}})
         self.addParameter(db_param)
+
+        schema_param = QgsProcessingParameterString(
+            self.SCHEMA,
+            self.tr('Schema (schema name)'), 'public', False, True)
+        schema_param.setMetadata({
+            'widget_wrapper': {
+                'class': 'processing.gui.wrappers_postgis.SchemaWidgetWrapper',
+                'connection_param': self.DESTINATION}})
+        self.addParameter(schema_param)
+
         super().initAlgorithm(configuration)

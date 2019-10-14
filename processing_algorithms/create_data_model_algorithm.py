@@ -50,6 +50,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
     SCHEMA = 'SCHEMA'
     CRS = 'CRS'
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'
+    VIEW_NAME = 'view_regard_geolocalized'
 
     def initAlgorithm(self, config):
 
@@ -69,7 +70,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        view_name = 'view_regard_geolocalized'
         destination = self.parameterAsFile(parameters, self.DESTINATION, context)
 
         try:
@@ -89,7 +89,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             info = database_uri.connectionInfo(True)
             conn = psycopg2.connect(info)
             c = conn.cursor()
-            sql = "DROP VIEW IF EXISTS {}.{};".format(schema, view_name)
+            sql = "DROP VIEW IF EXISTS {}.{};".format(schema, self.VIEW_NAME)
             feedback.pushInfo(sql)
             c.execute(sql)
             conn.commit()
@@ -147,6 +147,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                     else:
                         uri_string = uri_string.replace('table=""', 'table="{}"'.format(vl.name()))
                     uri = QgsDataSourceUri(uri_string)
+                uri.setSchema(schema)  # Schema is updating the table name, so after search&replace
 
             exporter = QgsVectorLayerExporter(
                 uri if is_geopackage else uri.uri(),
@@ -180,6 +181,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                     else:
                         uri_string = uri_string.replace('table=""', 'table="{}"'.format(vl.name()))
                     uri = QgsDataSourceUri(uri_string)
+                uri.setSchema(schema)
                 dest_layer = QgsVectorLayer(uri.uri(False), table, 'postgres')
             if not dest_layer.isValid():
                 source = uri if is_geopackage else uri.uri()
@@ -207,21 +209,26 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
 
         # Do create view
         c = conn.cursor()
-        sql = ("CREATE VIEW {1}.{0} AS SELECT r.id, r.caa, r.id_geom_regard, r.id_file, g.geom "
-               "FROM {1}.regard r, {1}.geom_regard g "
-               "WHERE r.id_geom_regard = g.id;".format(view_name, schema))
+        prefix = ''
+        view_destination = self.VIEW_NAME
+        if not is_geopackage:
+            prefix = '{}.'.format(schema)
+            view_destination = '{}{}'.format(prefix, view_destination)
+        sql = ("CREATE VIEW {0} AS SELECT r.id, r.caa, r.id_geom_regard, r.id_file, g.geom "
+               "FROM {1}regard r, {1}geom_regard g "
+               "WHERE r.id_geom_regard = g.id;".format(view_destination, prefix))
         feedback.pushInfo(sql)
         c.execute(sql)
         conn.commit()
 
         if is_geopackage:
             sql = ("INSERT INTO gpkg_contents (table_name, identifier, data_type, srs_id) "
-                   "VALUES ( '{0}', '{0}', 'features', {1});".format(view_name, crs.postgisSrid()))
+                   "VALUES ( '{0}', '{0}', 'features', {1});".format(self.VIEW_NAME, crs.postgisSrid()))
             feedback.pushInfo(sql)
             c.execute(sql)
             conn.commit()
             sql = ("INSERT INTO gpkg_geometry_columns (table_name, column_name, geometry_type_name, srs_id, z, m) "
-                   "VALUES ('{0}', 'geom', 'POINT', {1}, 0, 0);".format(view_name, crs.postgisSrid()))
+                   "VALUES ('{0}', 'geom', 'POINT', {1}, 0, 0);".format(self.VIEW_NAME, crs.postgisSrid()))
             feedback.pushInfo(sql)
             c.execute(sql)
             conn.commit()
@@ -230,23 +237,24 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
 
         # Connexion à la couche view_regard_localized dans le Geopackage
         if is_geopackage:
-            view_layer = QgsVectorLayer('{}|layername={}'.format(uri, view_name), view_name, 'ogr')
+            view_layer = QgsVectorLayer('{}|layername={}'.format(uri, self.VIEW_NAME), self.VIEW_NAME, 'ogr')
         else:
             uri = QgsDataSourceUri(database_uri)
             uri.setSchema(schema)
             if Qgis.QGIS_VERSION_INT >= 31000:
-                uri.setTable(view_name)
+                uri.setTable(self.VIEW_NAME)
                 uri.setGeometryColumn('geom')
             else:
                 uri_string = uri.uri(True)
-                uri_string = uri_string.replace('table=""', 'table="{}" (geom)'.format(view_name))
+                uri_string = uri_string.replace('table=""', 'table="{}" (geom)'.format(self.VIEW_NAME))
                 uri = QgsDataSourceUri(uri_string)
+            uri.setSchema(schema)
             uri.setKeyColumn('id')
-            view_layer = QgsVectorLayer(uri.uri(False), view_name, 'postgres')
+            view_layer = QgsVectorLayer(uri.uri(False), self.VIEW_NAME, 'postgres')
         if not view_layer.isValid():
             source = uri if is_geopackage else uri.uri()
             raise QgsProcessingException(
-                self.tr('* ERROR: Can\'t load layer {} in {}').format(view_name, source))
+                self.tr('* ERROR: Can\'t load layer {} in {}').format(self.VIEW_NAME, source))
 
         output_layers.append(view_layer.id())
 
@@ -255,7 +263,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         context.addLayerToLoadOnCompletion(
             view_layer.id(),
             QgsProcessingContext.LayerDetails(
-                view_name,
+                self.VIEW_NAME,
                 context.project(),
                 self.OUTPUT_LAYERS
             )
@@ -267,9 +275,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             self.DESTINATION: uri,
             self.OUTPUT_LAYERS: output_layers
         }
-
-    def shortHelpString(self) -> str:
-        return self.tr('Create the data model with all layers which are needed.')
 
     def group(self):
         return self.tr('Configuration')
@@ -303,6 +308,9 @@ class CreateGeopackage(CreateDataModelAlgorithm):
         )
         super().initAlgorithm(configuration)
 
+    def shortHelpString(self) -> str:
+        return self.tr('Create the data model with a new geopackage.')
+
 
 class CreatePostgisTables(CreateDataModelAlgorithm):
 
@@ -332,3 +340,10 @@ class CreatePostgisTables(CreateDataModelAlgorithm):
         self.addParameter(schema_param)
 
         super().initAlgorithm(configuration)
+
+    def shortHelpString(self) -> str:
+        tables = ', '.join(MAPPING.keys())
+        return self.tr(
+            'Create the data model in a PostGIS schema.\n'
+            'Be careful, all these tables are going to be replaced: {} '
+            'and the view "{}" in the given schema.').format(tables, self.VIEW_NAME)

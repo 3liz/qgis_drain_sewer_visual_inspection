@@ -148,6 +148,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                         uri_string = uri_string.replace('table=""', 'table="{}"'.format(vl.name()))
                     uri = QgsDataSourceUri(uri_string)
                 uri.setSchema(schema)  # Schema is updating the table name, so after search&replace
+                uri.setKeyColumn(vl.fields().at(0).name())
 
             exporter = QgsVectorLayerExporter(
                 uri if is_geopackage else uri.uri(),
@@ -182,6 +183,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                         uri_string = uri_string.replace('table=""', 'table="{}"'.format(vl.name()))
                     uri = QgsDataSourceUri(uri_string)
                 uri.setSchema(schema)
+                uri.setKeyColumn(vl.fields().at(0).name())
                 dest_layer = QgsVectorLayer(uri.uri(False), table, 'postgres')
             if not dest_layer.isValid():
                 source = uri if is_geopackage else uri.uri()
@@ -346,4 +348,6 @@ class CreatePostgisTables(CreateDataModelAlgorithm):
         return self.tr(
             'Create the data model in a PostGIS schema.\n'
             'Be careful, all these tables are going to be replaced: {} '
-            'and the view "{}" in the given schema.').format(tables, self.VIEW_NAME)
+            'and the view "{}" in the given schema.\n'
+            'The given schema must exist before.'
+        ).format(tables, self.VIEW_NAME)

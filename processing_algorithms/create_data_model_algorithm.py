@@ -135,7 +135,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             options['layerName'] = vl.name()
             if not is_geopackage:
                 uri = QgsDataSourceUri(database_uri)
-                uri.setSchema(schema)
                 if Qgis.QGIS_VERSION_INT >= 31000:
                     uri.setTable(vl.name())
                     if vl.isSpatial():
@@ -170,7 +169,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                 dest_layer = QgsVectorLayer('{}|layername={}'.format(uri, table), table, 'ogr')
             else:
                 uri = QgsDataSourceUri(database_uri)
-                uri.setSchema(schema)
                 if Qgis.QGIS_VERSION_INT >= 31000:
                     uri.setTable(vl.name())
                     if vl.isSpatial():
@@ -182,7 +180,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                     else:
                         uri_string = uri_string.replace('table=""', 'table="{}"'.format(vl.name()))
                     uri = QgsDataSourceUri(uri_string)
-                uri.setSchema(schema)
+                uri.setSchema(schema)  # Schema is updating the table name, so after search&replace
                 uri.setKeyColumn(vl.fields().at(0).name())
                 dest_layer = QgsVectorLayer(uri.uri(False), table, 'postgres')
             if not dest_layer.isValid():
@@ -242,7 +240,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             view_layer = QgsVectorLayer('{}|layername={}'.format(uri, self.VIEW_NAME), self.VIEW_NAME, 'ogr')
         else:
             uri = QgsDataSourceUri(database_uri)
-            uri.setSchema(schema)
             if Qgis.QGIS_VERSION_INT >= 31000:
                 uri.setTable(self.VIEW_NAME)
                 uri.setGeometryColumn('geom')
@@ -250,7 +247,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                 uri_string = uri.uri(True)
                 uri_string = uri_string.replace('table=""', 'table="{}" (geom)'.format(self.VIEW_NAME))
                 uri = QgsDataSourceUri(uri_string)
-            uri.setSchema(schema)
+            uri.setSchema(schema)  # Schema is updating the table name, so after search&replace
             uri.setKeyColumn('id')
             view_layer = QgsVectorLayer(uri.uri(False), self.VIEW_NAME, 'postgres')
         if not view_layer.isValid():

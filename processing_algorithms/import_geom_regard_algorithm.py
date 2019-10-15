@@ -1,6 +1,7 @@
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsFeature,
+    QgsVectorLayerUtils,
     QgsCoordinateTransform,
 )
 from qgis.core import (
@@ -12,8 +13,6 @@ from qgis.core import (
     QgsProcessingOutputNumber,
     QgsProcessingException,
 )
-
-from ..qgis_plugin_tools.tools.fields import provider_fields
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -64,7 +63,6 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
         # Construction des objets regards
         xform = QgsCoordinateTransform(g_import.sourceCrs(), g_regard.crs(), context.project())
         features = []
-        fields = provider_fields(g_regard.fields())
         i = 0
         for feat in g_import.getFeatures():
             # Stop the algorithm if cancel button has been clicked
@@ -76,7 +74,7 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
                 # TODO check utility?
                 continue
 
-            feat_i = QgsFeature(fields)
+            feat_i = QgsVectorLayerUtils.createFeature(g_regard)
             feat_i.setAttribute('label', feat[g_label])
 
             geometry.transform(xform)

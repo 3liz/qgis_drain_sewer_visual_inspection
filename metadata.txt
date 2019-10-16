@@ -2,7 +2,7 @@
 name=Drain sewer visual inspection
 description=Drain and sewer systems visual inspection coding system (EN 13508-2)
 about=Drain and sewer systems visual inspection coding system (EN 13508-2)
-version=0.1
+version=0.1.0
 qgisMinimumVersion=3.4
 author=3liz
 email=info@3liz.com

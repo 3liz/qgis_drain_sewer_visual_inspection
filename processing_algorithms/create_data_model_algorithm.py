@@ -34,14 +34,14 @@ __revision__ = '$Format:%H$'
 
 LOGGER = logging.getLogger(plugin_name())
 
-MAPPING = OrderedDict()
-MAPPING['file'] = [None, QgsWkbTypes.NullGeometry]
-MAPPING['troncon'] = [None, QgsWkbTypes.NullGeometry]
-MAPPING['obs'] = [None, QgsWkbTypes.NullGeometry]
-MAPPING['regard'] = [None, QgsWkbTypes.NullGeometry]
-MAPPING['geom_regard'] = ['Point', QgsWkbTypes.PointGeometry]
-MAPPING['geom_troncon'] = ['LineString', QgsWkbTypes.LineGeometry]
-MAPPING['geom_obs'] = ['Point', QgsWkbTypes.PointGeometry]
+MAPPING = OrderedDict() # Geometry name, Geometry type, sequence
+MAPPING['file'] = [None, QgsWkbTypes.NullGeometry, 'id']
+MAPPING['troncon'] = [None, QgsWkbTypes.NullGeometry, None]
+MAPPING['obs'] = [None, QgsWkbTypes.NullGeometry, 'id']
+MAPPING['regard'] = [None, QgsWkbTypes.NullGeometry, None]
+MAPPING['geom_regard'] = ['Point', QgsWkbTypes.PointGeometry, 'id']
+MAPPING['geom_troncon'] = ['LineString', QgsWkbTypes.LineGeometry, 'id']
+MAPPING['geom_obs'] = ['Point', QgsWkbTypes.PointGeometry, None]
 
 
 class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
@@ -164,6 +164,16 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
                 raise QgsProcessingException(
                     self.tr('* ERROR while exporting the layer to "{}":"{}"').format(source, exporter.errorMessage()))
 
+            # Do create sequence
+            if geom[2] and not is_geopackage:
+                c = conn.cursor()
+                sql = "CREATE SEQUENCE {}.{}_{}_seq;".format(schema, table, geom[2])
+                c.execute(sql)
+                conn.commit()
+                sql = "ALTER TABLE {0}.{1} ALTER COLUMN {2} SET DEFAULT nextval('{0}.{1}_{2}_seq'::regclass);".format(schema, table, geom[2])
+                c.execute(sql)
+                conn.commit()
+
             # connection troncon_rereau_classif in geopackage
             if is_geopackage:
                 dest_layer = QgsVectorLayer('{}|layername={}'.format(uri, table), table, 'ogr')
@@ -207,35 +217,8 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         if is_geopackage:
             conn = spatialite_connect(uri)
 
-        # Do create sequence
-        c = conn.cursor()
-        if not is_geopackage:
-            sql = "CREATE SEQUENCE {}.file_id_seq;".format(schema)
-            c.execute(sql)
-            conn.commit()
-            sql = "ALTER TABLE {0}.file ALTER COLUMN id SET DEFAULT nextval('{0}.file_id_seq'::regclass);".format(schema)
-            c.execute(sql)
-            conn.commit()
-            sql = "CREATE SEQUENCE {}.geom_regard_id_seq;".format(schema)
-            c.execute(sql)
-            conn.commit()
-            sql = "ALTER TABLE {0}.geom_regard ALTER COLUMN id SET DEFAULT nextval('{0}.geom_regard_id_seq'::regclass);".format(schema)
-            c.execute(sql)
-            conn.commit()
-            sql = "CREATE SEQUENCE {}.obs_id_seq;".format(schema)
-            c.execute(sql)
-            conn.commit()
-            sql = "ALTER TABLE {0}.obs ALTER COLUMN id SET DEFAULT nextval('{0}.obs_id_seq'::regclass);".format(schema)
-            c.execute(sql)
-            conn.commit()
-            sql = "CREATE SEQUENCE {}.geom_troncon_id_seq;".format(schema)
-            c.execute(sql)
-            conn.commit()
-            sql = "ALTER TABLE {0}.geom_troncon ALTER COLUMN id SET DEFAULT nextval('{0}.geom_troncon_id_seq'::regclass);".format(schema)
-            c.execute(sql)
-            conn.commit()
-
         # Do create view
+        c = conn.cursor()
         prefix = ''
         view_destination = self.VIEW_NAME
         if not is_geopackage:

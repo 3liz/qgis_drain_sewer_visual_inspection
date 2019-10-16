@@ -8,6 +8,7 @@ from qgis.core import (
     QgsExpressionContext,
     QgsExpressionContextUtils,
     QgsGeometry,
+    QgsVectorLayerUtils,
 )
 from qgis.core import (
     QgsProcessing,

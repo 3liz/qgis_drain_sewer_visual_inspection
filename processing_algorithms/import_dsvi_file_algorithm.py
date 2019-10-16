@@ -22,6 +22,7 @@ from qgis.core import (
     QgsExpression,
     QgsExpressionContext,
     QgsExpressionContextUtils,
+    QgsVectorLayerUtils,
 )
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
@@ -116,7 +117,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             m.update(f.read())
             hashcontent = m.hexdigest()
 
-            feat_file = QgsFeature(provider_fields(t_file.fields()))
+            feat_file = QgsVectorLayerUtils.createFeature(t_file)
             feat_file.setAttribute('basename', basename)
             feat_file.setAttribute('hashcontent', hashcontent)
 
@@ -493,7 +494,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         features = []
         fields = provider_fields(t_troncon.fields())
         for r in troncons:
-            feat_t = QgsFeature(fields)
+            feat_t = QgsVectorLayerUtils.createFeature(t_troncon)
             feat_t.setAttribute('id_file', feat_file['id'])
             for k, v in r:
                 field = fields.field(k)
@@ -519,7 +520,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         features = []
         fields = provider_fields(t_obs.fields())
         for r in observations:
-            feat_o = QgsFeature(fields)
+            feat_o = QgsVectorLayerUtils.createFeature(t_obs)
             feat_o.setAttribute('id_file', feat_file['id'])
             for k, v in r:
                 field = fields.field(k)
@@ -545,7 +546,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         features = []
         fields = provider_fields(t_regard.fields())
         for r in regards:
-            feat_r = QgsFeature(fields)
+            feat_r = QgsVectorLayerUtils.createFeature(t_regard)
             feat_r.setAttribute('id_file', feat_file['id'])
             for k, v in r:
                 field = fields.field(k)

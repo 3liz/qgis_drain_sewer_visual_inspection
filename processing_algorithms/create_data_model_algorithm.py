@@ -207,8 +207,35 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         if is_geopackage:
             conn = spatialite_connect(uri)
 
-        # Do create view
+        # Do create sequence
         c = conn.cursor()
+        if not is_geopackage:
+            sql = "CREATE SEQUENCE {}.file_id_seq;".format(schema)
+            c.execute(sql)
+            conn.commit()
+            sql = "ALTER TABLE {0}.file ALTER COLUMN id SET DEFAULT nextval('{0}.file_id_seq'::regclass);".format(schema)
+            c.execute(sql)
+            conn.commit()
+            sql = "CREATE SEQUENCE {}.geom_regard_id_seq;".format(schema)
+            c.execute(sql)
+            conn.commit()
+            sql = "ALTER TABLE {0}.geom_regard ALTER COLUMN id SET DEFAULT nextval('{0}.geom_regard_id_seq'::regclass);".format(schema)
+            c.execute(sql)
+            conn.commit()
+            sql = "CREATE SEQUENCE {}.obs_id_seq;".format(schema)
+            c.execute(sql)
+            conn.commit()
+            sql = "ALTER TABLE {0}.obs ALTER COLUMN id SET DEFAULT nextval('{0}.obs_id_seq'::regclass);".format(schema)
+            c.execute(sql)
+            conn.commit()
+            sql = "CREATE SEQUENCE {}.geom_troncon_id_seq;".format(schema)
+            c.execute(sql)
+            conn.commit()
+            sql = "ALTER TABLE {0}.geom_troncon ALTER COLUMN id SET DEFAULT nextval('{0}.geom_troncon_id_seq'::regclass);".format(schema)
+            c.execute(sql)
+            conn.commit()
+
+        # Do create view
         prefix = ''
         view_destination = self.VIEW_NAME
         if not is_geopackage:

@@ -18,8 +18,6 @@ from qgis.core import (
     QgsProcessingException,
 )
 
-from ..qgis_plugin_tools.tools.fields import provider_fields
-
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
 __email__ = 'info@3liz.org'
@@ -246,8 +244,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         l_t_g = {}  # lien troncon et geometrie troncon
         l_pts_t = {}  # lien points troncons
         features = []  # les objets de geometrie de troncon
-        geom_point_keys = []  # liste des
-        fields = provider_fields(g_troncon.fields())
+        geom_point_keys = []  # liste des clés des points troncons
         for tid, pts in lines.items():
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
@@ -279,7 +276,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 l_pts_t[(pts[0], pts[1])] = [tid]
                 geom_point_keys.append((pts[0], pts[1]))
 
-            feat_t = QgsFeature(fields)
+            feat_t = QgsVectorLayerUtils.createFeature(g_troncon)
             feat_t.setAttribute('label', str(pt_labels[pts[0]]) + '-' + str(pt_labels[pts[1]]))
             feat_t.setAttribute('id_geom_regard_amont', pts[0])
             feat_t.setAttribute('id_geom_regard_aval', pts[1])

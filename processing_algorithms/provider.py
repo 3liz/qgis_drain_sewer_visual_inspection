@@ -7,6 +7,7 @@ from .config_project_algorithm import ConfigProjectAlgorithm
 from .create_geom_obs_algorithm import CreateGeomObsAlgorithm
 from .create_geom_segment_algorithm import CreateGeomTronconAlgorithm
 from .create_data_model_algorithm import CreatePostgisTables, CreateGeopackage
+from .load_postgis_layers_algorithm import LoadPostgisTables
 from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
 from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
 from ..qgis_plugin_tools.resources import resources_path
@@ -29,6 +30,7 @@ class Provider(QgsProcessingProvider):
         # The order is more or less the workflow
         self.addAlgorithm(CreateGeopackage())
         self.addAlgorithm(CreatePostgisTables())
+        self.addAlgorithm(LoadPostgisTables())
         self.addAlgorithm(ConfigProjectAlgorithm())
         self.addAlgorithm(ImportGeomRegardAlgorithm())
         self.addAlgorithm(ImportDsviFileAlgorithm())

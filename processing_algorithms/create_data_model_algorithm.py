@@ -34,7 +34,7 @@ __revision__ = '$Format:%H$'
 
 LOGGER = logging.getLogger(plugin_name())
 
-MAPPING = OrderedDict() # Geometry name, Geometry type, sequence
+MAPPING = OrderedDict()  # Geometry name, Geometry type, sequence
 MAPPING['file'] = [None, QgsWkbTypes.NullGeometry, 'id']
 MAPPING['troncon'] = [None, QgsWkbTypes.NullGeometry, None]
 MAPPING['obs'] = [None, QgsWkbTypes.NullGeometry, 'id']

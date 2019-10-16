@@ -19,7 +19,6 @@ from qgis.core import (
 from processing.tools import postgis
 
 from ..qgis_plugin_tools.custom_logging import plugin_name
-from ..qgis_plugin_tools.resources import resources_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -28,7 +27,7 @@ __revision__ = '$Format:%H$'
 
 LOGGER = logging.getLogger(plugin_name())
 
-MAPPING = OrderedDict() # Geometry name, Geometry type, primary key
+MAPPING = OrderedDict()  # Geometry name, Geometry type, primary key
 MAPPING['file'] = [None, QgsWkbTypes.NullGeometry, 'id']
 MAPPING['troncon'] = [None, QgsWkbTypes.NullGeometry, 'id']
 MAPPING['obs'] = [None, QgsWkbTypes.NullGeometry, 'id']
@@ -37,6 +36,7 @@ MAPPING['geom_regard'] = ['Point', QgsWkbTypes.PointGeometry, 'id']
 MAPPING['geom_troncon'] = ['LineString', QgsWkbTypes.LineGeometry, 'id']
 MAPPING['geom_obs'] = ['Point', QgsWkbTypes.PointGeometry, 'id']
 MAPPING['view_regard_geolocalized'] = ['Point', QgsWkbTypes.PointGeometry, 'id']
+
 
 class LoadPostgisTables(QgsProcessingAlgorithm):
 
@@ -94,8 +94,8 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
             db = postgis.GeoDB.from_name(destination)
             schema = self.parameterAsFile(parameters, self.SCHEMA, context)
         except QgsProcessingException:
-                raise QgsProcessingException(
-                    self.tr('* ERROR while getting database "{}"').format(destination))
+            raise QgsProcessingException(
+                self.tr('* ERROR while getting database "{}"').format(destination))
 
         database_uri = db.uri
         output_layers = []
@@ -118,9 +118,8 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
             dest_layer = QgsVectorLayer(uri.uri(False), table, 'postgres')
 
             if not dest_layer.isValid():
-                source = uri if is_geopackage else uri.uri()
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, source))
+                    self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, uri.uri()))
 
             feedback.pushInfo('The layer {} has been loaded'.format(table))
 
@@ -152,4 +151,3 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
 
     def createInstance(self):
         return self.__class__()
-

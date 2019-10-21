@@ -18,7 +18,8 @@ from qgis.core import (
 )
 from processing.tools import postgis
 
-from ..qgis_plugin_tools.custom_logging import plugin_name
+from ..qgis_plugin_tools.tools.custom_logging import plugin_name
+from ..qgis_plugin_tools.tools.i18n import tr
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -59,12 +60,12 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
         return 'load_postgis_layers'
 
     def displayName(self):
-        return self.tr('00 Load postgis layers')
+        return tr('00 Load postgis layers')
 
     def initAlgorithm(self, configuration):
         db_param = QgsProcessingParameterString(
             self.DATABASE,
-            self.tr('Database (connection name)'),
+            tr('Database (connection name)'),
         )
         db_param.setMetadata({
             'widget_wrapper': {
@@ -73,7 +74,7 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
 
         schema_param = QgsProcessingParameterString(
             self.SCHEMA,
-            self.tr('Schema (schema name)'), 'public', False, True)
+            tr('Schema (schema name)'), 'public', False, True)
         schema_param.setMetadata({
             'widget_wrapper': {
                 'class': 'processing.gui.wrappers_postgis.SchemaWidgetWrapper',
@@ -83,7 +84,7 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputMultipleLayers(
                 self.OUTPUT_LAYERS,
-                self.tr('Output layers')
+                tr('Output layers')
             )
         )
 
@@ -95,7 +96,7 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
             schema = self.parameterAsFile(parameters, self.SCHEMA, context)
         except QgsProcessingException:
             raise QgsProcessingException(
-                self.tr('* ERROR while getting database "{}"').format(destination))
+                tr('* ERROR while getting database "{}"').format(destination))
 
         database_uri = db.uri
         output_layers = []
@@ -119,7 +120,7 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
 
             if not dest_layer.isValid():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, uri.uri()))
+                    tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, uri.uri()))
 
             feedback.pushInfo('The layer {} has been loaded'.format(table))
 
@@ -140,7 +141,7 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
         }
 
     def group(self):
-        return self.tr('Configuration')
+        return tr('Configuration')
 
     def groupId(self):
         return 'configuration'

@@ -17,7 +17,8 @@ from qgis.core import (
     QgsProcessingParameterVectorLayer,
 )
 
-from ..qgis_plugin_tools.resources import resources_path
+from ..qgis_plugin_tools.tools.i18n import tr
+from ..qgis_plugin_tools.tools.resources import resources_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -44,7 +45,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.FILE_TABLE,
-                self.tr('Tableau des fichiers d\'ITV importés'),
+                tr('Tableau des fichiers d\'ITV importés'),
                 [QgsProcessing.TypeVector],
                 defaultValue='file'
             )
@@ -53,7 +54,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SEGMENTS_TABLE,
-                self.tr('Tableau des tronçons d\'ITV'),
+                tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector],
                 defaultValue='troncon'
             )
@@ -62,7 +63,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.OBSERVATIONS_TABLE,
-                self.tr('Tableau des observations d\'ITV'),
+                tr('Tableau des observations d\'ITV'),
                 [QgsProcessing.TypeVector],
                 defaultValue='obs'
             )
@@ -71,7 +72,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.MANHOLES_TABLE,
-                self.tr('Tableau des regards d\'ITV'),
+                tr('Tableau des regards d\'ITV'),
                 [QgsProcessing.TypeVector],
                 defaultValue='regard'
             )
@@ -80,7 +81,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.GEOM_MANHOLES,
-                self.tr('Couche des géométries de regards'),
+                tr('Couche des géométries de regards'),
                 [QgsProcessing.TypeVectorPoint],
                 defaultValue='geom_regard'
             )
@@ -89,7 +90,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.GEOM_SEGMENT,
-                self.tr('Couche des géométries de tronçons'),
+                tr('Couche des géométries de tronçons'),
                 [QgsProcessing.TypeVectorLine],
                 defaultValue='geom_troncon'
             )
@@ -98,7 +99,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.GEOM_OBSERVATION,
-                self.tr('Couche des géométries d\'observations'),
+                tr('Couche des géométries d\'observations'),
                 [QgsProcessing.TypeVectorPoint],
                 defaultValue='geom_obs'
             )
@@ -107,13 +108,13 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.VIEW_MANHOLES_GEOLOCALIZED,
-                self.tr('Couche des regards géolocalisés'),
+                tr('Couche des regards géolocalisés'),
                 [QgsProcessing.TypeVectorPoint],
                 defaultValue='view_regard_geolocalized'
             )
         )
 
-        # self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, self.tr('Succès')))
+        # self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, tr('Succès')))
 
     def processAlgorithm(self, parameters, context, feedback):
 
@@ -358,16 +359,16 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         return {}
 
     def shortHelpString(self) -> str:
-        return self.tr('Create project variables according to layers.')
+        return tr('Create project variables according to layers.')
 
     def name(self):
         return 'config_dsvi_project'
 
     def displayName(self):
-        return self.tr('05 Project configuration')
+        return tr('05 Project configuration')
 
     def group(self):
-        return self.tr('Configuration')
+        return tr('Configuration')
 
     def groupId(self):
         return 'configuration'

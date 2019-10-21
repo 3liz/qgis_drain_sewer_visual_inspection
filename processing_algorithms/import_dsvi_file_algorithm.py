@@ -16,7 +16,6 @@ from qgis.core import (
 )
 from qgis.core import (
     edit,
-    QgsFeature,
     QgsField,
     QgsFeatureRequest,
     QgsExpression,
@@ -26,6 +25,7 @@ from qgis.core import (
 )
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
+from ..qgis_plugin_tools.tools.i18n import tr
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -46,14 +46,14 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFile(
                 self.INPUT,
-                self.tr('Fichier d\'ITV')
+                tr('Fichier d\'ITV')
             )
         )
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.FILE_TABLE,
-                self.tr('Tableau des fichiers d\'ITV importés'),
+                tr('Tableau des fichiers d\'ITV importés'),
                 [QgsProcessing.TypeVector]
             )
         )
@@ -61,7 +61,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SEGMENT_TABLE,
-                self.tr('Tableau des tronçons d\'ITV'),
+                tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
         )
@@ -69,7 +69,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.OBSERVATIONS_TABLE,
-                self.tr('Tableau des observations d\'ITV'),
+                tr('Tableau des observations d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
         )
@@ -77,12 +77,12 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.MANHOLES_TABLE,
-                self.tr('Tableau des regards d\'ITV'),
+                tr('Tableau des regards d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, self.tr('Succès')))
+        self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, tr('Succès')))
 
     def processAlgorithm(self, parameters, context, feedback):
         path = self.parameterAsFile(parameters, self.INPUT, context)
@@ -94,11 +94,11 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         paths = path.split(';')
         if len(paths) != 1:
             raise QgsProcessingException(
-                self.tr('* ERREUR: 1 fichier a la fois %s.') % path)
+                tr('* ERREUR: 1 fichier a la fois %s.') % path)
 
         if not os.path.exists(path):
             raise QgsProcessingException(
-                self.tr('* ERREUR: %s n\'existe pas.') % path)
+                tr('* ERREUR: %s n\'existe pas.') % path)
 
         # add date fields to itv file table
         # relation_aggregate( 'itv_tronco_id_file_itv_file20_id', 'max', "abf")
@@ -123,7 +123,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
         if not feat_file:
             raise QgsProcessingException(
-                self.tr('* ERREUR: le fichier %s n\'a pas ete lu correctement.') % path)
+                tr('* ERREUR: le fichier %s n\'a pas ete lu correctement.') % path)
 
         exp_context = QgsExpressionContext()
         exp_context.appendScope(QgsExpressionContextUtils.globalScope())
@@ -137,14 +137,14 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         request.setLimit(1)
 
         for t in t_file.getFeatures(request):
             raise QgsProcessingException(
-                self.tr('* ERREUR: le fichier %s a deja ete lu') % path)
+                tr('* ERREUR: le fichier %s a deja ete lu') % path)
 
         exp_str = QgsExpression.createFieldEqualityExpression('hashcontent', feat_file['hashcontent'])
         exp = QgsExpression(exp_str)
@@ -152,14 +152,14 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         request.setLimit(1)
 
         for t in t_file.getFeatures(request):
             raise QgsProcessingException(
-                self.tr('* ERREUR: le fichier %s semble deja avoir ete lu') % path)
+                tr('* ERREUR: le fichier %s semble deja avoir ete lu') % path)
 
         exp_context = QgsExpressionContext()
         exp_context.appendScope(QgsExpressionContextUtils.globalScope())
@@ -172,7 +172,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         last_t_id = exp.evaluate(exp_context)
         if not last_t_id:
@@ -189,7 +189,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         last_r_id = exp.evaluate(exp_context)
         if not last_r_id:
@@ -408,7 +408,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
                 if fields.indexOf(k) == -1:
                     raise QgsProcessingException(
-                        self.tr('* ERREUR dans le fichier : le champs de tronçon "%s" est inconnue') % k)
+                        tr('* ERREUR dans le fichier : le champs de tronçon "%s" est inconnue') % k)
                 field = fields.field(k)
                 if isinstance(v, str) and field.isNumeric():
                     if v:
@@ -416,7 +416,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                             float(v.replace(DECIMAL, '.'))
                         except:
                             raise QgsProcessingException(
-                                self.tr('* ERREUR dans le fichier : le champs de tronçon "%s" est numérique mais pas la valeur "%s"') % (k, v))
+                                tr('* ERREUR dans le fichier : le champs de tronçon "%s" est numérique mais pas la valeur "%s"') % (k, v))
 
         fields = provider_fields(t_obs.fields())
         for r in observations:
@@ -431,7 +431,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
                 if fields.indexOf(k) == -1:
                     raise QgsProcessingException(
-                        self.tr('* ERREUR dans le fichier : le champs d\'observation "%s" est inconnue') % k)
+                        tr('* ERREUR dans le fichier : le champs d\'observation "%s" est inconnue') % k)
                 field = fields.field(k)
                 if isinstance(v, str) and field.isNumeric():
                     if v:
@@ -439,7 +439,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                             float(v.replace(DECIMAL, '.'))
                         except:
                             raise QgsProcessingException(
-                                self.tr('* ERREUR dans le fichier : le champs d\'observation "%s" est numérique mais pas la valeur "%s"') % (k, v))
+                                tr('* ERREUR dans le fichier : le champs d\'observation "%s" est numérique mais pas la valeur "%s"') % (k, v))
 
         fields = provider_fields(t_regard.fields())
         for r in regards:
@@ -454,7 +454,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
                 if fields.indexOf(k) == -1:
                     raise QgsProcessingException(
-                        self.tr('* ERREUR dans le fichier : le champs de regard "%s" est inconnue') % k)
+                        tr('* ERREUR dans le fichier : le champs de regard "%s" est inconnue') % k)
                 field = fields.field(k)
                 if isinstance(v, str) and field.isNumeric():
                     if v:
@@ -462,7 +462,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                             float(v.replace(DECIMAL, '.'))
                         except:
                             raise QgsProcessingException(
-                                self.tr('* ERREUR dans le fichier : le champs de regard "%s" est numérique mais pas la valeur "%s"') % (k, v))
+                                tr('* ERREUR dans le fichier : le champs de regard "%s" est numérique mais pas la valeur "%s"') % (k, v))
 
         # Finalisation objet fichier
         feat_file.setAttribute('encoding', ENCODING)
@@ -482,10 +482,10 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         (res, outFeats) = t_file.dataProvider().addFeatures([feat_file])
         if not res or not outFeats:
             raise QgsProcessingException(
-                self.tr('* ERREUR: lors de l\'enregistrement du fichier %s') % ', '.join(t_file.dataProvider().errors()))
+                tr('* ERREUR: lors de l\'enregistrement du fichier %s') % ', '.join(t_file.dataProvider().errors()))
         if not t_file.commitChanges():
             raise QgsProcessingException(
-                self.tr('* ERROR: Commit %s.') % t_file.commitErrors())
+                tr('* ERROR: Commit %s.') % t_file.commitErrors())
 
         # Mise a jour de l'identifiant de l'objet fichier
         feat_file.setAttribute('id', outFeats[0]['id'])
@@ -511,10 +511,10 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = t_troncon.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    self.tr('* ERREUR: lors de l\'enregistrement des troncon %s') % ', '.join(t_troncon.dataProvider().errors()))
+                    tr('* ERREUR: lors de l\'enregistrement des troncon %s') % ', '.join(t_troncon.dataProvider().errors()))
             if not t_troncon.commitChanges():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Commit %s.') % t_troncon.commitErrors())
+                    tr('* ERROR: Commit %s.') % t_troncon.commitErrors())
 
         # Creation des objets observations
         features = []
@@ -537,10 +537,10 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = t_obs.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    self.tr('* ERREUR: lors de l\'enregistrement des observations %s') % ', '.join(t_obs.dataProvider().errors()))
+                    tr('* ERREUR: lors de l\'enregistrement des observations %s') % ', '.join(t_obs.dataProvider().errors()))
             if not t_obs.commitChanges():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Commit %s.') % t_obs.commitErrors())
+                    tr('* ERROR: Commit %s.') % t_obs.commitErrors())
 
         # Creation des objets regards
         features = []
@@ -563,25 +563,25 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = t_regard.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    self.tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(t_regard.dataProvider().errors()))
+                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(t_regard.dataProvider().errors()))
             if not t_regard.commitChanges():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Commit %s.') % t_regard.commitErrors())
+                    tr('* ERROR: Commit %s.') % t_regard.commitErrors())
 
         # Returns empty dict if no outputs
         return {self.SUCCESS: 1}
 
     def shortHelpString(self) -> str:
-        return self.tr('It will import Drain Sewer Visual Inspection data into the geopackage.')
+        return tr('It will import Drain Sewer Visual Inspection data into the geopackage.')
 
     def name(self):
         return 'import_dsvi_data'
 
     def displayName(self):
-        return self.tr('00 Import DSVI data')
+        return tr('00 Import DSVI data')
 
     def group(self):
-        return self.tr('Drain Sewer Visual Inspection data')
+        return tr('Drain Sewer Visual Inspection data')
 
     def groupId(self):
         return 'dsvi'

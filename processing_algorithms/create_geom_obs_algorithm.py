@@ -18,6 +18,7 @@ from qgis.core import (
 )
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
+from ..qgis_plugin_tools.tools.i18n import tr
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -37,7 +38,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.SEGMENTS_TABLE,
-                self.tr('Tableau des tronçons d\'ITV'),
+                tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
         )
@@ -45,7 +46,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.GEOM_SEGMENTS,
-                self.tr('Couche des géométries de tronçons'),
+                tr('Couche des géométries de tronçons'),
                 [QgsProcessing.TypeVectorLine]
             )
         )
@@ -53,7 +54,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.OBSERVATION_TABLE,
-                self.tr('Tableau des observations'),
+                tr('Tableau des observations'),
                 [QgsProcessing.TypeVector]
             )
         )
@@ -61,12 +62,12 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.GEOM_OBSERVATION,
-                self.tr('Couche des géométries d\'observations'),
+                tr('Couche des géométries d\'observations'),
                 [QgsProcessing.TypeVectorPoint]
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.OBSERVATIONS_CREATED, self.tr('Succès')))
+        self.addOutput(QgsProcessingOutputNumber(self.OBSERVATIONS_CREATED, tr('Succès')))
 
     def processAlgorithm(self, parameters, context, feedback):
 
@@ -87,7 +88,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         request.setSubsetOfAttributes(['id', 'aab', 'aad', 'aaf', 'abq', 'id_file', 'id_geom_troncon'], t_troncon.fields())
@@ -105,7 +106,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         if not has_geo_troncon:
             raise QgsProcessingException(
-                self.tr('* ERROR: No troncon geometries'))
+                tr('* ERROR: No troncon geometries'))
 
         # Get observation ids
         exp_context = QgsExpressionContext()
@@ -120,7 +121,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         obs_ids = []
         request = QgsFeatureRequest(exp, exp_context)
@@ -139,7 +140,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         if not obs_ids:
             raise QgsProcessingException(
-                self.tr('* ERROR: No observations to geolocalize found'))
+                tr('* ERROR: No observations to geolocalize found'))
 
         # Check observations already geolocalised on troncon
         exp_context = QgsExpressionContext()
@@ -153,7 +154,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         geo_observations = []
@@ -179,7 +180,7 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         features = []
@@ -219,10 +220,10 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = g_obs.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    self.tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_obs.dataProvider().errors()))
+                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_obs.dataProvider().errors()))
             if not g_obs.commitChanges():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Commit %s.') % g_obs.commitErrors())
+                    tr('* ERROR: Commit %s.') % g_obs.commitErrors())
 
         # Returns empty dict if no outputs
         return {self.OBSERVATIONS_CREATED: len(features)}
@@ -231,10 +232,10 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         return 'create_geom_obs'
 
     def displayName(self):
-        return self.tr('10 Create observations geometries')
+        return tr('10 Create observations geometries')
 
     def group(self):
-        return self.tr('Drain Sewer Visual Inspection data')
+        return tr('Drain Sewer Visual Inspection data')
 
     def groupId(self):
         return 'dsvi'

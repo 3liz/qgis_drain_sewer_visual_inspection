@@ -15,7 +15,7 @@ except ImportError:
 
 from ..provider import Provider
 from ..create_data_model_algorithm import MAPPING
-from ...qgis_plugin_tools.resources import plugin_test_data_path, plugin_path
+from ...qgis_plugin_tools.tools.resources import plugin_test_data_path, plugin_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'

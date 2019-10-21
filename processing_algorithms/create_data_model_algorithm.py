@@ -24,8 +24,9 @@ from qgis.utils import spatialite_connect
 from processing.tools import postgis
 
 
-from ..qgis_plugin_tools.custom_logging import plugin_name
-from ..qgis_plugin_tools.resources import resources_path
+from ..qgis_plugin_tools.tools.custom_logging import plugin_name
+from ..qgis_plugin_tools.tools.i18n import tr
+from ..qgis_plugin_tools.tools.resources import resources_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -57,7 +58,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterCrs(
                 self.CRS,
-                self.tr('Coordinate Reference System'),
+                tr('Coordinate Reference System'),
                 defaultValue='EPSG:2154'
             )
         )
@@ -65,7 +66,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputMultipleLayers(
                 self.OUTPUT_LAYERS,
-                self.tr('Output layers')
+                tr('Output layers')
             )
         )
 
@@ -116,7 +117,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             if not csv.isValid():
                 csv_path = resources_path('data_models', '{}.csv'.format(table))
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Can\'t load CSV {}').format(csv_path))
+                    tr('* ERROR: Can\'t load CSV {}').format(csv_path))
 
             fields = []
             for c in csv.getFeatures():
@@ -129,7 +130,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
 
             if vl.fields().count() != len(fields):
                 raise QgsProcessingException(
-                    self.tr('* ERROR while creating fields in layer "{}"'.format(table)))
+                    tr('* ERROR while creating fields in layer "{}"'.format(table)))
 
             # export layer
             options['layerName'] = vl.name()
@@ -162,7 +163,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             if exporter.errorCode() != QgsVectorLayerExporter.NoError:
                 source = uri if is_geopackage else uri.uri()
                 raise QgsProcessingException(
-                    self.tr('* ERROR while exporting the layer to "{}":"{}"').format(source, exporter.errorMessage()))
+                    tr('* ERROR while exporting the layer to "{}":"{}"').format(source, exporter.errorMessage()))
 
             # Do create sequence
             if geom[2] and not is_geopackage:
@@ -196,7 +197,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
             if not dest_layer.isValid():
                 source = uri if is_geopackage else uri.uri()
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, source))
+                    tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, source))
 
             feedback.pushInfo('The layer {} has been created'.format(table))
 
@@ -263,7 +264,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         if not view_layer.isValid():
             source = uri if is_geopackage else uri.uri()
             raise QgsProcessingException(
-                self.tr('* ERROR: Can\'t load layer {} in {}').format(self.VIEW_NAME, source))
+                tr('* ERROR: Can\'t load layer {} in {}').format(self.VIEW_NAME, source))
 
         output_layers.append(view_layer.id())
 
@@ -286,7 +287,7 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
         }
 
     def group(self):
-        return self.tr('Configuration')
+        return tr('Configuration')
 
     def groupId(self):
         return 'configuration'
@@ -305,20 +306,20 @@ class CreateGeopackage(CreateDataModelAlgorithm):
         return 'create_geopackage_data_model'
 
     def displayName(self):
-        return self.tr('01 Create geopackage data model')
+        return tr('01 Create geopackage data model')
 
     def initAlgorithm(self, configuration):
         self.addParameter(
             QgsProcessingParameterFileDestination(
                 self.DESTINATION,
-                self.tr('Geopackage file'),
+                tr('Geopackage file'),
                 fileFilter='gpkg'
             )
         )
         super().initAlgorithm(configuration)
 
     def shortHelpString(self) -> str:
-        return self.tr('Create the data model with a new geopackage.')
+        return tr('Create the data model with a new geopackage.')
 
 
 class CreatePostgisTables(CreateDataModelAlgorithm):
@@ -327,12 +328,12 @@ class CreatePostgisTables(CreateDataModelAlgorithm):
         return 'create_postgis_data_model'
 
     def displayName(self):
-        return self.tr('00 Create postgis data model')
+        return tr('00 Create postgis data model')
 
     def initAlgorithm(self, configuration):
         db_param = QgsProcessingParameterString(
             self.DESTINATION,
-            self.tr('Database (connection name)'),
+            tr('Database (connection name)'),
         )
         db_param.setMetadata({
             'widget_wrapper': {
@@ -341,7 +342,7 @@ class CreatePostgisTables(CreateDataModelAlgorithm):
 
         schema_param = QgsProcessingParameterString(
             self.SCHEMA,
-            self.tr('Schema (schema name)'), 'public', False, True)
+            tr('Schema (schema name)'), 'public', False, True)
         schema_param.setMetadata({
             'widget_wrapper': {
                 'class': 'processing.gui.wrappers_postgis.SchemaWidgetWrapper',
@@ -352,7 +353,7 @@ class CreatePostgisTables(CreateDataModelAlgorithm):
 
     def shortHelpString(self) -> str:
         tables = ', '.join(MAPPING.keys())
-        return self.tr(
+        return tr(
             'Create the data model in a PostGIS schema.\n'
             'Be careful, all these tables are going to be replaced: {} '
             'and the view "{}" in the given schema.\n'

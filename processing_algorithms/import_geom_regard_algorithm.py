@@ -1,6 +1,5 @@
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
-    QgsFeature,
     QgsVectorLayerUtils,
     QgsCoordinateTransform,
 )
@@ -13,6 +12,8 @@ from qgis.core import (
     QgsProcessingOutputNumber,
     QgsProcessingException,
 )
+
+from ..qgis_plugin_tools.tools.i18n import tr
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -31,14 +32,14 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.INPUT,
-                self.tr('Couche des regards à importer'),
+                tr('Couche des regards à importer'),
                 [QgsProcessing.TypeVectorPoint]
             )
         )
         self.addParameter(
             QgsProcessingParameterField(
                 self.MANHOLE_NAME_FIELD,
-                self.tr('Champs du nom des regards à conserver'),
+                tr('Champs du nom des regards à conserver'),
                 None,
                 self.INPUT,
                 QgsProcessingParameterField.Any
@@ -48,12 +49,12 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.GEOM_MANHOLES,
-                self.tr('Couche des géométries de regards'),
+                tr('Couche des géométries de regards'),
                 [QgsProcessing.TypeVectorPoint]
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.MAN_HOLES, self.tr('Number of imported man holes')))
+        self.addOutput(QgsProcessingOutputNumber(self.MAN_HOLES, tr('Number of imported man holes')))
 
     def processAlgorithm(self, parameters, context, feedback):
         g_import = self.parameterAsSource(parameters, self.INPUT, context)
@@ -92,25 +93,25 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = g_regard.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    self.tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_regard.dataProvider().errors()))
+                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_regard.dataProvider().errors()))
             if not g_regard.commitChanges():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Commit %s.') % g_regard.commitErrors())
+                    tr('* ERROR: Commit %s.') % g_regard.commitErrors())
 
         feedback.pushInfo('{} manholes have been imported'.format(i))
         return {self.MAN_HOLES: i}
 
     def shortHelpString(self) -> str:
-        return self.tr('It will import the geometry and the specified field into the layer "geom_regard".')
+        return tr('It will import the geometry and the specified field into the layer "geom_regard".')
 
     def name(self):
         return 'import_geom_regard'
 
     def displayName(self):
-        return self.tr('10 Import des géométries de regards')
+        return tr('10 Import des géométries de regards')
 
     def group(self):
-        return self.tr('Configuration')
+        return tr('Configuration')
 
     def groupId(self):
         return 'configuration'

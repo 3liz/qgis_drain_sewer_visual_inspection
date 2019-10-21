@@ -10,5 +10,5 @@ docker_test:
 i18n_%:
 	$(MAKE) -C qgis_plugin_tools i18n_$* LOCALES=$(LOCALES)
 
-deploy_%:
-	$(MAKE) -C qgis_plugin_tools deploy_$* PLUGINNAME=$(PLUGINNAME)
+release_%:
+	$(MAKE) -C qgis_plugin_tools release_$* PLUGINNAME=$(PLUGINNAME)

@@ -2,7 +2,6 @@
 
 from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
-    QgsFeature,
     QgsFeatureRequest,
     QgsExpression,
     QgsExpressionContext,
@@ -18,6 +17,8 @@ from qgis.core import (
     QgsProcessingOutputNumber,
     QgsProcessingException,
 )
+
+from ..qgis_plugin_tools.tools.i18n import tr
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'
@@ -38,7 +39,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.MANHOLES_TABLE,
-                self.tr('Tableau des regards d\'ITV'),
+                tr('Tableau des regards d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
         )
@@ -46,7 +47,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.GEOM_MANHOLES,
-                self.tr('Couche des géométries de regards'),
+                tr('Couche des géométries de regards'),
                 [QgsProcessing.TypeVectorPoint]
             )
         )
@@ -54,7 +55,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SEGMENTS_TABLE,
-                self.tr('Tableau des tronçons d\'ITV'),
+                tr('Tableau des tronçons d\'ITV'),
                 [QgsProcessing.TypeVector]
             )
         )
@@ -62,12 +63,12 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.GEOM_SEGMENTS,
-                self.tr('Couche des géométries de tronçons'),
+                tr('Couche des géométries de tronçons'),
                 [QgsProcessing.TypeVectorLine]
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.SEGMENT_CREATED, self.tr('Number of segment created')))
+        self.addOutput(QgsProcessingOutputNumber(self.SEGMENT_CREATED, tr('Number of segment created')))
 
     def processAlgorithm(self, parameters, context, feedback):
 
@@ -87,7 +88,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         r_ids = []  # identifiant des regards
@@ -138,7 +139,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         g_ids = []  # identifiants des géométrie de regards
@@ -177,7 +178,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         request = QgsFeatureRequest(exp, exp_context)
         points = {}
@@ -262,7 +263,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             exp.prepare(exp_context)
             if exp.hasEvalError():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                    tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
             request = QgsFeatureRequest(exp, exp_context)
             request.setLimit(1)
@@ -290,10 +291,10 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = g_troncon.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    self.tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_troncon.dataProvider().errors()))
+                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_troncon.dataProvider().errors()))
             if not g_troncon.commitChanges():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Commit %s.') % g_troncon.commitErrors())
+                    tr('* ERROR: Commit %s.') % g_troncon.commitErrors())
 
             for g in outFeats:
                 # Stop the algorithm if cancel button has been clicked
@@ -329,7 +330,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             exp.prepare(exp_context)
             if exp.hasEvalError():
                 raise QgsProcessingException(
-                    self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                    tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
             request = QgsFeatureRequest(exp, exp_context)
             request.setLimit(1)
@@ -341,7 +342,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
         if not l_t_g.keys():
             raise QgsProcessingException(
-                self.tr('* ERREUR: Aucune géométrie de tronçon'))
+                tr('* ERREUR: Aucune géométrie de tronçon'))
 
         # Mise a jour de la table troncon
         exp_context = QgsExpressionContext()
@@ -355,7 +356,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                self.tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
 
         # Mise a jour de la table de tronçon
         request = QgsFeatureRequest(exp, exp_context)
@@ -371,22 +372,22 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
         if not t_troncon.commitChanges():
             raise QgsProcessingException(
-                self.tr('* ERROR: Commit %s.') % t_troncon.commitErrors())
+                tr('* ERROR: Commit %s.') % t_troncon.commitErrors())
 
         # Returns empty dict if no outputs
         return {self.SEGMENT_CREATED: segment_number}
 
     def shortHelpString(self) -> str:
-        return self.tr('Generate segments from manholes.')
+        return tr('Generate segments from manholes.')
 
     def name(self):
         return 'create_geom_segment'
 
     def displayName(self):
-        return self.tr('05 Create segment geometries')
+        return tr('05 Create segment geometries')
 
     def group(self):
-        return self.tr('Drain Sewer Visual Inspection data')
+        return tr('Drain Sewer Visual Inspection data')
 
     def groupId(self):
         return 'dsvi'

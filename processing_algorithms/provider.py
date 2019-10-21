@@ -10,7 +10,8 @@ from .create_data_model_algorithm import CreatePostgisTables, CreateGeopackage
 from .load_postgis_layers_algorithm import LoadPostgisTables
 from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
 from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
-from ..qgis_plugin_tools.resources import resources_path
+from ..qgis_plugin_tools.tools.i18n import tr
+from ..qgis_plugin_tools.tools.resources import resources_path
 
 # from .create_temp_geom_troncon_algorithm import CreateTempGeomTronconAlgorithm
 # from .create_temp_geom_obs_algorithm import CreateTempGeomObsAlgorithm
@@ -61,7 +62,7 @@ class Provider(QgsProcessingProvider):
 
         This string should be short (e.g. "Lastools") and localised.
         """
-        return self.tr('Drain sewer visual inspection')
+        return tr('Drain sewer visual inspection')
 
     def longName(self):
         """

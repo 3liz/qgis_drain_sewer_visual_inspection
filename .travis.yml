@@ -25,7 +25,7 @@ install:
   - docker exec -it qgis-testing-environment sh -c "qgis_setup.sh qgis_drain_sewer_visual_inspection"
 
 script:
-  - docker exec -it qgis-testing-environment sh -c "qgis_testrunner.sh qgis_drain_sewer_visual_inspection.qgis_plugin_tools.test_runner.test_package"
+  - docker exec -it qgis-testing-environment sh -c "qgis_testrunner.sh qgis_drain_sewer_visual_inspection.qgis_plugin_tools.infrastructure.test_runner.test_package"
 
 notifications:
   email:

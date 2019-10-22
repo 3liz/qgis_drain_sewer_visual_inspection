@@ -25,11 +25,14 @@ class DrainSewerVisualInspection:
 
         setup_logger(plugin_name())
 
-        _, ts_file = setup_translation()
+        locale, ts_file = setup_translation()
         if ts_file:
             self.translator = QTranslator()
             self.translator.load(ts_file)
             QCoreApplication.installTranslator(self.translator)
+            LOGGER.debug('Translation file set to {}'.format(ts_file))
+        else:
+            LOGGER.debug('Translation file not found {}'.format(locale))
 
     def initProcessing(self):
         """Init Processing provider."""

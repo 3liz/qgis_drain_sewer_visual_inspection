@@ -1,6 +1,5 @@
 """Create geom segment algorithm."""
 
-from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsFeatureRequest,
     QgsExpression,
@@ -384,17 +383,13 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         return 'create_geom_segment'
 
     def displayName(self):
-        return tr('05 Create segment geometries')
+        return '{} {}'.format('05', tr('Create segment geometries'))
 
     def group(self):
         return tr('Drain Sewer Visual Inspection data')
 
     def groupId(self):
         return 'dsvi'
-
-    @staticmethod
-    def tr(string):
-        return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
         return self.__class__()

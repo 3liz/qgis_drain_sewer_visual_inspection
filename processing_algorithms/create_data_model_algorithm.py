@@ -5,7 +5,6 @@ import psycopg2
 
 from collections import OrderedDict
 
-from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsVectorLayer,
     QgsVectorLayerExporter,
@@ -292,10 +291,6 @@ class CreateDataModelAlgorithm(QgsProcessingAlgorithm):
     def groupId(self):
         return 'configuration'
 
-    @staticmethod
-    def tr(string):
-        return QCoreApplication.translate('Processing', string)
-
     def createInstance(self):
         return self.__class__()
 
@@ -306,7 +301,7 @@ class CreateGeopackage(CreateDataModelAlgorithm):
         return 'create_geopackage_data_model'
 
     def displayName(self):
-        return tr('01 Create geopackage data model')
+        return '{} {}'.format('02', tr('Create geopackage data model'))
 
     def initAlgorithm(self, configuration):
         self.addParameter(
@@ -328,7 +323,7 @@ class CreatePostgisTables(CreateDataModelAlgorithm):
         return 'create_postgis_data_model'
 
     def displayName(self):
-        return tr('00 Create postgis data model')
+        return '{} {}'.format('00', tr('Create PostGIS data model'))
 
     def initAlgorithm(self, configuration):
         db_param = QgsProcessingParameterString(

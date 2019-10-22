@@ -4,7 +4,6 @@ import logging
 
 from collections import OrderedDict
 
-from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsVectorLayer,
     Qgis,
@@ -60,7 +59,7 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
         return 'load_postgis_layers'
 
     def displayName(self):
-        return tr('00 Load postgis layers')
+        return '{} {}'.format('01', tr('Load PostGIS layers'))
 
     def initAlgorithm(self, configuration):
         db_param = QgsProcessingParameterString(
@@ -145,10 +144,6 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
 
     def groupId(self):
         return 'configuration'
-
-    @staticmethod
-    def tr(string):
-        return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
         return self.__class__()

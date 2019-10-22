@@ -1,6 +1,5 @@
 """Config project algorithm."""
 
-from qgis.PyQt.QtCore import QCoreApplication
 from qgis.PyQt.QtGui import QColor
 from qgis.core import (
     QgsMapLayer,
@@ -37,8 +36,6 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
     GEOM_OBSERVATION = 'GEOM_OBSERVATION'
 
     VIEW_MANHOLES_GEOLOCALIZED = 'VIEW_MANHOLES_GEOLOCALIZED'
-
-    SUCCESS = 'SUCCESS'
 
     def initAlgorithm(self, config):
 
@@ -114,8 +111,6 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        # self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, tr('Succès')))
-
     def processAlgorithm(self, parameters, context, feedback):
 
         t_file = self.parameterAsVectorLayer(parameters, self.FILE_TABLE, context)
@@ -145,42 +140,42 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         # define relations
         relations = [{
             'id': 'fk_obs_id_file',
-            'name': 'Liens Fichier - Observation',
+            'name': tr('Link File - Observation'),
             'referencingLayer': t_obs.id(),
             'referencingField': 'id_file',
             'referencedLayer': t_file.id(),
             'referencedField': 'id'
         }, {
             'id': 'fk_regard_id_file',
-            'name': 'Liens Fichier - Regard',
+            'name': tr('Link File - Manhole'),
             'referencingLayer': t_regard.id(),
             'referencingField': 'id_file',
             'referencedLayer': t_file.id(),
             'referencedField': 'id'
         }, {
             'id': 'fk_troncon_id_file',
-            'name': 'Liens Fichier - Tronçon',
+            'name': tr('Link File - Pipe segment'),
             'referencingLayer': t_troncon.id(),
             'referencingField': 'id_file',
             'referencedLayer': t_file.id(),
             'referencedField': 'id'
         }, {
             'id': 'fk_obs_id_troncon',
-            'name': 'Liens Tronçon - Observation',
+            'name': tr('Link Pipe segment - Observation'),
             'referencingLayer': t_obs.id(),
             'referencingField': 'id_troncon',
             'referencedLayer': t_troncon.id(),
             'referencedField': 'id'
         }, {
             'id': 'fk_regard_id_geom_regard',
-            'name': 'Liens Inspection regard - Référence',
+            'name': tr('Link Manhole inspection - Reference'),
             'referencingLayer': t_regard.id(),
             'referencingField': 'id_geom_regard',
             'referencedLayer': g_regard.id(),
             'referencedField': 'id'
         }, {
             'id': 'fk_troncon_id_geom_trononc',
-            'name': 'Liens Inspection tronçon - Référence',
+            'name': tr('Link Pipe segment inspection - Reference'),
             'referencingLayer': t_troncon.id(),
             'referencingField': 'id_geom_troncon',
             'referencedLayer': g_troncon.id(),
@@ -189,7 +184,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         relation_manager = context.project().relationManager()
         for r in relations:
-            feedback.pushInfo(r['name'])
+            feedback.pushInfo('Link: {}'.format(r['name']))
             rel = QgsRelation()
             rel.setId(r['id'])
             rel.setName(r['name'])
@@ -365,17 +360,13 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         return 'config_dsvi_project'
 
     def displayName(self):
-        return tr('05 Project configuration')
+        return '{} {}'.format('05', tr('Project configuration'))
 
     def group(self):
         return tr('Configuration')
 
     def groupId(self):
         return 'configuration'
-
-    @staticmethod
-    def tr(string):
-        return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
         return self.__class__()

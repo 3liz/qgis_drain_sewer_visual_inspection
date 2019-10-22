@@ -1,4 +1,3 @@
-from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsVectorLayerUtils,
     QgsCoordinateTransform,
@@ -108,17 +107,13 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
         return 'import_geom_regard'
 
     def displayName(self):
-        return tr('10 Import des géométries de regards')
+        return '{} {}'.format('10', tr('Import des géométries de regards'))
 
     def group(self):
         return tr('Configuration')
 
     def groupId(self):
         return 'configuration'
-
-    @staticmethod
-    def tr(string):
-        return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
         return self.__class__()

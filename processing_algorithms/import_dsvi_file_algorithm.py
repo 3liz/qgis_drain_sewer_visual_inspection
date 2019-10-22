@@ -5,7 +5,7 @@ import hashlib
 import io
 import os.path
 
-from qgis.PyQt.QtCore import QCoreApplication, QVariant
+from qgis.PyQt.QtCore import QVariant
 from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
@@ -578,17 +578,13 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         return 'import_dsvi_data'
 
     def displayName(self):
-        return tr('00 Import DSVI data')
+        return '{} {}'.format('00', tr('Import DSVI data'))
 
     def group(self):
         return tr('Drain Sewer Visual Inspection data')
 
     def groupId(self):
         return 'dsvi'
-
-    @staticmethod
-    def tr(string):
-        return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
         return self.__class__()

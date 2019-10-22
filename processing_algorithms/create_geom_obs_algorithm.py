@@ -1,6 +1,5 @@
 """Create observations geometries."""
 
-from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsFeature,
     QgsFeatureRequest,
@@ -232,17 +231,13 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         return 'create_geom_obs'
 
     def displayName(self):
-        return tr('10 Create observations geometries')
+        return '{} {}'.format('10', tr('Create observations geometries'))
 
     def group(self):
         return tr('Drain Sewer Visual Inspection data')
 
     def groupId(self):
         return 'dsvi'
-
-    @staticmethod
-    def tr(string):
-        return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
         return self.__class__()

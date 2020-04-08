@@ -2,20 +2,28 @@ import os
 import tempfile
 from shutil import copyfile
 
-from qgis.PyQt.QtCore import QCoreApplication, QSettings
-from qgis.core import QgsApplication, QgsCoordinateReferenceSystem, QgsVectorLayer
+from qgis.PyQt.QtCore import (
+    QCoreApplication,
+    QSettings,
+)
+from qgis.core import (
+    Qgis,
+    QgsApplication,
+    QgsCoordinateReferenceSystem,
+    QgsVectorLayer,
+)
 from qgis.testing import unittest, start_app
 
 start_app()
 
-try:
+if Qgis.QGIS_VERSION_INT >= 30800:
     from qgis import processing
-except ImportError:
+else:
     import processing
 
-from ..provider import Provider
-from ..create_data_model_algorithm import MAPPING
-from ...qgis_plugin_tools.tools.resources import plugin_test_data_path, plugin_path
+from ..processing_algorithms.provider import Provider
+from ..processing_algorithms.create_data_model_algorithm import MAPPING
+from ..qgis_plugin_tools.tools.resources import plugin_test_data_path, plugin_path
 
 __copyright__ = 'Copyright 2019, 3Liz'
 __license__ = 'GPL version 3'

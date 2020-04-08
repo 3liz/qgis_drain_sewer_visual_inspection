@@ -1,0 +1,1133 @@
+#A1=ISO-8859-1:1998
+#A2=fr
+#A3=,
+#A4=.
+#A5="
+#A6=2010
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1395 VERS EU1410","EU1395","EU1395","EU1410","CHEMIN DES ILES",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video000301.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,,,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1395,,"regard enterré ",,,,,"Photo-22659.jpg",00:00:01
+0.00,,DBA,B,,,,,,,,,"Photo-22659.jpg",00:00:01
+24.10,,BCE,A,,EU1410,,"regard enterré",,,,,"Photo-6555.jpg",00:02:09
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1400 VERS EU1395","EU1400","EU1400","EU1395","CHEMIN DES ILES",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video000201.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,0.80,,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU1400,,,,,,,"Photo-43550.jpg",00:00:01
+1.00,,DBA,C,,,,,,,,,"Photo-43550.jpg",00:00:01
+4.60,A,BBB,B,,,,,,,,,"Photo-50831.jpg",00:00:27
+36.20,,BCE,A,,EU1395,,"regard enterré",,,,,"Photo-25314.jpg",00:03:11
+36.20,,BBA,B,,,,,,,,,"Photo-25314.jpg",00:03:11
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1400 VERS EU1405","EU1400","EU1400","EU1405","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video000401.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,0.80,,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1400,,,,,,,"Photo-358.jpg",00:00:01
+0.00,,BBA,C,,,,,,,,,"Photo-358.jpg",00:00:01
+0.00,,BCA,E,B,125,,"à 3h ",,,,,"Photo-58676.jpg",00:00:17
+14.30,,BCE,A,,EU1405,,"regard enterré ",,,,,"Photo-45704.jpg",00:01:46
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1405 VERS EU2215","EU1405","EU1405","EU2215","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video000501.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,,0.44,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1405,,"regard enterré",,,,,"Photo-42043.jpg",00:00:01
+0.00,A,BBB,B,,,,,,,,,"Photo-42043.jpg",00:00:01
+7.40,B,BBB,B,,,,,,,,,"Photo-38595.jpg",00:00:53
+13.20,A,BBB,B,,,,,,,,,"Photo-53061.jpg",00:01:46
+19.70,B,BBB,B,,,,,,,,,"Photo-21861.jpg",00:02:14
+22.10,,BBA,B,,,,,,,,,"Photo-19356.jpg",00:02:41
+22.10,,BDB,,,,,"mauvais assemblage ",,,,,"Photo-19356.jpg",00:02:41
+22.70,,BCE,A,,EU2215,,,,,,,"Photo-65185.jpg",00:03:00
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2215 VERS EU2210","EU2215","EU2215","EU2210","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,16.70,B,"Video000601.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,0.44,0.85,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2215,,,,,,,"Photo-17208.jpg",00:00:01
+6.30,,BAC,B,,,,"épaufrure",,,,,"Photo-39381.jpg",00:00:46
+9.20,,BBB,B,,,,,,,,,"Photo-62174.jpg",00:01:09
+13.60,A,BBB,B,,,,,,,,,"Photo-63983.jpg",00:01:28
+16.30,B,BBB,B,,,,,,,,,"Photo-7426.jpg",00:01:43
+17.00,,BCE,A,,EU2210,,,,,,,"Photo-47872.jpg",00:02:06
+17.00,,BBA,C,,,,,,,,,"Photo-47872.jpg",00:02:06
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2210 VERS EU2145","EU2210","EU2210","EU2145","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video000701.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,0.85,1.31,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2210,,,,,,,"Photo-29846.jpg",00:00:01
+0.00,,BBA,C,,,,,,,,,"Photo-29846.jpg",00:00:01
+9.00,,BAB,B,B,,,,,,,,"Photo-21731.jpg",00:00:56
+27.40,,BDB,,,,,"mauvais assemblage ",,,,,"Photo-36116.jpg",00:02:59
+27.80,,BCE,A,,EU2145,,,,,,,"Photo-64636.jpg",00:03:20
+27.80,,DCA,A,,,,,,,,,"Photo-64636.jpg",00:03:20
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2145 VERS EU2140","EU2145","EU2145","EU2140","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video000801.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,1.31,,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2145,,,,,,,"Photo-53026.jpg",00:00:01
+1.00,,DCA,A,,,,,,,,,"Photo-53026.jpg",00:00:01
+16.60,,BDB,,,,,"début de flache ",,,,,"Photo-12968.jpg",00:01:00
+20.10,,BDB,,,,,"fin de flache ",,,,,"Photo-65105.jpg",00:01:21
+32.30,,BDB,,,,,"début de flache ",,,,,"Photo-58739.jpg",00:02:04
+38.80,,BCE,A,,EU2140,,,,,,,"Photo-35585.jpg",00:02:57
+38.80,,DBA,C,,,,,,,,,"Photo-35585.jpg",00:02:57
+38.80,,BDB,,,,,"fin de flache ",,,,,"Photo-35585.jpg",00:02:57
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2140 VERS EU2135","EU2140","EU2140","EU2135","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video000901.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,,2.74,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2140,,,,,,,"Photo-18150.jpg",00:00:01
+0.00,,DBA,C,,,,,,,,,"Photo-18150.jpg",00:00:01
+4.00,,BDB,,,,,"début de flache ",,,,,"Photo-58828.jpg",00:00:29
+10.40,,BDB,,,,,"fin de flache ",,,,,"Photo-15784.jpg",00:00:57
+11.50,,BDB,,,,,"début de flache ",,,,,"Photo-51232.jpg",00:01:05
+15.70,,BDB,,,,,"fin de flache ",,,,,"Photo-4431.jpg",00:01:23
+34.30,,BDB,,,,,"début de flache",,,,,"Photo-56704.jpg",00:02:31
+40.90,,BCE,A,,EU2135,,,,,,,"Photo-21216.jpg",00:03:23
+40.90,,DCA,A,,,,,,,,,"Photo-21216.jpg",00:03:23
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2130 VERS EU2135","EU2130","EU2130","EU2135","CHEMIN DES ILES",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,48.30,B,"Video001201.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.44,2.74,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2130,,,,,,,"Photo-45230.jpg",00:00:10
+0.00,,DCA,A,,,,,,,,,"Photo-45230.jpg",00:00:10
+15.60,,BDB,,,,,"début de flache ",,,,,"Photo-16733.jpg",00:01:12
+20.60,,BCE,Z,,,,"regard borgne avec un branchement",,,,,"Photo-38006.jpg",00:01:50
+48.40,,BCE,A,,EU2135,,,,,,,"Photo-16513.jpg",00:04:21
+48.40,,DCA,A,,,,,,,,,"Photo-16513.jpg",00:04:21
+48.40,,BDB,,,,,"fin de flache ",,,,,"Photo-16513.jpg",00:04:21
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2125 VERS EU2130","EU2125","EU2125","EU2130","CHEMIN DES ILES",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,51.40,B,"Video001101.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.43,2.44,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2125,,,,,,,"Photo-37585.jpg",00:00:02
+0.00,,DCA,A,,,,"2 branchements ",,,,,"Photo-37585.jpg",00:00:02
+0.00,,DCA,B,,,,,,,,,"Photo-37585.jpg",00:00:02
+13.60,,BDB,,,,,"début de flache ",,,,,"Photo-61028.jpg",00:00:51
+21.20,,BDB,,,,,"fin de flache ",,,,,"Photo-47207.jpg",00:01:22
+24.00,,BDB,,,,,"début de flache ",,,,,"Photo-52321.jpg",00:01:38
+29.70,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-51389.jpg",00:02:12
+29.70,,BBA,B,,,,,,,,,"Photo-51389.jpg",00:02:12
+29.70,,BBC,C,,,,,,,,,"Photo-51389.jpg",00:02:12
+29.70,,BDB,,,,,"fin de flache ",,,,,"Photo-51389.jpg",00:02:12
+30.60,,BBB,B,,,,,,,,,"Photo-38667.jpg",00:02:28
+45.90,A,BBC,C,,,,,,,,,"Photo-49250.jpg",00:03:44
+51.50,,BCE,A,,EU2130,,,,,,,"Photo-14067.jpg",00:04:58
+51.50,,DCA,A,,,,,,,,,"Photo-14067.jpg",00:04:58
+51.50,,DBC,C,,25,,,,,,,"Photo-14067.jpg",00:04:58
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2220 VERS EU2125","EU2220","EU2220","EU2125","CHEMIN DES ILES",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-17","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,22.70,B,"Video001001.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.53,2.43,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2220,,,,,,,"Photo-18139.jpg",00:00:02
+1.00,,DCA,B,,,,,,,,,"Photo-18139.jpg",00:00:02
+12.90,,BBB,B,,,,,,,,,"Photo-14056.jpg",00:02:21
+16.10,,BBC,C,,,,,,,,,"Photo-21507.jpg",00:02:41
+16.10,,BBB,B,,,,,,,,,"Photo-21507.jpg",00:02:41
+17.20,,BBB,B,,,,,,,,,"Photo-26838.jpg",00:03:17
+22.10,,BCE,A,,EU2125,,,,,,,"Photo-47626.jpg",00:04:39
+22.10,,DCA,A,,,," 2 branhements ",,,,,"Photo-47626.jpg",00:04:39
+22.10,,DCA,B,,,,,,,,,"Photo-47626.jpg",00:04:39
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2220 VERS EU2225","EU2220","EU2220","EU2225","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-18","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,33.70,B,"Video001301.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.53,2.51,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2220,,,,,,,"Photo-54796.jpg",00:00:01
+1.00,,BDB,,,,,"début de flache ",,,,,"Photo-54796.jpg",00:00:01
+7.80,,BBB,B,,,,,,,,,"Photo-4123.jpg",00:00:59
+7.80,,BAC,B,,,,"épaufrure",,,,,"Photo-4123.jpg",00:00:59
+7.80,,BDB,,,,,"fin de flache ",,,,,"Photo-4123.jpg",00:00:59
+11.90,,BDB,,,,,"début de flache ",,,,,"Photo-55977.jpg",00:01:25
+17.80,,BAJ,A,,,,,,,,,"Photo-4043.jpg",00:01:57
+18.50,,BDB,,,,,"fin de flache ",,,,,"Photo-22158.jpg",00:02:03
+21.10,,BAC,B,,,,,,,,,"Photo-60623.jpg",00:02:30
+21.10,,BAB,B,B,,,,,,,,"Photo-60623.jpg",00:02:30
+25.60,A,BBB,B,,,,,,,,,"Photo-23494.jpg",00:02:50
+26.70,,BDB,,,,,"début de flache ",,,,,"Photo-61569.jpg",00:02:59
+27.90,,BAJ,A,,,,,,,,,"Photo-51219.jpg",00:03:14
+29.30,,BAC,B,,,,,,,,,"Photo-13598.jpg",00:03:35
+29.30,,BDG,A,,,,,,,,,"Photo-13598.jpg",00:03:35
+29.60,,BBB,B,,,,,,,,,"Photo-23334.jpg",00:03:49
+30.60,,BDG,A,,,,,,,,,"Photo-10470.jpg",00:03:59
+33.40,,BCE,A,,EU2225,,,,,,,"Photo-34129.jpg",00:04:56
+33.40,,DCA,A,,,,"2 branchements ",,,,,"Photo-34129.jpg",00:04:56
+33.40,B,BBB,B,,,,,,,,,"Photo-34129.jpg",00:04:56
+33.40,,BDB,,,,,"fin de flache ",,,,,"Photo-34129.jpg",00:04:56
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2225 VERS EU2230","EU2225","EU2225","EU2230","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-18","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,40.70,B,"Video001401.mpg;Video001402.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.51,2.25,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2225,,,,,,,"Photo-32726.jpg",00:00:01
+0.00,,DCA,A,,,,"2 branchements ",,,,,"Photo-32726.jpg",00:00:01
+3.80,,BDB,,,,,"début de flache ",,,,,"Photo-51519.jpg",00:00:20
+13.00,,BBB,B,,,,,,,,,"Photo-6473.jpg",00:01:21
+13.60,,BBB,B,,,,,,,,,"Photo-54741.jpg",00:01:43
+14.00,,BDG,A,,,,,,,,,"Photo-38332.jpg",00:01:56
+21.70,,BBB,B,,,,,,,,,"Photo-55073.jpg",00:03:14
+23.00,,BDC,A,,,,"de graisses et d'un niveau d'eau trop élevé empechant la progression de la camera , reprise dans le sens inverse ",,,,,"Photo-54289.jpg",00:04:25
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2225 VERS EU2230","EU2230","EU2230","EU2225","CHEMIN DES ILES",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-18","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,40.70,B,"Video001401.mpg;Video001402.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.51,2.25,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2230,,"reprise dans le sens inverse",,,,,"Photo-25845.jpg",00:00:01
+14.60,,BDB,,,,,"début de flache ",,,,,"Photo-6079.jpg",00:00:53
+18.40,,BDB,,,,,"fin de flache ",,,,,"Photo-56949.jpg",00:01:17
+20.90,,BDB,,,,,"début de flache ",,,,,"Photo-13277.jpg",00:01:30
+21.90,,BBB,B,,,,,,,,,"Photo-56079.jpg",00:01:41
+21.90,,BCE,Z,,,,"arrivée au point d'arret , inspection complete du tronçon",,,,,"Photo-56079.jpg",00:01:41
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EP2230 VERS EU2235","EU2230","EU2230","EU2235","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-18","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,63.60,B,"Video001501.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.25,2.40,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2230,,,,,,,"Photo-27213.jpg",00:00:01
+1.00,,DCA,A,,,,,,,,,"Photo-27213.jpg",00:00:01
+1.00,,DCA,B,,,,,,,,,"Photo-27213.jpg",00:00:01
+30.30,,BDB,,,,,"fin de flache ",,,,,"Photo-20358.jpg",00:02:51
+50.20,,BAI,A,D,,,,,,,,"Photo-32556.jpg",00:04:28
+50.20,,BDB,,,,,"début de flache ",,,,,"Photo-32556.jpg",00:04:28
+54.70,,BDB,,,,,"fin de flache ",,,,,"Photo-47118.jpg",00:04:49
+62.90,,BDB,,,,,"début de flache ",,,,,"Photo-16627.jpg",00:05:26
+65.50,,BCE,A,,EU2235,,,,,,,"Photo-8229.jpg",00:06:00
+65.50,,BBA,C,,,,,,,,,"Photo-8229.jpg",00:06:00
+65.50,,DCA,B,,,,,,,,,"Photo-8229.jpg",00:06:00
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2235 VERS EU2240","EU2235","EU2235","EU2240","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-18","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,56.70,B,"Video001601.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.40,2.27,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2235,,,,,,,"Photo-10319.jpg",00:00:01
+0.00,,DCA,B,,,,,,,,,"Photo-10319.jpg",00:00:01
+0.00,,DBA,C,,,,,,,,,"Photo-10319.jpg",00:00:01
+12.50,,BCA,E,A,125,,"à 3h , branchement trop penetrant et mal renformi ",,,,,"Photo-20429.jpg",00:01:20
+12.50,,BBA,B,,,,,,,,,"Photo-20429.jpg",00:01:20
+31.50,,BAJ,A,,,,,,,,,"Photo-20834.jpg",00:02:39
+57.40,,BCE,A,,EU2240,,,,,,,"Photo-50284.jpg",00:04:42
+57.40,,DBA,C,,,,,,,,,"Photo-50284.jpg",00:04:42
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2240 VERS EU2105","EU2240","EU2240","EU2105","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-18","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video001701.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.27,,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2240,,,,,,,"Photo-39402.jpg",00:00:01
+0.00,,DBA,C,,,,,,,,,"Photo-39402.jpg",00:00:01
+15.40,,BAJ,A,,,,,,,,,"Photo-6318.jpg",00:01:24
+25.50,,BAF,B,A,,,,,,,,"Photo-28326.jpg",00:02:13
+40.50,,BAJ,A,,,,,,,,,"Photo-54724.jpg",00:03:49
+45.50,,BAJ,A,,,,,,,,,"Photo-40874.jpg",00:04:27
+45.90,,BCA,A,A,200,,"à 2h ",,,,,"Photo-39375.jpg",00:04:43
+56.20,,BAJ,A,,,,,,,,,"Photo-2746.jpg",00:05:39
+65.10,,BAF,A,A,,,"sur l'ensemble du tronçon ",,,,,"Photo-12248.jpg",00:06:24
+66.20,,BAJ,A,,,,,,,,,"Photo-45494.jpg",00:06:43
+66.20,,BAI,A,C,,,,,,,,"Photo-45494.jpg",00:06:43
+71.90,,BCE,A,,EU2105,,,,,,,"Photo-50818.jpg",00:07:24
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2105 VERS EU2100","EU2105","EU2105","EU2100","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-18","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video001801.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,,2.97,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2105,,,,,,,"Photo-20265.jpg",00:00:01
+9.00,,BCE,A,,EU2100,,,,,,,"Photo-59947.jpg",00:01:08
+9.00,,DCA,A,,,,,,,,,"Photo-59947.jpg",00:01:08
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2005 VERS EU2000","EU2005","EU2005","EU2000","RUE DU PORT AUX LOUPS ",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,13.50,B,"Video001901.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.70,2.70,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2005,,,,,,,"Photo-46641.jpg",00:00:01
+1.00,,DCA,A,,,,,,,,,"Photo-46641.jpg",00:00:01
+7.00,,BDB,,,,,"début de flache ",,,,,"Photo-29317.jpg",00:00:32
+8.20,,BAJ,A,,,,,,,,,"Photo-14373.jpg",00:00:55
+8.30,,BAC,B,,,,,,,,,"Photo-57236.jpg",00:01:04
+13.20,,BCE,A,,EU2000,,,,,,,"Photo-24104.jpg",00:01:44
+13.20,,DCA,B,,,,,,,,,"Photo-24104.jpg",00:01:44
+13.20,,DCA,A,,,,,,,,,"Photo-24104.jpg",00:01:44
+13.20,,BDB,,,,,"fin de flache ",,,,,"Photo-24104.jpg",00:01:44
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2000 VERS EU1995","EU2000","EU2000","EU1995","RUE DU PORT AUX LOUPS ",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,36.30,B,"Video002001.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.70,2.63,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2000,,,,,,,"Photo-30403.jpg",00:00:01
+0.00,,DCA,A,,,,,,,,,"Photo-30403.jpg",00:00:01
+0.00,,DCA,B,,,,,,,,,"Photo-30403.jpg",00:00:01
+4.10,,BAC,B,,,,"épaufrure",,,,,"Photo-8531.jpg",00:00:22
+23.00,,BAF,B,A,,,,,,,,"Photo-56614.jpg",00:01:30
+24.70,,BAJ,A,,,,,,,,,"Photo-1996.jpg",00:01:51
+25.00,,BCA,D,A,200,,"à 1h ",,,,,"Photo-26155.jpg",00:02:08
+25.20,,BAJ,B,,,,,,,,,"Photo-10643.jpg",00:02:24
+25.30,,BCA,D,A,200,,"à 11h ",,,,,"Photo-12367.jpg",00:02:40
+28.60,,BDB,,,,,"début de flache ",,,,,"Photo-45847.jpg",00:02:56
+30.60,,BCA,A,A,200,,"à 11h ",,,,,"Photo-2634.jpg",00:03:24
+31.00,,BDB,,,,,"fin de flache ",,,,,"Photo-22873.jpg",00:03:31
+36.90,,BCE,A,,EU1995,,,,,,,"Photo-39720.jpg",00:04:06
+36.90,,DCA,B,,,,,,,,,"Photo-39720.jpg",00:04:06
+36.90,,DBB,A,,,,,,,,,"Photo-39720.jpg",00:04:06
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1995 VERS EU1990","EU1995","EU1995","EU1990","RUE DU PORT AUX LOUPS ",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,36.60,B,"Video002101.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.63,2.80,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1995,,,,,,,"Photo-4866.jpg",00:00:01
+0.00,,DCA,B,,,,,,,,,"Photo-4866.jpg",00:00:01
+0.00,,DBB,A,,,,,,,,,"Photo-4866.jpg",00:00:01
+12.60,,BDB,,,,,"début de flache",,,,,"Photo-44198.jpg",00:00:57
+15.10,,BAJ,A,,,,,,,,,"Photo-64951.jpg",00:01:15
+19.30,,BDB,,,,,"fin de flache ",,,,,"Photo-29029.jpg",00:01:34
+21.40,,BDB,,,,,"début de flache ",,,,,"Photo-50004.jpg",00:01:43
+25.10,,BAJ,A,,,,,,,,,"Photo-36391.jpg",00:02:13
+25.10,,BDB,,,,,"fin de flache ",,,,,"Photo-36391.jpg",00:02:13
+30.10,,BAJ,A,,,,,,,,,"Photo-7679.jpg",00:02:43
+35.10,,BAJ,A,,,,,,,,,"Photo-26764.jpg",00:03:15
+35.10,,BAC,B,,,,"épaufrure",,,,,"Photo-26764.jpg",00:03:15
+35.80,,BCE,A,,EU1990,,,,,,,"Photo-60564.jpg",00:03:35
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1990 VERS EU1990BIS","EU1990","EU1990","EU1990BIS","RUE DU PORT AUX LOUPS ",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,29.30,B,"Video002201.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.80,2.92,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1990,,,,,,,"Photo-17659.jpg",00:00:02
+9.30,,BAJ,A,,,,,,,,,"Photo-27085.jpg",00:00:48
+9.30,,BAI,A,A,,,,,,,,"Photo-27085.jpg",00:00:48
+24.40,,BAI,A,D,,,,,,,,"Photo-29697.jpg",00:01:51
+24.70,,BCA,A,A,180,,"à 10h ",,,,,"Photo-41181.jpg",00:02:04
+26.00,,BDB,,,,,"début de flache ",,,,,"Photo-33168.jpg",00:02:14
+29.70,,BCE,A,,EU1990BIS,,,,,,,"Photo-49559.jpg",00:02:52
+29.70,,DCA,B,,,,,,,,,"Photo-49559.jpg",00:02:52
+29.70,,BDB,,,,,"fin de flache ",,,,,"Photo-49559.jpg",00:02:52
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1990BIS VERS EU1985","EU1990BIS","EU1990BIS","EU1985","RUE DU PORT AUX LOUPS ",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,41.70,B,"Video002301.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.92,2.74,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1990BIS,,,,,,,"Photo-55726.jpg",00:00:01
+0.00,,DCA,B,,,,,,,,,"Photo-55726.jpg",00:00:01
+0.00,,BDB,,,,,"début de flache ",,,,,"Photo-55726.jpg",00:00:01
+15.20,,BAJ,A,,,,,,,,,"Photo-29710.jpg",00:01:07
+15.20,,BDB,,,,,"fin de flache",,,,,"Photo-29710.jpg",00:01:07
+17.10,,BDB,,,,,"début de flache ",,,,,"Photo-63141.jpg",00:01:20
+20.40,,BAJ,B,,,,,,,,,"Photo-28080.jpg",00:01:38
+20.70,,BCA,A,A,200,,"à 2h ",,,,,"Photo-18994.jpg",00:01:53
+20.80,,BAC,B,,,,"épaufrure",,,,,"Photo-20604.jpg",00:02:08
+20.80,,BBA,B,,,,,,,,,"Photo-20604.jpg",00:02:08
+25.90,,BAI,A,D,,,,,,,,"Photo-41455.jpg",00:02:36
+25.90,,BAJ,A,,,,,,,,,"Photo-41455.jpg",00:02:36
+25.90,,BDB,,,,,"début de flache ",,,,,"Photo-41455.jpg",00:02:36
+30.90,,BAJ,A,,,,,,,,,"Photo-2622.jpg",00:03:06
+33.40,,BAJ,B,,,,,,,,,"Photo-38861.jpg",00:03:36
+33.70,,BAC,B,,,,,,,,,"Photo-26280.jpg",00:03:45
+41.50,,BCE,A,,EU1985,,,,,,,"Photo-10855.jpg",00:04:36
+41.50,,BDB,,,,,"fin de flache ",,,,,"Photo-10855.jpg",00:04:36
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1985 VERS EU1980","EU1985","EU1985","EU1980","RUE DU PORT AUX LOUPS ",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,6.20,B,"Video002401.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.74,2.74,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1985,,,,,,,"Photo-29265.jpg",00:00:01
+2.60,,BDB,,,,,"début de flache ",,,,,"Photo-37082.jpg",00:00:18
+6.10,,BCE,A,,EU1980,,,,,,,"Photo-5790.jpg",00:00:47
+6.10,,DBA,B,,,,,,,,,"Photo-5790.jpg",00:00:47
+6.10,,BDB,,,,,"fin de flache ",,,,,"Photo-5790.jpg",00:00:47
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1980 VERS EU2050","EU1980","EU1980","EU2050","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,46.50,B,"Video002501.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.74,2.79,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU1980,,,,,,,"Photo-23309.jpg",00:00:01
+3.50,,BDB,,,,,"début de flache ",,,,,"Photo-24040.jpg",00:00:14
+5.70,,BDB,,,,,"fin de flache ",,,,,"Photo-392.jpg",00:00:36
+5.70,,BAI,A,C,,,,,,,,"Photo-392.jpg",00:00:36
+11.20,,BDB,,,,,"début de flache ",,,,,"Photo-28642.jpg",00:00:58
+15.60,,BAJ,B,,,,,,,,,"Photo-41210.jpg",00:01:42
+15.60,,BDB,,,,,"fin de flache ",,,,,"Photo-41210.jpg",00:01:42
+20.50,,BAC,B,,,,"épaufrure",,,,,"Photo-18286.jpg",00:02:08
+41.70,,BDB,,,,,"début de flache ",,,,,"Photo-52535.jpg",00:03:29
+46.10,,BCE,A,,EU2050,,,,,,,"Photo-8409.jpg",00:04:12
+46.10,,BBA,B,,,,,,,,,"Photo-8409.jpg",00:04:12
+46.10,,BDB,,,,,"fin de flache ",,,,,"Photo-8409.jpg",00:04:12
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2050 VERS EU2055","EU2050","EU2050","EU2055","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,42.20,B,"Video002601.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.79,3.06,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2050,,,,,,,"Photo-20224.jpg",00:00:01
+0.00,,DBA,B,,,,,,,,,"Photo-20224.jpg",00:00:01
+2.70,,BDB,,,,,"début de flache ",,,,,"Photo-9981.jpg",00:00:17
+11.30,,BAC,B,,,,"épaufrure ",,,,,"Photo-20719.jpg",00:01:00
+15.70,,BAJ,B,,,,,,,,,"Photo-33416.jpg",00:01:26
+15.70,,BDB,,,,,"fin de flache ",,,,,"Photo-33416.jpg",00:01:26
+18.20,,BDB,,,,,"début de flache ",,,,,"Photo-23492.jpg",00:01:41
+20.90,,BCA,A,A,200,,"à 2h ",,,,,"Photo-8661.jpg",00:02:06
+27.00,,BAJ,B,,,,,,,,,"Photo-16083.jpg",00:02:40
+42.00,,BCE,A,,EU2055,,,,,,,"Photo-15732.jpg",00:04:02
+42.00,,DCA,B,,,,,,,,,"Photo-15732.jpg",00:04:02
+42.00,,BDB,,,,,"fin de flache ",,,,,"Photo-15732.jpg",00:04:02
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2055 VERS EU2060","EU2055","EU2055","EU2060","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,51.10,B,"Video002701.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,3.06,3.28,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2055,,,,,,,"Photo-39676.jpg",00:00:01
+0.00,,DCA,B,,,,,,,,,"Photo-39676.jpg",00:00:01
+0.90,,BBA,B,,,,,,,,,"Photo-59368.jpg",00:00:12
+0.90,,BCB,Z,,,,"présence d'une manchette ",,,,,"Photo-59368.jpg",00:00:12
+2.20,,BDB,,,,,"début de flache ",,,,,"Photo-37897.jpg",00:00:23
+5.40,,BAJ,B,,,,,,,,,"Photo-3900.jpg",00:00:39
+5.40,,BDB,,,,,"fin de flache ",,,,,"Photo-3900.jpg",00:00:39
+6.80,,BDB,,,,,"début de flache ",,,,,"Photo-45016.jpg",00:00:48
+10.50,,BAJ,B,,,,,,,,,"Photo-20100.jpg",00:01:07
+15.70,,BDB,,,,,"fin de flache ",,,,,"Photo-58449.jpg",00:01:29
+16.60,,BDB,,,,,"début de flache ",,,,,"Photo-60146.jpg",00:01:35
+20.50,,BAC,B,,,,"épaufrure",,,,,"Photo-6365.jpg",00:01:57
+30.50,,BAJ,B,,,,,,,,,"Photo-64244.jpg",00:02:40
+30.50,,BDB,,,,,"fin de flache ",,,,,"Photo-64244.jpg",00:02:40
+40.60,,BAI,A,A,,,,,,,,"Photo-1523.jpg",00:03:27
+43.20,,BDB,,,,,"début de flache ",,,,,"Photo-52751.jpg",00:03:41
+45.60,,BAJ,B,,,,,,,,,"Photo-5287.jpg",00:03:56
+51.00,,BBC,C,,,,,,,,,"Photo-6946.jpg",00:04:30
+51.10,,BCE,A,,EU2060,,,,,,,"Photo-55514.jpg",00:04:56
+51.10,,DBA,B,,,,,,,,,"Photo-55514.jpg",00:04:56
+51.10,,BDB,,,,,"fin de flache ",,,,,"Photo-55514.jpg",00:04:56
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2060 VERS EU2065 ","EU2060","EU2060","EU2065","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,47.10,B,"Video002801.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,3.28,3.30,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2060,,,,,,,"Photo-48548.jpg",00:00:01
+0.00,,DBA,B,,,,,,,,,"Photo-48548.jpg",00:00:01
+0.00,,DBC,C,,,,,,,,,"Photo-48548.jpg",00:00:01
+10.70,,BAJ,B,,,,,,,,,"Photo-62085.jpg",00:00:54
+10.70,,BDB,,,,,"début de flache ",,,,,"Photo-62085.jpg",00:00:54
+25.60,,BDB,,,,,"fin de flache ",,,,,"Photo-63053.jpg",00:01:53
+27.00,,BDB,,,,,"début de flache ",,,,,"Photo-41952.jpg",00:02:01
+36.00,,BAJ,B,,,,,,,,,"Photo-51220.jpg",00:02:44
+36.00,,BDB,,,,,"fin de flache ",,,,,"Photo-51220.jpg",00:02:44
+41.70,,BDB,,,,,"début de flache ",,,,,"Photo-10750.jpg",00:03:10
+45.80,,BBC,C,,,,,,,,,"Photo-17324.jpg",00:03:32
+46.70,,BCE,A,,EU2065,,,,,,,"Photo-3162.jpg",00:03:51
+46.70,,BDB,,,,,"fin de flache ",,,,,"Photo-3162.jpg",00:03:51
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2065 VERS EU2070","EU2065","EU2065","EU2070","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video002901.mpg;Video002902.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,3.30,,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2065,,,,,,,"Photo-64165.jpg",00:00:01
+4.30,,BAC,B,,,,"épaufrure",,,,,"Photo-8200.jpg",00:00:28
+45.30,,BAF,B,A,,,,,,,,"Photo-46127.jpg",00:02:59
+59.70,,BAI,A,A,,,,,,,,"Photo-33898.jpg",00:04:21
+64.50,,BAF,B,A,,,,,,,,"Photo-42873.jpg",00:04:58
+70.20,,BCE,A,,EU2070,,"regard enterré",,,,,"Photo-23497.jpg",00:05:39
+70.20,,DBC,C,,,,,,,,,"Photo-23497.jpg",00:05:39
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2070 VERS EU2075","EU2070","EU2070","EU2075","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video003001.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,,4.14,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2070,,,,,,,"Photo-19208.jpg",00:00:01
+4.40,,BAI,A,A,,,,,,,,"Photo-64135.jpg",00:00:24
+18.30,,BBB,B,,,,,,,,,"Photo-28986.jpg",00:01:20
+18.30,,BDB,,,,,"début de flache ",,,,,"Photo-28986.jpg",00:01:20
+25.50,,BAF,B,A,,,,,,,,"Photo-44818.jpg",00:01:52
+35.60,,BCE,A,,EU2075,,,,,,,"Photo-23511.jpg",00:02:55
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2075 VERS EU2080","EU2075","EU2075","EU2080","CHEMIN DES ILES",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,1.40,B,"Video003101.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,4.14,4.14,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2075,,,,,,,"Photo-34294.jpg",00:00:01
+1.30,,BCE,A,,EU2080,,,,,,,"Photo-55870.jpg",00:01:52
+1.30,,DCA,A,,,,,,,,,"Photo-55870.jpg",00:01:52
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU330 VERS EU325","EU330","EU330","EU325","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,22.60,B,"Video003201.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,3.23,3.12,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU330,,,,,,,"Photo-2403.jpg",00:00:01
+1.00,,DCA,B,,,,,,,,,"Photo-2403.jpg",00:00:01
+1.00,,DCA,A,,,,,,,,,"Photo-2403.jpg",00:00:01
+3.30,,BAJ,A,,,,,,,,,"Photo-59893.jpg",00:00:32
+7.30,,BAJ,A,,,,,,,,,"Photo-47603.jpg",00:01:13
+11.30,,BAC,B,,,,"épaufrure",,,,,"Photo-19562.jpg",00:01:36
+11.30,,BAJ,A,,,,,,,,,"Photo-19562.jpg",00:01:36
+12.10,,BCA,A,A,150,,"à 2h ",,,,,"Photo-59781.jpg",00:01:49
+12.30,,BAJ,A,,,,,,,,,"Photo-1805.jpg",00:02:15
+17.10,,BAC,B,,,,"épaufrure",,,,,"Photo-28426.jpg",00:02:37
+20.70,,BAJ,C,,,,,,,,,"Photo-60240.jpg",00:03:03
+23.20,,BCE,A,,EU325,,,,,,,"Photo-21742.jpg",00:03:35
+23.20,,DCA,A,,,,,,,,,"Photo-21742.jpg",00:03:35
+23.20,,DCA,C,,,,,,,,,"Photo-21742.jpg",00:03:35
+23.20,,BBB,B,,,,,,,,,"Photo-21742.jpg",00:03:35
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU325 VERS EU320","EU325","EU325","EU320","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,39.20,B,"Video003301.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,3.12,2.92,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU325,,,,,,,"Photo-9326.jpg",00:00:01
+0.00,,DCA,A,,,,,,,,,"Photo-9326.jpg",00:00:01
+0.00,,DCA,C,,,,,,,,,"Photo-9326.jpg",00:00:01
+0.00,,DBB,B,,,,,,,,,"Photo-9326.jpg",00:00:01
+1.50,,BAJ,C,,,,,,,,,"Photo-22413.jpg",00:00:18
+5.50,,BAJ,B,,,,,,,,,"Photo-22083.jpg",00:00:42
+9.70,,BAJ,A,,,,,,,,,"Photo-54505.jpg",00:01:07
+9.70,,BCA,A,A,100,,"à 3h ",,,,,"Photo-56279.jpg",00:01:22
+9.70,,BAJ,A,,,,,,,,,"Photo-49946.jpg",00:01:37
+14.50,,BAJ,A,,,,,,,,,"Photo-26443.jpg",00:02:07
+17.80,,BAJ,A,,,,,,,,,"Photo-59595.jpg",00:02:58
+17.80,,BCA,A,A,100,,"à 3h ",,,,,"Photo-37775.jpg",00:03:13
+20.80,,BAF,B,A,,,,,,,,"Photo-1112.jpg",00:03:44
+20.80,,BAC,B,,,,,,,,,"Photo-1112.jpg",00:03:44
+22.20,,BAJ,A,,,,,,,,,"Photo-20050.jpg",00:04:12
+26.00,,BAJ,A,,,,,,,,,"Photo-23391.jpg",00:04:33
+30.10,,BAJ,A,,,,,,,,,"Photo-62405.jpg",00:04:55
+34.10,,BAJ,B,,,,,,,,,"Photo-10578.jpg",00:05:17
+38.60,,BCE,A,,EU320,,,,,,,"Photo-16116.jpg",00:06:02
+38.60,,DCA,C,,,,,,,,,"Photo-16116.jpg",00:06:02
+38.60,,DCA,A,,,,,,,,,"Photo-16116.jpg",00:06:02
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU320 VERS EU315","EU320","EU320","EU315","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,59.00,B,"Video003401.mpg;Video003402.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,2.92,2.74,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU320,,,,,,,"Photo-36828.jpg",00:00:01
+0.00,,DCA,C,,,,,,,,,"Photo-36828.jpg",00:00:01
+0.00,,DCA,A,,,,,,,,,"Photo-36828.jpg",00:00:01
+0.50,,BCB,Z,,,,"présence d'une manchette dechirée",,,,,"Photo-20272.jpg",00:00:08
+4.50,,BAJ,A,,,,,,,,,"Photo-40525.jpg",00:01:00
+8.50,,BAC,B,,,,"épaufrure",,,,,"Photo-64984.jpg",00:01:32
+8.50,,BAJ,A,,,,,,,,,"Photo-64984.jpg",00:01:32
+12.50,,BAC,B,,,,"épaufrure",,,,,"Photo-3728.jpg",00:02:01
+12.50,,BAJ,A,,,,,,,,,"Photo-3728.jpg",00:02:01
+12.50,,BDB,,,,,"début de flache ",,,,,"Photo-3728.jpg",00:02:01
+16.60,,BAJ,B,,,,,,,,,"Photo-60479.jpg",00:02:29
+16.60,,BAC,B,,,,"épaufrure",,,,,"Photo-60479.jpg",00:02:29
+20.50,,BCB,Z,,,,"présence d'une manchette",,,,,"Photo-20966.jpg",00:03:31
+24.40,,BAJ,A,,,,,,,,,"Photo-1718.jpg",00:04:01
+28.50,,BAC,B,,,,"épaufrure",,,,,"Photo-147.jpg",00:04:32
+28.50,,BAJ,A,,,,,,,,,"Photo-147.jpg",00:04:32
+32.40,,BAJ,B,,,,,,,,,"Photo-30676.jpg",00:05:13
+36.50,,BAJ,B,,,,,,,,,"Photo-50911.jpg",00:05:47
+40.50,,BAJ,B,,,,,,,,,"Photo-46150.jpg",00:06:20
+40.50,A,BBB,B,,,,,,,,,"Photo-46150.jpg",00:06:20
+44.50,,BAJ,B,,,,,,,,,"Photo-62676.jpg",00:06:51
+48.50,,BAC,B,,,,"épaufrure",,,,,"Photo-3864.jpg",00:07:27
+48.50,,BAJ,B,,,,,,,,,"Photo-3864.jpg",00:07:27
+52.50,,BAJ,A,,,,,,,,,"Photo-54519.jpg",00:08:00
+52.50,A,BBB,B,,15,,,,,,,"Photo-54519.jpg",00:08:00
+52.50,,BDB,,,,,"fin de flache ",,,,,"Photo-54519.jpg",00:08:00
+55.30,A,BBB,B,,45,,,,,,,"Photo-36821.jpg",00:08:44
+56.60,,BBB,B,,45,,,,,,,"Photo-34180.jpg",00:25:28
+56.60,,BDC,A,,,,"de graisses empechant la progression de la camera , reprise dans le sens inverse",,,,,"Photo-34180.jpg",00:25:28
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU320 VERS EU315","EU315","EU315","EU320","RUE PISSARRO",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,59.00,B,"Video003401.mpg;Video003402.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,2.92,2.74,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU315,,"reprise dans le sens inverse",,,,,"Photo-6565.jpg",00:00:02
+0.70,A,BBB,B,,40,,,,,,,"Photo-18094.jpg",00:00:17
+0.70,,BDC,A,,,,"de graisses empechant la progression de la camera , inspection complete du tronçon impossible",,,,,"Photo-18094.jpg",00:00:17
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU315 VERS EU310","EU315","EU315","EU310","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,39.60,B,"Video003501.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,2.74,3.07,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU315,,,,,,,"Photo-48902.jpg",00:00:01
+1.00,A,BBB,B,,10,,,,,,,"Photo-48902.jpg",00:00:01
+2.00,,BAJ,A,,,,,,,,,"Photo-9884.jpg",00:00:13
+4.60,A,BBB,B,,40,,,,,,,"Photo-12380.jpg",00:00:58
+6.00,,BAJ,A,,,,,,,,,"Photo-31651.jpg",00:10:20
+20.10,,BDB,,,,,"début de flache",,,,,"Photo-54127.jpg",00:34:11
+21.60,,BBB,B,,,,,,,,,"Photo-60353.jpg",00:34:21
+26.30,,BAJ,B,,,,,,,,,"Photo-41757.jpg",00:37:14
+33.70,,BDG,A,,,,,,,,,"Photo-25666.jpg",00:38:18
+39.50,,BCE,A,,EU310,,,,,,,"Photo-8689.jpg",00:45:50
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU310 VERS EU305","EU310","EU310","EU305","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,3.40,B,"Video003601.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,3.07,3.12,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU310,,,,,,,"Photo-28272.jpg",00:00:01
+1.00,A,BBB,B,,25,,,,,,,"Photo-28272.jpg",00:00:01
+3.60,,BCE,A,,EU305,,,,,,,"Photo-58794.jpg",00:00:42
+3.60,B,BBB,B,,25,,,,,,,"Photo-58794.jpg",00:00:42
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU305 VERS EU2100","EU305","EU305","EU2100","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,10.40,B,"Video003701.mpg;Video003702.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,3.12,2.95,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.50,,BCD,A,,EU305,,,,,,,"Photo-20630.jpg",00:00:01
+0.60,,BBB,B,,75,,,,,,,"Photo-16176.jpg",00:00:14
+0.60,,BDC,A,,,,"de graisses empechant la progression de la camera , reprise dans le sens inverse",,,,,"Photo-16176.jpg",00:00:14
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU305 VERS EU2100","EU2100","EU2100","EU305","RUE PISSARRO",B,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,10.40,B,"Video003701.mpg;Video003702.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AK,,,3000,3.12,2.95,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2100,,"reprise dans le sens inverse",,,,,"Photo-27877.jpg",
+1.00,,BDB,,,,,"début de flache ",,,,,"Photo-27877.jpg",
+4.10,,BDG,A,,,,,,,,,"Photo-40812.jpg",00:01:07
+7.70,,BBB,B,,40,,,,,,,"Photo-61448.jpg",00:01:34
+8.60,,BBB,B,,55,,,,,,,"Photo-28225.jpg",00:02:11
+8.60,,BDC,A,,,,"de graisses empechant la progression de la camera , inspection complete du tronçon impossible ",,,,,"Photo-28225.jpg",00:02:11
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2100 VERS EU2095","EU2100","EU2100","EU2095","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video003801.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.95,,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU2100,,,,,,,"Photo-8523.jpg",00:00:01
+1.00,,DCA,A,,,,,,,,,"Photo-8523.jpg",00:00:01
+9.80,,BBB,B,,,,,,,,,"Photo-19083.jpg",00:00:33
+12.20,,BBB,B,,,,,,,,,"Photo-7599.jpg",00:00:44
+15.40,A,BBB,B,,25,,,,,,,"Photo-2972.jpg",00:01:00
+25.90,B,BBB,B,,,,,,,,,"Photo-35227.jpg",00:01:37
+25.90,,BDB,,,,,"début de flache ",,,,,"Photo-35227.jpg",00:01:37
+28.40,A,BBB,B,,,,,,,,,"Photo-36462.jpg",00:01:49
+30.00,B,BBB,B,,,,,,,,,"Photo-21344.jpg",00:01:57
+40.80,,BAJ,A,,,,,,,,,"Photo-16751.jpg",00:02:43
+48.00,A,BBB,B,,,,,,,,,"Photo-7923.jpg",00:03:10
+56.10,,BDA,,,,,,,,,,"Photo-49568.jpg",00:03:40
+61.20,,BCE,A,,EU2095,,"regard enterré ",,,,,"Photo-58146.jpg",00:04:22
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2095 VERS EU2090","EU2095","EU2095","EU2090","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,,B,"Video003901.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,,4.06,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2095,,"regard enterré",,,,,"Photo-37350.jpg",00:00:01
+0.00,,BDB,,,,,"suite du flache ",,,,,"Photo-37350.jpg",00:00:01
+7.50,,BCE,A,,EU2090,,,,,,,"Photo-46527.jpg",00:01:00
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU2090 VERS EU2080","EU2090","EU2090","EU2080","RUE PISSARRO",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-19","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,4.10,B,"Video004001.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,4.06,4.14,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,B,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU2090,,,,,,,"Photo-16011.jpg",00:00:01
+0.00,,BDB,,,,,"suite du flache  ",,,,,"Photo-16011.jpg",00:00:01
+3.90,,BCE,A,,EU2080,,,,,,,"Photo-20342.jpg",00:00:36
+3.90,,DCA,A,,,,,,,,,"Photo-20342.jpg",00:00:36
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1805 VERS EU1810","EU1805","EU1805","EU1810","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,33.50,B,"Video004101.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,1.34,1.58,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU1805,,,,,,,"Photo-34286.jpg",00:00:01
+3.50,,BCA,A,A,180,,"à 11h ",,,,,"Photo-30553.jpg",00:00:29
+4.40,,BCA,A,A,100,,"à 3h ",,,,,"Photo-24479.jpg",00:00:58
+20.20,,BCA,A,A,100,,"à 9h",,,,,"Photo-61827.jpg",00:02:06
+20.80,,BCA,A,A,100,,"à 3h ",,,,,"Photo-37769.jpg",00:02:57
+33.30,,BCE,A,,EU1810,,,,,,,"Photo-62957.jpg",00:04:03
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1810 VERS EU1815","EU1810","EU1810","EU1815","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,44.70,B,"Video004201.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,1.58,1.85,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1810,,,,,,,"Photo-52606.jpg",00:00:01
+0.60,,BAC,B,,,,"épaufrure",,,,,"Photo-60754.jpg",00:00:18
+1.30,,BBC,C,,,,,,,,,"Photo-63221.jpg",00:00:37
+1.50,,BCA,A,A,100,,"à 3h ",,,,,"Photo-45671.jpg",00:01:02
+1.50,,BDB,,,,,"début de flache ",,,,,"Photo-45671.jpg",00:01:02
+2.40,,BAF,H,A,,,,,,,,"Photo-42685.jpg",00:01:19
+2.40,,BAC,B,,,,,,,,,"Photo-42685.jpg",00:01:19
+6.60,,BCA,A,A,100,,"à 3h ",,,,,"Photo-1415.jpg",00:01:49
+6.60,,BDB,,,,,"fin de flache ",,,,,"Photo-1415.jpg",00:01:49
+13.50,,BDB,,,,,"début de flache ",,,,,"Photo-48881.jpg",00:02:20
+16.00,,BCA,A,A,100,,"à 3h ",,,,,"Photo-27824.jpg",00:02:41
+16.00,,BBB,B,,,,,,,,,"Photo-27824.jpg",00:02:41
+19.30,,BCA,A,A,100,,"à 3h ",,,,,"Photo-48658.jpg",00:03:05
+19.30,,BDB,,,,,"fin de flache ",,,,,"Photo-48658.jpg",00:03:05
+19.30,,BBB,B,,,,,,,,,"Photo-48658.jpg",00:03:05
+28.80,,BDB,,,,,"début de flache ",,,,,"Photo-30056.jpg",00:03:48
+34.60,,BCA,A,A,100,,"à 3h ",,,,,"Photo-26750.jpg",00:04:21
+34.60,,BBB,B,,,,,,,,,"Photo-26750.jpg",00:04:21
+35.50,,BCA,A,A,100,,"à 9h ",,,,,"Photo-62960.jpg",00:04:39
+35.50,,BDB,,,,,"fin de flache ",,,,,"Photo-62960.jpg",00:04:39
+35.50,,BBB,B,,,,,,,,,"Photo-62960.jpg",00:04:39
+38.80,,BCA,A,A,100,,"à 3h ",,,,,"Photo-51588.jpg",00:05:03
+38.80,,BBB,B,,,,,,,,,"Photo-51588.jpg",00:05:03
+45.00,,BCE,A,,EU1815,,,,,,,"Photo-43400.jpg",00:05:45
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1815 VERS EU1820","EU1815","EU1815","EU1820","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,48.80,B,"Video004301.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,1.85,1.89,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1815,,,,,,,"Photo-10641.jpg",00:00:01
+0.00,A,BBB,B,,5,,,,,,,"Photo-10641.jpg",00:00:01
+0.00,,BDB,,,,,"début de flache ",,,,,"Photo-10641.jpg",00:00:01
+6.30,,BCA,A,A,100,,"à 9h ",,,,,"Photo-38221.jpg",00:00:52
+18.60,,BCA,A,A,100,,"à 9h ",,,,,"Photo-2158.jpg",00:01:48
+24.20,,BCA,A,A,100,,"à 3h ",,,,,"Photo-60815.jpg",00:02:33
+24.20,A,BBB,B,,25,,,,,,,"Photo-60815.jpg",00:02:33
+26.50,,BDB,,,,,"fin de flache ",,,,,"Photo-35266.jpg",00:04:08
+33.90,,BCA,A,A,100,,"à 3h ",,,,,"Photo-62153.jpg",00:04:49
+48.70,,BCE,A,,EU1820,,,,,,,"Photo-36197.jpg",00:08:47
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1820 VERS EU1825","EU1820","EU1820","EU1825","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,45.80,B,"Video004401.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,1.89,2.15,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1820,,,,,,,"Photo-20594.jpg",00:00:01
+0.60,A,BBB,B,,30,,,,,,,"Photo-1429.jpg",00:00:08
+4.20,,BCA,A,A,100,,"à 3h",,,,,"Photo-14113.jpg",00:00:36
+5.10,,BCA,A,A,100,,"à 9h ",,,,,"Photo-35273.jpg",00:00:54
+5.10,,BDB,,,,,"début de flache ",,,,,"Photo-35273.jpg",00:00:54
+11.20,,BCA,A,A,100,,"à 9h ",,,,,"Photo-35060.jpg",00:01:40
+13.80,,BDB,,,,,"fin de flache ",,,,,"Photo-46832.jpg",00:02:08
+17.10,,BCA,A,A,100,,"à 9h ",,,,,"Photo-18682.jpg",00:02:37
+20.60,,BCA,A,A,100,,"à 3h ",,,,,"Photo-13254.jpg",00:03:07
+29.50,,BCA,A,A,100,,"à 9h ",,,,,"Photo-59558.jpg",00:03:54
+36.50,,BAF,A,A,,,"sur l'ensemble du tronçon",,,,,"Photo-16825.jpg",00:04:25
+41.70,,BCA,A,A,100,,"à 3h",,,,,"Photo-22319.jpg",00:04:55
+42.70,,BCA,A,A,100,,"à 9h ",,,,,"Photo-9648.jpg",00:05:29
+46.00,,BCE,A,,EU1825,,,,,,,"Photo-42788.jpg",00:06:03
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1825 VERS EU1830","EU1825","EU1825","EU1830","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,45.70,B,"Video004501.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,2.15,2.22,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1825,,,,,,,"Photo-31831.jpg",00:00:01
+0.00,A,BBB,B,,5,,,,,,,"Photo-31831.jpg",00:00:01
+6.70,,BCA,A,A,100,,"à 3h ",,,,,"Photo-6412.jpg",00:00:43
+7.60,,BAF,A,A,,,"sur l'ensemble du tronçon",,,,,"Photo-20866.jpg",00:00:51
+17.70,,BCA,A,A,100,,"à 3h ",,,,,"Photo-38055.jpg",00:02:12
+17.70,A,BBB,B,,10,,,,,,,"Photo-38055.jpg",00:02:12
+28.10,,BCA,A,A,100,,"à 9h ",,,,,"Photo-29219.jpg",00:03:05
+30.50,,BCA,A,A,100,,"à 3h ",,,,,"Photo-58461.jpg",00:03:27
+31.30,,BCA,A,A,100,,"à 9h ",,,,,"Photo-43449.jpg",00:04:01
+32.80,B,BBB,B,,,,,,,,,"Photo-26083.jpg",00:04:13
+34.70,A,BBB,B,,10,,,,,,,"Photo-46744.jpg",00:04:23
+45.90,,BCE,A,,EU1830,,,,,,,"Photo-42367.jpg",00:05:29
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1830 VERS EU1835","EU1830","EU1830","EU1835","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,47.40,B,"Video004601.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,2.22,2.77,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1830,,,,,,,"Photo-4787.jpg",00:00:01
+1.40,,BAF,A,A,,,"sur l"ensemble du tronçon ",,,,,"Photo-6274.jpg",00:00:24
+3.60,,BCA,A,A,100,,"à 9h ",,,,,"Photo-34187.jpg",00:00:45
+13.90,,BCA,A,A,100,,"à 9h ",,,,,"Photo-9080.jpg",00:01:46
+20.80,,BCA,A,A,150,,"à 2h ",,,,,"Photo-52291.jpg",00:02:28
+21.20,,BAF,A,A,,,"sur l'ensemble du tronçon",,,,,"Photo-63013.jpg",00:02:34
+45.20,,BCA,A,A,100,,"à 9h ",,,,,"Photo-17975.jpg",00:06:08
+47.50,,BCE,A,,EU1835,,,,,,,"Photo-26020.jpg",00:06:55
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1835 VERS EU1840","EU1835","EU1835","EU1840","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,44.50,B,"Video004701.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,2.77,2.58,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU1835,,,,,,,"Photo-34104.jpg",00:00:01
+1.00,A,BBB,B,,25,,,,,,,"Photo-34104.jpg",00:00:01
+1.00,,BDB,,,,,"début de flache ",,,,,"Photo-34104.jpg",00:00:01
+5.20,A,BDG,A,,,,,,,,,"Photo-30198.jpg",00:01:01
+13.00,,BCA,A,A,100,,"à 9h ",,,,,"Photo-59743.jpg",00:02:52
+32.80,,BCA,A,A,100,,"à 3h ",,,,,"Photo-54306.jpg",00:04:25
+43.00,,BCA,A,A,150,,"à 10h",,,,,"Photo-13167.jpg",00:05:09
+44.60,,BCE,A,,EU1840,,,,,,,"Photo-39672.jpg",00:05:45
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1840 VERS EU1445","EU1840","EU1840","EU1445","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,45.20,B,"Video004801.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,200,,AM,,,3000,2.58,2.47,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1840,,,,,,,"Photo-51117.jpg",00:00:01
+0.00,,BDB,,,,,"début de flache ",,,,,"Photo-51117.jpg",00:00:01
+0.00,A,BBB,B,,,,,,,,,"Photo-51117.jpg",00:00:01
+9.60,,BCA,A,A,100,,"à 3h ",,,,,"Photo-41074.jpg",00:01:02
+13.30,,BDB,,,,,"fin de flache ",,,,,"Photo-63915.jpg",00:01:34
+18.20,,BAF,A,A,,,"sur l'ensemble du tronçon",,,,,"Photo-52217.jpg",00:01:52
+31.80,,BDB,,,,,"début de flache ",,,,,"Photo-3238.jpg",00:04:20
+45.00,,BCE,A,,EU1445,,,,,,,"Photo-4391.jpg",00:05:33
+45.00,,DCA,B,,,,"2 branchements ",,,,,"Photo-4391.jpg",00:05:33
+45.00,,DCA,A,,,,,,,,,"Photo-4391.jpg",00:05:33
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1445 VERS EU1450","EU1445","EU1445","EU1450","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,73.50,B,"Video004901.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.47,2.54,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1445,,,,,,,"Photo-22278.jpg",00:00:01
+0.00,,DCA,A,,,,,,,,,"Photo-22278.jpg",00:00:01
+0.00,,DCA,B,,,,"2 branchements ",,,,,"Photo-22278.jpg",00:00:01
+0.00,,BDB,,,,,"suite du flache ",,,,,"Photo-22278.jpg",00:00:01
+12.30,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-58533.jpg",00:01:57
+12.30,,BDB,,,,,"fin de flache ",,,,,"Photo-58533.jpg",00:01:57
+16.20,,BDB,,,,,"début de flache ",,,,,"Photo-10899.jpg",00:02:15
+26.70,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-8503.jpg",00:03:34
+59.90,,BBF,B,,,,,,,,,"Photo-9102.jpg",00:06:07
+68.30,,BAJ,A,,,,,,,,,"Photo-1891.jpg",00:07:06
+69.70,,BBF,B,,,,,,,,,"Photo-28867.jpg",00:07:28
+71.10,,BDB,,,,,"fin de flache ",,,,,"Photo-13505.jpg",00:07:38
+74.00,,BCE,A,,EU1450 ,,,,,,,"Photo-18901.jpg",00:08:17
+74.00,,DCA,B,,,,,,,,,"Photo-18901.jpg",00:08:17
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1450 VERS EU1455","EU1450","EU1450","EU1455","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,71.20,B,"Video005001.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.54,2.51,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1450,,,,,,,"Photo-36831.jpg",00:00:03
+0.00,,DCA,B,,,,,,,,,"Photo-36831.jpg",00:00:03
+7.80,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-55355.jpg",00:00:47
+19.30,,BDB,,,,,"début de flache ",,,,,"Photo-62096.jpg",00:01:44
+21.20,A,BBB,B,,10,,,,,,,"Photo-19523.jpg",00:01:58
+26.00,,BDB,,,,,"fin de flache ",,,,,"Photo-42487.jpg",00:02:20
+27.80,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-50371.jpg",00:02:40
+28.00,,BAC,B,,,,,,,,,"Photo-18684.jpg",00:02:46
+45.00,,BDB,,,,,"début de flache ",,,,,"Photo-33235.jpg",00:12:18
+70.80,,BCE,A,,EU1455,,,,,,,"Photo-4948.jpg",00:15:28
+70.80,,DCA,B,,,,,,,,,"Photo-4948.jpg",00:15:28
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1455 VERS EU1460","EU1455","EU1455","EU1460","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,71.40,B,"Video005101.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.51,2.54,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+1.00,,BCD,A,,EU1455,,,,,,,"Photo-32297.jpg",00:00:01
+1.00,,DCA,B,,,,,,,,,"Photo-32297.jpg",00:00:01
+1.00,,BDB,,,,,"suite du flache  ",,,,,"Photo-32297.jpg",00:00:01
+3.50,,BAJ,B,,,,,,,,,"Photo-60481.jpg",00:00:23
+25.60,,BAI,A,A,,,,,,,,"Photo-44952.jpg",00:03:23
+30.60,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-20761.jpg",00:04:10
+30.60,,BBF,A,,,,,,,,,"Photo-20761.jpg",00:04:10
+53.30,,BBF,C,,,,,,,,,"Photo-39053.jpg",00:05:36
+53.30,,BBB,A,,,,,,,,,"Photo-39053.jpg",00:05:36
+62.50,,BDB,,,,,"fin de flache ",,,,,"Photo-6393.jpg",00:06:11
+71.20,,BBF,B,,,,,,,,,"Photo-49725.jpg",00:06:49
+71.20,,BCE,A,,EU1460,,,,,,,"Photo-15453.jpg",00:07:08
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1460 VERS EU1465","EU1460","EU1460","EU1465","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,45.30,B,"Video005201.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.54,2.85,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1460,,,,,,,"Photo-45418.jpg",00:00:01
+0.00,,DBF,B,C,,,,,,,,"Photo-45418.jpg",00:00:01
+11.90,,BCE,Z,,,,"regard borgne avec un branchement",,,,,"Photo-48654.jpg",00:00:57
+11.90,,BBC,C,,,,,,,,,"Photo-48654.jpg",00:00:57
+45.40,,BCE,A,,EU1465,,,,,,,"Photo-1248.jpg",00:03:22
+45.40,,DCA,A,,,,,,,,,"Photo-1248.jpg",00:03:22
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1465 VERS EU1470","EU1465","EU1465","EU1470","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,53.00,B,"Video005301.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.85,2.90,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1465,,,,,,,"Photo-58390.jpg",00:00:01
+0.00,,DCA,A,,,,,,,,,"Photo-58390.jpg",00:00:01
+13.60,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-44790.jpg",00:01:06
+21.00,,BCA,A,A,200,,"à 2h ",,,,,"Photo-60403.jpg",00:01:51
+31.60,,BCE,Z,,,,"regard borgne avec un branchement ",,,,,"Photo-24083.jpg",00:02:51
+31.60,,BBF,C,,,,,,,,,"Photo-24083.jpg",00:02:51
+47.00,,BDB,,,,,"début de flache ",,,,,"Photo-30817.jpg",00:03:50
+52.20,,BCE,A,,EU1470,,,,,,,"Photo-42228.jpg",00:04:23
+52.20,,DCA,B,,,,"3 branchements ",,,,,"Photo-42228.jpg",00:04:23
+52.20,,DDB,,,,,"fin de flache ",,,,,"Photo-42228.jpg",00:04:23
+#Z
+#B01=AAA,AAB,AAD,AAF,AAJ,AAK,AAL,AAM,AAN,AAO,AAP,AAQ
+"EU1470 VERS EU1475","EU1470","EU1470","EU1475","RUE DES RAYONS",A,A,"","BUTRY SUR OISE ","QUAI DE L'OISE ","",A
+#B02=ABA,ABC,ABE,ABF,ABG,ABH,ABL,ABM,ABN,ABO,ABP,ABQ,ABR,ABS
+"EN 13508-2:2003+A1:2011",Z,B,"2012-09-20","00:00","SH",E,A,"012-286-ITV-SH-BUTRY SUR OISE ","012-286-ITV-SH-BUTRY SUR OISE ",D,57.60,B,"Video005401.mpg"
+#B03=ACA,ACB,ACC,ACD,ACE,ACF,ACG,ACH,ACI,ACJ,ACK,ACM
+A,250,,AK,,,3000,2.90,3.28,A,A,A
+#B04=ADA,ADB,ADC,ADE
+A,A,A,
+#C=I,J,A,B,C,D,E,F,G,H,K,L,M,N
+0.00,,BCD,A,,EU1470,,,,,,,"Photo-31665.jpg",00:00:01
+0.00,,DCA,B,,,,"3 branchements ",,,,,"Photo-31665.jpg",00:00:01
+0.00,,BBF,B,,,,,,,,,"Photo-31665.jpg",00:00:01
+15.50,,BCA,A,A,200,,"à 10h ",,,,,"Photo-6678.jpg",00:01:13
+15.50,,BDB,,,,,"début de flache ",,,,,"Photo-6678.jpg",00:01:13
+21.00,,BAJ,A,,,,,,,,,"Photo-32723.jpg",00:01:44
+26.10,,BAC,B,,,,"épaufrure",,,,,"Photo-10962.jpg",00:02:07
+30.90,,BBF,A,,,,,,,,,"Photo-60714.jpg",00:02:38
+30.90,,BAI,A,D,,,,,,,,"Photo-60714.jpg",00:02:38
+40.90,,BAJ,A,,,,,,,,,"Photo-12585.jpg",00:03:47
+41.50,,BCA,A,A,200,,"à 10h ",,,,,"Photo-60415.jpg",00:03:58
+41.60,,BAJ,A,,,,,,,,,"Photo-11962.jpg",00:04:10
+46.70,,BAJ,A,,,,,,,,,"Photo-47162.jpg",00:04:45
+46.70,,BBB,B,,,,,,,,,"Photo-47162.jpg",00:04:45
+46.70,,BBF,A,,,,,,,,,"Photo-47162.jpg",00:04:45
+51.80,,BAJ,A,,,,,,,,,"Photo-51822.jpg",00:05:20
+53.20,,BDG,A,,,,,,,,,"Photo-21903.jpg",00:05:54
+57.10,,BCE,A,,EU1475,,,,,,,"Photo-37488.jpg",00:09:29
+57.10,,DCA,A,,,,,,,,,"Photo-37488.jpg",00:09:29

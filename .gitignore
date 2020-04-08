@@ -106,6 +106,6 @@ venv.bak/
 # Pycharm
 .idea/
 
-test/data/confidential/*/*.txt
-test/data/confidential/*/*.TXT
-test/data/confidential/*.gpkg
+drain_sewer_visual_inspection/test/data/confidential/*
+
+drain-sewer-visual-inspection.*.zip

@@ -77,10 +77,45 @@
                 </section>
                 <!-- Main content -->
                 <section class="content">
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-ban"></i> Missed Relationships!</h4>
-                        <p>No relationships were detected in the schema.</p>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-code-fork"></i>
+                            <h3 class="box-title">Diagrams</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="nav-tabs-custom">
+                                <!-- Tabs within a box -->
+                                <h5>By default only columns that are primary keys, foreign keys or indexes are shown.</h5>
+                                <ul class="nav nav-tabs pull-left ui-sortable-handle">
+                                    <li class="active"><a href="#compactDegreeImg-chart" data-toggle="tab" aria-expanded="true">Compact</a></li>
+                                    <li class=""><a href="#largeDegreeImg-chart" data-toggle="tab" aria-expanded="true">Large</a></li>
+                                </ul>
+                                <div class="tab-content no-padding">
+                                    <div class="chart tab-pane active" id="compactDegreeImg-chart" style="position: relative; overflow-x:auto;">
+                                        <map id="compactRelationshipsDiagram" name="compactRelationshipsDiagram">
+<area shape="rect" id="node1" href="tables/file.html" target="_top" title="file" alt="" coords="53,159,215,276">
+<area shape="rect" id="node2" href="tables/geom_regard.html" target="_top" title="geom_regard" alt="" coords="47,293,221,411">
+<area shape="rect" id="node3" href="tables/geom_troncon.html" target="_top" title="geom_troncon" alt="" coords="5,24,263,141">
+<area shape="rect" id="node4" href="tables/obs.html" target="_top" title="obs" alt="" coords="552,39,696,215">
+<area shape="rect" id="node6" href="tables/troncon.html" target="_top" title="troncon" alt="" coords="307,5,508,181">
+<area shape="rect" id="node5" href="tables/regard.html" target="_top" title="regard" alt="" coords="311,249,503,425">
+</map>
+                                        <a name='diagram'><img id="compactDegreeImg" src="diagrams/summary/relationships.real.compact.png" usemap="#compactRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                    </div>
+                                    <div class="chart tab-pane " id="largeDegreeImg-chart" style="position: relative; overflow-x:auto;">
+                                        <map id="largeRelationshipsDiagram" name="largeRelationshipsDiagram">
+<area shape="rect" id="node1" href="tables/file.html" target="_top" title="file" alt="" coords="53,2135,215,2433">
+<area shape="rect" id="node2" href="tables/geom_regard.html" target="_top" title="geom_regard" alt="" coords="47,3672,221,3824">
+<area shape="rect" id="node3" href="tables/geom_troncon.html" target="_top" title="geom_troncon" alt="" coords="5,1907,263,2117">
+<area shape="rect" id="node4" href="tables/obs.html" target="_top" title="obs" alt="" coords="552,584,696,1147">
+<area shape="rect" id="node6" href="tables/troncon.html" target="_top" title="troncon" alt="" coords="307,5,508,2093">
+<area shape="rect" id="node5" href="tables/regard.html" target="_top" title="regard" alt="" coords="311,2147,503,3795">
+</map>
+                                        <a name='diagram'><img id="largeDegreeImg" src="diagrams/summary/relationships.real.large.png" usemap="#largeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
                     </div>
                 </section>
             </div>

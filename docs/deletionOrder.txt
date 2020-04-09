@@ -1,7 +1,7 @@
-troncon
+geom_obs
 regard
 obs
+troncon
 geom_troncon
 geom_regard
-geom_obs
 file

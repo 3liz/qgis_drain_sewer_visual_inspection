@@ -8,7 +8,11 @@
    </sequences>
    <tables>
       <table name="file" remarks="" schema="sewer" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('sewer.file_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="true" defaultValue="nextval('sewer.file_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="id_file" foreignKey="file_obs" implied="false" onDeleteCascade="false" schema="sewer" table="obs"/>
+            <child column="id_file" foreignKey="file_regard" implied="false" onDeleteCascade="false" schema="sewer" table="regard"/>
+            <child column="id_file" foreignKey="file_troncon" implied="false" onDeleteCascade="false" schema="sewer" table="troncon"/>
+         </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="basename" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="encoding" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="lang" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
@@ -30,7 +34,9 @@
          </index>
       </table>
       <table name="geom_regard" remarks="" schema="sewer" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('sewer.geom_regard_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="true" defaultValue="nextval('sewer.geom_regard_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="id_geom_regard" foreignKey="regard_geom_regard" implied="false" onDeleteCascade="false" schema="sewer" table="regard"/>
+         </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="geom" nullable="true" remarks="" size="2147483647" type="geometry" typeCode="1111"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="label" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
@@ -39,7 +45,9 @@
          </index>
       </table>
       <table name="geom_troncon" remarks="" schema="sewer" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('sewer.geom_troncon_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="true" defaultValue="nextval('sewer.geom_troncon_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="id_geom_troncon" foreignKey="troncon_geom_troncon" implied="false" onDeleteCascade="false" schema="sewer" table="troncon"/>
+         </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="geom" nullable="true" remarks="" size="2147483647" type="geometry" typeCode="1111"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="label" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="id_geom_regard_amont" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
@@ -65,8 +73,12 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="l" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="m" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="n" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="id_troncon" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="16" name="id_file" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="id_troncon" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="troncon_observation" implied="false" onDeleteCascade="false" schema="sewer" table="troncon"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="16" name="id_file" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="file_obs" implied="false" onDeleteCascade="false" schema="sewer" table="file"/>
+         </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="obs_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -125,15 +137,21 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="49" name="cef" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="50" name="ceg" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="51" name="ceh" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="52" name="id_geom_regard" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="53" name="id_file" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="52" name="id_geom_regard" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="regard_geom_regard" implied="false" onDeleteCascade="false" schema="sewer" table="geom_regard"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="53" name="id_file" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="file_regard" implied="false" onDeleteCascade="false" schema="sewer" table="file"/>
+         </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="regard_pkey" unique="true">
             <column ascending="true" name="id"/>
          </index>
       </table>
       <table name="troncon" remarks="" schema="sewer" type="TABLE">
-         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <child column="id_troncon" foreignKey="troncon_observation" implied="false" onDeleteCascade="false" schema="sewer" table="obs"/>
+         </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="aaa" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="aab" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="aac" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
@@ -200,8 +218,12 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="64" name="id_regard1" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="65" name="id_regard2" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="66" name="id_regard3" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="67" name="id_geom_troncon" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="68" name="id_file" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="67" name="id_geom_troncon" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="troncon_geom_troncon" implied="false" onDeleteCascade="false" schema="sewer" table="geom_troncon"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="68" name="id_file" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="file_troncon" implied="false" onDeleteCascade="false" schema="sewer" table="file"/>
+         </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="troncon_pkey" unique="true">
             <column ascending="true" name="id"/>

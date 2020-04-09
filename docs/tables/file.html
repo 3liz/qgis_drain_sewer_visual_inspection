@@ -111,6 +111,18 @@
                                     <td>nextval(&#39;sewer.file_id_seq&#39;::regclass)</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="obs.id_file references file.id via file_obs"><a href='obs.html'>obs</a><span class='relatedKey'>.id_file</span></td>
+                                                <td class="constraint detail">file_obs<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td title="regard.id_file references file.id via file_regard"><a href='regard.html'>regard</a><span class='relatedKey'>.id_file</span></td>
+                                                <td class="constraint detail">file_regard<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td title="troncon.id_file references file.id via file_troncon"><a href='troncon.html'>troncon</a><span class='relatedKey'>.id_file</span></td>
+                                                <td class="constraint detail">file_troncon<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
                                         </table>
                                     </td>
                                     <td>
@@ -272,10 +284,46 @@
                             </table>
                         </div><!-- /.box-body -->
                     </div>
-                    <div class="alert alert-warning alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-warning"></i>Diagram producer might be missing</h4>
-                        <p>No diagrams were produced please see application output for any errors</p>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-code-fork"></i>
+                            <h3 id="Relationships" class="box-title">Relationships</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="nav-tabs-custom"><!-- Tabs within a box -->
+                                <h5>Close relationships within degrees of separation</h5>
+                                <ul class="nav nav-tabs pull-left ui-sortable-handle">
+                                    <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>
+                                    <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>
+                                </ul>
+                                <div class="tab-content no-padding">
+                                    <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
+                                        <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
+<area shape="rect" id="node1" href="obs.html" target="_top" title="obs" alt="" coords="551,39,695,215">
+<area shape="rect" id="node2" href="file.html" target="_top" title="file" alt="" coords="5,156,261,460">
+<area shape="rect" id="node3" href="troncon.html" target="_top" title="troncon" alt="" coords="305,5,507,181">
+<area shape="rect" id="node4" href="regard.html" target="_top" title="regard" alt="" coords="310,235,502,411">
+</map>
+                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/file.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                    </div>
+                                    <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
+                                        <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
+<area shape="rect" id="node1" href="obs.html" target="_top" title="obs" alt="" coords="551,39,695,215">
+<area shape="rect" id="node2" href="file.html" target="_top" title="file" alt="" coords="5,149,261,453">
+<area shape="rect" id="node3" href="troncon.html" target="_top" title="troncon" alt="" coords="305,5,507,181">
+<area shape="rect" id="node6" href="geom_troncon.html" target="_top" title="geom_troncon" alt="" coords="42,37,225,125">
+<area shape="rect" id="node4" href="regard.html" target="_top" title="regard" alt="" coords="310,337,502,513">
+<area shape="rect" id="node5" href="geom_regard.html" target="_top" title="geom_regard" alt="" coords="47,471,220,559">
+</map>
+                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/file.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
                     </div>
                 </section>
                 <script>

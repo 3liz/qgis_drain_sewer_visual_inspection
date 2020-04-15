@@ -18,4 +18,5 @@ ALTER TABLE sewer.troncon ADD CONSTRAINT file_troncon FOREIGN KEY (id_file) REFE
 ALTER TABLE sewer.regard ADD CONSTRAINT regard_geom_regard FOREIGN KEY (id_geom_regard) REFERENCES sewer.geom_regard (id);
 ALTER TABLE sewer.troncon ADD CONSTRAINT troncon_geom_troncon FOREIGN KEY (id_geom_troncon) REFERENCES sewer.geom_troncon (id);
 ALTER TABLE sewer.obs ADD CONSTRAINT troncon_observation FOREIGN KEY (id_troncon) REFERENCES sewer.troncon (id);
+-- TOCHECK FILE - GEOMS OBS
 ```

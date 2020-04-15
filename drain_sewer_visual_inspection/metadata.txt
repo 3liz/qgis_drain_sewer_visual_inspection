@@ -8,6 +8,7 @@ author=3liz
 email=info@3liz.com
 tags=drain,sewer,pipe,pipeline,inspection,EN13508,water,hydraulic,pvi
 icon=resources/icons/icon.png
+hasProcessingProvider=yes
 
 homepage=https://github.com/3liz/qgis_drain_sewer_visual_inspection
 repository=https://github.com/3liz/qgis_drain_sewer_visual_inspection

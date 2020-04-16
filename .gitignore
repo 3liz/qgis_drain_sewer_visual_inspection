@@ -107,5 +107,5 @@ venv.bak/
 .idea/
 
 drain_sewer_visual_inspection/test/data/confidential/*
-
+drain_sewer_visual_inspection/i18n/*
 drain-sewer-visual-inspection.*.zip

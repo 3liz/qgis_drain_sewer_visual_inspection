@@ -76,40 +76,68 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.SUCCESS, tr('Succès')))
+        self.addOutput(
+            QgsProcessingOutputNumber(
+                self.SUCCESS,
+                tr('Succès')
+            )
+        )
 
     def processAlgorithm(self, parameters, context, feedback):
         path = self.parameterAsFile(parameters, self.INPUT, context)
-        t_file = self.parameterAsVectorLayer(parameters, self.FILE_TABLE, context)
-        t_troncon = self.parameterAsVectorLayer(parameters, self.SEGMENT_TABLE, context)
-        t_obs = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_TABLE, context)
-        t_regard = self.parameterAsVectorLayer(parameters, self.MANHOLES_TABLE, context)
+        t_file = self.parameterAsVectorLayer(
+            parameters,
+            self.FILE_TABLE,
+            context
+        )
+        t_troncon = self.parameterAsVectorLayer(
+            parameters,
+            self.SEGMENT_TABLE,
+            context
+        )
+        t_obs = self.parameterAsVectorLayer(
+            parameters,
+            self.OBSERVATIONS_TABLE,
+            context
+        )
+        t_regard = self.parameterAsVectorLayer(
+            parameters,
+            self.MANHOLES_TABLE,
+            context
+        )
 
         paths = path.split(';')
         if len(paths) != 1:
             raise QgsProcessingException(
-                tr('* ERREUR: 1 fichier a la fois %s.') % path)
+                tr('* ERREUR: 1 fichier a la fois {}.').format(path)
+            )
 
         if not os.path.exists(path):
             raise QgsProcessingException(
-                tr('* ERREUR: %s n\'existe pas.') % path)
+                tr('* ERREUR: {} n\'existe pas.').format(path)
+            )
 
         # add date fields to itv file table
-        # relation_aggregate( 'itv_tronco_id_file_itv_file20_id', 'max', "abf")
+        # relation_aggregate(
+        #     'itv_tronco_id_file_itv_file20_id',
+        #     'max',
+        #     "abf"
+        # )
         if 'date_debut' not in t_file.dataProvider().fields().names():
             with edit(t_file):
-                res = t_file.dataProvider().addAttributes(
-                    [QgsField("date_debut", QVariant.String),
-                     QgsField("date_fin", QVariant.String)])
+                res = t_file.dataProvider().addAttributes([
+                    QgsField("date_debut", QVariant.String),
+                    QgsField("date_fin", QVariant.String)
+                ])
                 if res:
                     t_file.updateFields()
 
         feat_file = None
         with open(path, 'rb') as f:
             basename = os.path.basename(path)
-            m = hashlib.md5()
-            m.update(f.read())
-            hashcontent = m.hexdigest()
+            md = hashlib.md5()
+            md.update(f.read())
+            hashcontent = md.hexdigest()
 
             feat_file = QgsVectorLayerUtils.createFeature(t_file)
             feat_file.setAttribute('basename', basename)
@@ -117,48 +145,81 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
         if not feat_file:
             raise QgsProcessingException(
-                tr('* ERREUR: le fichier %s n\'a pas ete lu correctement.') % path)
+                tr(
+                    '* ERREUR: le fichier {} n\'a pas été lu '
+                    'correctement.'
+                ).format(path)
+            )
 
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(QgsExpressionContextUtils.layerScope(t_file))
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.layerScope(t_file)
+        )
 
-        exp_str = QgsExpression.createFieldEqualityExpression('basename', feat_file['basename']) + ' AND ' + \
-                  QgsExpression.createFieldEqualityExpression('hashcontent', feat_file['hashcontent'])
+        exp_str = QgsExpression.createFieldEqualityExpression(
+            'basename', feat_file['basename']
+        ) + ' AND ' + QgsExpression.createFieldEqualityExpression(
+            'hashcontent', feat_file['hashcontent']
+        )
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression {} has eval error: {}').format(
+                    exp.expression(), exp.evalErrorString()
+                )
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
         request.setLimit(1)
 
-        for t in t_file.getFeatures(request):
+        for _t in t_file.getFeatures(request):
             raise QgsProcessingException(
-                tr('* ERREUR: le fichier %s a deja ete lu') % path)
+                tr('* ERREUR: le fichier {} a deja ete lu').format(
+                    path
+                )
+            )
 
-        exp_str = QgsExpression.createFieldEqualityExpression('hashcontent', feat_file['hashcontent'])
+        exp_str = QgsExpression.createFieldEqualityExpression(
+            'hashcontent', feat_file['hashcontent']
+        )
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr('* ERROR: Expression {} has eval error: {}').format(
+                    (exp.expression(), exp.evalErrorString())
+                )
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
         request.setLimit(1)
 
-        for t in t_file.getFeatures(request):
+        for _t in t_file.getFeatures(request):
             raise QgsProcessingException(
-                tr('* ERREUR: le fichier %s semble deja avoir ete lu') % path)
+                tr(
+                    '* ERREUR: le fichier {} semble deja avoir ete lu'
+                ).format(path)
+            )
 
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(QgsExpressionContextUtils.layerScope(t_troncon))
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.layerScope(t_troncon)
+        )
 
         exp_str = 'maximum("id")'
         exp = QgsExpression(exp_str)
@@ -166,16 +227,25 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         last_t_id = exp.evaluate(exp_context)
         if not last_t_id:
             last_t_id = 0
 
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(QgsExpressionContextUtils.layerScope(t_regard))
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.layerScope(t_regard)
+        )
 
         exp_str = 'maximum("id")'
         exp = QgsExpression(exp_str)
@@ -183,7 +253,10 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         last_r_id = exp.evaluate(exp_context)
         if not last_r_id:
@@ -205,8 +278,9 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                 try:
                     line = line.decode()
                 except UnicodeDecodeError:
-                    print('Error while reading {}'.format(path))
-                    raise
+                    raise QgsProcessingException(
+                        'Error while reading {}'.format(path)
+                    )
                 # remove break line
                 line = line.replace('\n', '').replace('\r', '')
                 if line.startswith('#'):
@@ -226,7 +300,8 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                     else:
                         break
 
-        # Dialect CSV pour la lecture des tableaux de valeurs du fichier d'ITV
+        # Dialect CSV pour la lecture des tableaux de valeurs du
+        # fichier d'ITV
         class itvDialect(csv.Dialect):
             strict = True
             skipinitialspace = True
@@ -252,7 +327,7 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             # Observations de troncons ?
             obs_for_troncon = False
             # initialisation du Dialect CSV pour ITV
-            d = itvDialect()
+            dia = itvDialect()
             # Lecture ligne à ligne du fichier
             for line in f:
                 # Stop the algorithm if cancel button has been clicked
@@ -266,9 +341,9 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                 if line.startswith('#'):
                     # Entête de troncon ou regard
                     if line.startswith('#B'):
-                        b = io.StringIO(line[5:])
-                        for r in csv.reader(b, d):
-                            header = r
+                        l_b = io.StringIO(line[5:])
+                        for l_r in csv.reader(l_b, dia):
+                            header = l_r
                             break
                         array = line[1:4]
                         continue
@@ -278,9 +353,9 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                             obs_for_troncon = True
                         else:
                             obs_for_troncon = False
-                        b = io.StringIO(line[3:])
-                        for r in csv.reader(b, d):
-                            header = r
+                        l_b = io.StringIO(line[3:])
+                        for l_r in csv.reader(l_b, dia):
+                            header = l_r
                             break
                         array = line[1:2]
                         continue
@@ -294,14 +369,21 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                 else:
                     if not header:  # an error in the file structure
                         continue
-                    b = io.StringIO(line)
-                    for r in csv.reader(b, d):
-                        data = r
-                        row = list(zip([h.lower() for h in header], [t for t in data]))
+                    l_b = io.StringIO(line)
+                    for l_r in csv.reader(l_b, dia):
+                        data = l_r
+                        row = list(
+                            zip(
+                                [h.lower() for h in header],
+                                [t for t in data]
+                            )
+                        )
                         # observation
                         if array == 'C':
                             if obs_for_troncon:
-                                observations.append(row + [('id_troncon', t_id)])
+                                observations.append(
+                                    row + [('id_troncon', t_id)]
+                                )
                         # Premiere ligne de description d'un troncon ou regard
                         elif array == 'B01':
                             if header[0].startswith('A'):
@@ -322,42 +404,42 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         regard_node_refs = []
         regard_ref_id = {}
         max_r_id = last_r_id
-        for r in regards:
+        for reg in regards:
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            d = dict(r)
-            if d['caa'] and d['caa'] not in regard_node_refs:
-                regard_node_refs.append(d['caa'])
-                regard_ref_id[d['caa']] = d['id']
-            if d['id'] and d['id'] > max_r_id:
-                max_r_id = d['id']
-            if 'cbf' in d and d['cbf'] not in itv_dates:
-                itv_dates.append(d['cbf'])
+            d_rg = dict(reg)
+            if d_rg['caa'] and d_rg['caa'] not in regard_node_refs:
+                regard_node_refs.append(d_rg['caa'])
+                regard_ref_id[d_rg['caa']] = d_rg['id']
+            if d_rg['id'] and d_rg['id'] > max_r_id:
+                max_r_id = d_rg['id']
+            if 'cbf' in d_rg and d_rg['cbf'] not in itv_dates:
+                itv_dates.append(d_rg['cbf'])
 
         node_refs = []
-        for tr in troncons:
+        for tro in troncons:
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            d = dict(tr)
-            if d['aad'] and \
-                    d['aad'] not in regard_node_refs and \
-                    d['aad'] not in node_refs:
-                node_refs.append(d['aad'])
-            if d['aaf'] and \
-                    d['aaf'] not in regard_node_refs and \
-                    d['aaf'] not in node_refs:
-                node_refs.append(d['aaf'])
-            if 'aat' in d and \
-                    d['aat'] and \
-                    d['aat'] not in regard_node_refs and \
-                    d['aat'] not in node_refs:
-                node_refs.append(d['aat'])
-            if 'abf' in d and d['abf'] not in itv_dates:
-                itv_dates.append(d['abf'])
+            d_tr = dict(tro)
+            if d_tr['aad'] and \
+                    d_tr['aad'] not in regard_node_refs and \
+                    d_tr['aad'] not in node_refs:
+                node_refs.append(d_tr['aad'])
+            if d_tr['aaf'] and \
+                    d_tr['aaf'] not in regard_node_refs and \
+                    d_tr['aaf'] not in node_refs:
+                node_refs.append(d_tr['aaf'])
+            if 'aat' in d_tr and \
+                    d_tr['aat'] and \
+                    d_tr['aat'] not in regard_node_refs and \
+                    d_tr['aat'] not in node_refs:
+                node_refs.append(d_tr['aat'])
+            if 'abf' in d_tr and d_tr['abf'] not in itv_dates:
+                itv_dates.append(d_tr['abf'])
 
         # Ajout des regards manquant
         for n_ref in node_refs:
@@ -371,92 +453,120 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
 
         # Ajout des identifiants de regards aux tronçons
         regard_refs = regard_ref_id.keys()
-        for tr in troncons:
+        for tro in troncons:
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            d = dict(tr)
-            if d['aad'] and \
-                    d['aad'] in regard_refs:
-                tr += [('id_regard1', regard_ref_id[d['aad']])]
-            if d['aaf'] and \
-                    d['aaf'] in regard_refs:
-                tr += [('id_regard2', regard_ref_id[d['aaf']])]
-            if 'aat' in d.keys() and \
-                    d['aat'] and \
-                    d['aat'] in regard_refs:
-                tr += [('id_regard3', regard_ref_id[d['aat']])]
+            d_tr = dict(tro)
+            if d_tr['aad'] and \
+                    d_tr['aad'] in regard_refs:
+                tro += [('id_regard1', regard_ref_id[d_tr['aad']])]
+            if d_tr['aaf'] and \
+                    d_tr['aaf'] in regard_refs:
+                tro += [('id_regard2', regard_ref_id[d_tr['aaf']])]
+            if 'aat' in d_tr.keys() and \
+                    d_tr['aat'] and \
+                    d_tr['aat'] in regard_refs:
+                tro += [('id_regard3', regard_ref_id[d_tr['aat']])]
 
         # Verification des champs
         fields = provider_fields(t_troncon.fields())
-        for r in troncons:
+        for tro in troncons:
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            for k, v in r:
+            for key, val in tro:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SUCCESS: 0}
 
-                if fields.indexOf(k) == -1:
+                if fields.indexOf(key) == -1:
                     raise QgsProcessingException(
-                        tr('* ERREUR dans le fichier : le champs de tronçon "%s" est inconnue') % k)
-                field = fields.field(k)
-                if isinstance(v, str) and field.isNumeric():
-                    if v:
+                        tr(
+                            '* ERREUR dans le fichier : '
+                            'le champs de tronçon "{}" est inconnue'
+                        ).format(key)
+                    )
+                field = fields.field(key)
+                if isinstance(val, str) and field.isNumeric():
+                    if val:
                         try:
-                            float(v.replace(DECIMAL, '.'))
-                        except:
+                            float(val.replace(DECIMAL, '.'))
+                        except BaseException:
                             raise QgsProcessingException(
-                                tr('* ERREUR dans le fichier : le champs de tronçon "%s" est numérique mais pas la valeur "%s"') % (k, v))
+                                tr(
+                                    '* ERREUR dans le fichier : '
+                                    'le champs de tronçon "{}" est '
+                                    'numérique mais pas la valeur "{}"'
+                                ).format(key, val)
+                            )
 
         fields = provider_fields(t_obs.fields())
-        for r in observations:
+        for obs in observations:
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            for k, v in r:
+            for key, val in obs:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SUCCESS: 0}
 
-                if fields.indexOf(k) == -1:
+                if fields.indexOf(key) == -1:
                     raise QgsProcessingException(
-                        tr('* ERREUR dans le fichier : le champs d\'observation "%s" est inconnue') % k)
-                field = fields.field(k)
-                if isinstance(v, str) and field.isNumeric():
-                    if v:
+                        tr(
+                            '* ERREUR dans le fichier : '
+                            'le champs d\'observation "{}" est '
+                            'inconnue'
+                        ).format(key)
+                    )
+                field = fields.field(key)
+                if isinstance(val, str) and field.isNumeric():
+                    if val:
                         try:
-                            float(v.replace(DECIMAL, '.'))
-                        except:
+                            float(val.replace(DECIMAL, '.'))
+                        except BaseException:
                             raise QgsProcessingException(
-                                tr('* ERREUR dans le fichier : le champs d\'observation "%s" est numérique mais pas la valeur "%s"') % (k, v))
+                                tr(
+                                    '* ERREUR dans le fichier : '
+                                    'le champs d\'observation "{}" est '
+                                    'numérique mais pas la valeur "{}"'
+                                ).format(key, val)
+                            )
 
         fields = provider_fields(t_regard.fields())
-        for r in regards:
+        for reg in regards:
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SUCCESS: 0}
 
-            for k, v in r:
+            for key, val in reg:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SUCCESS: 0}
 
-                if fields.indexOf(k) == -1:
+                if fields.indexOf(key) == -1:
                     raise QgsProcessingException(
-                        tr('* ERREUR dans le fichier : le champs de regard "%s" est inconnue') % k)
-                field = fields.field(k)
-                if isinstance(v, str) and field.isNumeric():
-                    if v:
+                        tr(
+                            '* ERREUR dans le fichier : '
+                            'le champs de regard "{}" est inconnue'
+                        ).format(key)
+                    )
+                field = fields.field(key)
+                if isinstance(val, str) and field.isNumeric():
+                    if val:
                         try:
-                            float(v.replace(DECIMAL, '.'))
-                        except:
+                            float(val.replace(DECIMAL, '.'))
+                        except BaseException:
                             raise QgsProcessingException(
-                                tr('* ERREUR dans le fichier : le champs de regard "%s" est numérique mais pas la valeur "%s"') % (k, v))
+                                tr(
+                                    '* ERREUR dans le fichier : '
+                                    'le champs de regard "{}" est '
+                                    'numérique mais pas la valeur "{}"'
+                                ).format(key, val)
+                            )
 
         # Finalisation objet fichier
         feat_file.setAttribute('encoding', ENCODING)
@@ -476,10 +586,14 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         (res, outFeats) = t_file.dataProvider().addFeatures([feat_file])
         if not res or not outFeats:
             raise QgsProcessingException(
-                tr('* ERREUR: lors de l\'enregistrement du fichier %s') % ', '.join(t_file.dataProvider().errors()))
+                tr(
+                    '* ERREUR: lors de l\'enregistrement du fichier {}'
+                ).format(', '.join(t_file.dataProvider().errors()))
+            )
         if not t_file.commitChanges():
             raise QgsProcessingException(
-                tr('* ERROR: Commit %s.') % t_file.commitErrors())
+                tr('* ERROR: Commit {}.').format(t_file.commitErrors())
+            )
 
         # Mise a jour de l'identifiant de l'objet fichier
         feat_file.setAttribute('id', outFeats[0]['id'])
@@ -487,16 +601,18 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
         # Creation des objets troncons
         features = []
         fields = provider_fields(t_troncon.fields())
-        for r in troncons:
+        for tro in troncons:
             feat_t = QgsVectorLayerUtils.createFeature(t_troncon)
             feat_t.setAttribute('id_file', feat_file['id'])
-            for k, v in r:
-                field = fields.field(k)
-                if isinstance(v, str) and field.isNumeric():
-                    if v:
-                        feat_t.setAttribute(k, float(v.replace(DECIMAL, '.')))
+            for key, val in tro:
+                field = fields.field(key)
+                if isinstance(val, str) and field.isNumeric():
+                    if val:
+                        feat_t.setAttribute(
+                            key, float(val.replace(DECIMAL, '.'))
+                        )
                 else:
-                    feat_t.setAttribute(k, v)
+                    feat_t.setAttribute(key, val)
             features.append(feat_t)
 
         # Ajout des objets troncons
@@ -505,24 +621,35 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = t_troncon.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    tr('* ERREUR: lors de l\'enregistrement des troncon %s') % ', '.join(t_troncon.dataProvider().errors()))
+                    tr(
+                        '* ERREUR: lors de l\'enregistrement '
+                        'des troncon {}'
+                    ).format(
+                        ', '.join(t_troncon.dataProvider().errors())
+                    )
+                )
             if not t_troncon.commitChanges():
                 raise QgsProcessingException(
-                    tr('* ERROR: Commit %s.') % t_troncon.commitErrors())
+                    tr('* ERROR: Commit {}.').format(
+                        t_troncon.commitErrors()
+                    )
+                )
 
         # Creation des objets observations
         features = []
         fields = provider_fields(t_obs.fields())
-        for r in observations:
+        for obs in observations:
             feat_o = QgsVectorLayerUtils.createFeature(t_obs)
             feat_o.setAttribute('id_file', feat_file['id'])
-            for k, v in r:
-                field = fields.field(k)
-                if isinstance(v, str) and field.isNumeric():
-                    if v:
-                        feat_o.setAttribute(k, float(v.replace(DECIMAL, '.')))
+            for key, val in obs:
+                field = fields.field(key)
+                if isinstance(val, str) and field.isNumeric():
+                    if val:
+                        feat_o.setAttribute(
+                            key, float(val.replace(DECIMAL, '.'))
+                        )
                 else:
-                    feat_o.setAttribute(k, v)
+                    feat_o.setAttribute(key, val)
             features.append(feat_o)
 
         # Ajout des objets observations
@@ -531,42 +658,67 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = t_obs.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    tr('* ERREUR: lors de l\'enregistrement des observations %s') % ', '.join(t_obs.dataProvider().errors()))
+                    tr(
+                        '* ERREUR: lors de l\'enregistrement '
+                        'des observations {}'
+                    ).format(
+                        ', '.join(t_obs.dataProvider().errors())
+                    )
+                )
             if not t_obs.commitChanges():
                 raise QgsProcessingException(
-                    tr('* ERROR: Commit %s.') % t_obs.commitErrors())
+                    tr('* ERROR: Commit {}.').format(
+                        t_obs.commitErrors()
+                    )
+                )
 
         # Creation des objets regards
         features = []
         fields = provider_fields(t_regard.fields())
-        for r in regards:
+        for reg in regards:
             feat_r = QgsVectorLayerUtils.createFeature(t_regard)
             feat_r.setAttribute('id_file', feat_file['id'])
-            for k, v in r:
-                field = fields.field(k)
-                if isinstance(v, str) and field.isNumeric():
-                    if v:
-                        feat_r.setAttribute(k, float(v.replace(DECIMAL, '.')))
+            for key, val in reg:
+                field = fields.field(key)
+                if isinstance(val, str) and field.isNumeric():
+                    if val:
+                        feat_r.setAttribute(
+                            key, float(val.replace(DECIMAL, '.'))
+                        )
                 else:
-                    feat_r.setAttribute(k, v)
+                    feat_r.setAttribute(key, val)
             features.append(feat_r)
 
         # Ajout des objets regards
         if features:
             t_regard.startEditing()
-            (res, outFeats) = t_regard.dataProvider().addFeatures(features)
+            (res, outFeats) = t_regard.dataProvider().addFeatures(
+                features
+            )
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(t_regard.dataProvider().errors()))
+                    tr(
+                        '* ERREUR: lors de l\'enregistrement '
+                        'des regards {}'
+                    ).format(
+                        ', '.join(t_regard.dataProvider().errors())
+                    )
+                )
             if not t_regard.commitChanges():
                 raise QgsProcessingException(
-                    tr('* ERROR: Commit %s.') % t_regard.commitErrors())
+                    tr('* ERROR: Commit %s.').format(
+                        t_regard.commitErrors()
+                    )
+                )
 
         # Returns empty dict if no outputs
         return {self.SUCCESS: 1}
 
     def shortHelpString(self) -> str:
-        return tr('It will import Drain Sewer Visual Inspection data into the geopackage.')
+        return tr(
+            'It will import Drain Sewer Visual Inspection data '
+            'into the geopackage.'
+        )
 
     def name(self):
         return 'import_dsvi_data'

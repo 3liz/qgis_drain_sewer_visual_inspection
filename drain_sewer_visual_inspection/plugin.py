@@ -2,11 +2,11 @@
 
 import logging
 
-from qgis.PyQt.QtCore import QCoreApplication, QTranslator
 from qgis.core import QgsApplication
+from qgis.PyQt.QtCore import QCoreApplication, QTranslator
 
 from .processing_algorithms.provider import Provider
-from .qgis_plugin_tools.tools.custom_logging import setup_logger, plugin_name
+from .qgis_plugin_tools.tools.custom_logging import plugin_name, setup_logger
 from .qgis_plugin_tools.tools.i18n import setup_translation
 
 __copyright__ = 'Copyright 2019, 3Liz'

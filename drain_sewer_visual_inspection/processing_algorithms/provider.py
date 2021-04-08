@@ -1,17 +1,17 @@
 """Processing provider."""
 
-from qgis.PyQt.QtGui import QIcon
 from qgis.core import QgsProcessingProvider
+from qgis.PyQt.QtGui import QIcon
 
-from .config_project_algorithm import ConfigProjectAlgorithm
-from .create_geom_obs_algorithm import CreateGeomObsAlgorithm
-from .create_geom_segment_algorithm import CreateGeomTronconAlgorithm
-from .create_data_model_algorithm import CreatePostgisTables, CreateGeopackage
-from .load_postgis_layers_algorithm import LoadPostgisTables
-from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
-from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
 from ..qgis_plugin_tools.tools.i18n import tr
 from ..qgis_plugin_tools.tools.resources import resources_path
+from .config_project_algorithm import ConfigProjectAlgorithm
+from .create_data_model_algorithm import CreateGeopackage, CreatePostgisTables
+from .create_geom_obs_algorithm import CreateGeomObsAlgorithm
+from .create_geom_segment_algorithm import CreateGeomTronconAlgorithm
+from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
+from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
+from .load_postgis_layers_algorithm import LoadPostgisTables
 
 # from .create_temp_geom_troncon_algorithm import CreateTempGeomTronconAlgorithm
 # from .create_temp_geom_obs_algorithm import CreateTempGeomObsAlgorithm

@@ -1,20 +1,12 @@
 """Create observations geometries."""
 
-from qgis.core import (
-    QgsFeature,
-    QgsFeatureRequest,
-    QgsExpression,
-    QgsExpressionContext,
-    QgsExpressionContextUtils,
-)
-from qgis.core import (
-    QgsProcessing,
-    QgsProcessingAlgorithm,
-    QgsProcessingParameterFeatureSource,
-    QgsProcessingParameterVectorLayer,
-    QgsProcessingOutputNumber,
-    QgsProcessingException,
-)
+from qgis.core import (QgsExpression, QgsExpressionContext,
+                       QgsExpressionContextUtils, QgsFeature,
+                       QgsFeatureRequest, QgsProcessing,
+                       QgsProcessingAlgorithm, QgsProcessingException,
+                       QgsProcessingOutputNumber,
+                       QgsProcessingParameterFeatureSource,
+                       QgsProcessingParameterVectorLayer)
 
 from ..qgis_plugin_tools.tools.fields import provider_fields
 from ..qgis_plugin_tools.tools.i18n import tr

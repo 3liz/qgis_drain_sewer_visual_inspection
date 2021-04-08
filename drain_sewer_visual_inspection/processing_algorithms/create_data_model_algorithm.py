@@ -1,27 +1,18 @@
 """Create data schema algorithm."""
 
 import logging
-import psycopg2
-
 from collections import OrderedDict
 
-from qgis.core import (
-    QgsVectorLayer,
-    QgsVectorLayerExporter,
-    Qgis,
-    QgsWkbTypes,
-    QgsDataSourceUri,
-    QgsProcessingContext,
-    QgsProcessingAlgorithm,
-    QgsProcessingParameterFileDestination,
-    QgsProcessingParameterCrs,
-    QgsProcessingParameterString,
-    QgsProcessingOutputMultipleLayers,
-    QgsProcessingException,
-)
-from qgis.utils import spatialite_connect
+import psycopg2
 from processing.tools import postgis
-
+from qgis.core import (Qgis, QgsDataSourceUri, QgsProcessingAlgorithm,
+                       QgsProcessingContext, QgsProcessingException,
+                       QgsProcessingOutputMultipleLayers,
+                       QgsProcessingParameterCrs,
+                       QgsProcessingParameterFileDestination,
+                       QgsProcessingParameterString, QgsVectorLayer,
+                       QgsVectorLayerExporter, QgsWkbTypes)
+from qgis.utils import spatialite_connect
 
 from ..qgis_plugin_tools.tools.custom_logging import plugin_name
 from ..qgis_plugin_tools.tools.i18n import tr

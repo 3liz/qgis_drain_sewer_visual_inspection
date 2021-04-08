@@ -1,20 +1,12 @@
 """Config project algorithm."""
 
+from qgis.core import (QgsExpression, QgsMapLayer, QgsMarkerSymbol,
+                       QgsProcessing, QgsProcessingAlgorithm,
+                       QgsProcessingParameterVectorLayer, QgsRelation,
+                       QgsRuleBasedRenderer, QgsSimpleMarkerSymbolLayer,
+                       QgsSimpleMarkerSymbolLayerBase, QgsSvgMarkerSymbolLayer,
+                       QgsVectorLayerJoinInfo)
 from qgis.PyQt.QtGui import QColor
-from qgis.core import (
-    QgsMapLayer,
-    QgsVectorLayerJoinInfo,
-    QgsRelation,
-    QgsExpression,
-    QgsRuleBasedRenderer,
-    QgsSvgMarkerSymbolLayer,
-    QgsSimpleMarkerSymbolLayer,
-    QgsSimpleMarkerSymbolLayerBase,
-    QgsMarkerSymbol,
-    QgsProcessing,
-    QgsProcessingAlgorithm,
-    QgsProcessingParameterVectorLayer,
-)
 
 from ..qgis_plugin_tools.tools.i18n import tr
 from ..qgis_plugin_tools.tools.resources import resources_path

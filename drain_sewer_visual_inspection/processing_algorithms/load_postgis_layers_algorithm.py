@@ -1,21 +1,14 @@
 """Load PostGIS layers algorithm."""
 
 import logging
-
 from collections import OrderedDict
 
-from qgis.core import (
-    QgsVectorLayer,
-    Qgis,
-    QgsWkbTypes,
-    QgsDataSourceUri,
-    QgsProcessingContext,
-    QgsProcessingAlgorithm,
-    QgsProcessingParameterString,
-    QgsProcessingOutputMultipleLayers,
-    QgsProcessingException,
-)
 from processing.tools import postgis
+from qgis.core import (Qgis, QgsDataSourceUri, QgsProcessingAlgorithm,
+                       QgsProcessingContext, QgsProcessingException,
+                       QgsProcessingOutputMultipleLayers,
+                       QgsProcessingParameterString, QgsVectorLayer,
+                       QgsWkbTypes)
 
 from ..qgis_plugin_tools.tools.custom_logging import plugin_name
 from ..qgis_plugin_tools.tools.i18n import tr

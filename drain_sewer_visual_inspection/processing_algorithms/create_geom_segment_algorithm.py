@@ -370,7 +370,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                         '* ERREUR: lors de l\'enregistrement '
                         'des regards {}'
                     ).format(
-                        ', '.join(g_troncon.dataProvider().errors()
+                        ', '.join(g_troncon.dataProvider().errors())
                     )
                 )
             if not g_troncon.commitChanges():

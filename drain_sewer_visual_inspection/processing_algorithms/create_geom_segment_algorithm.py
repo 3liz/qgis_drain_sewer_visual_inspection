@@ -61,19 +61,46 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.SEGMENT_CREATED, tr('Number of segment created')))
+        self.addOutput(
+            QgsProcessingOutputNumber(
+                self.SEGMENT_CREATED,
+                tr('Number of segment created')
+            )
+        )
 
     def processAlgorithm(self, parameters, context, feedback):
 
-        t_regard = self.parameterAsSource(parameters, self.MANHOLES_TABLE, context)
-        g_regard = self.parameterAsSource(parameters, self.GEOM_MANHOLES, context)
-        t_troncon = self.parameterAsVectorLayer(parameters, self.SEGMENTS_TABLE, context)
-        g_troncon = self.parameterAsVectorLayer(parameters, self.GEOM_SEGMENTS, context)
+        t_regard = self.parameterAsSource(
+            parameters,
+            self.MANHOLES_TABLE,
+            context
+        )
+        g_regard = self.parameterAsSource(
+            parameters,
+            self.GEOM_MANHOLES,
+            context
+        )
+        t_troncon = self.parameterAsVectorLayer(
+            parameters,
+            self.SEGMENTS_TABLE,
+            context
+        )
+        g_troncon = self.parameterAsVectorLayer(
+            parameters,
+            self.GEOM_SEGMENTS,
+            context
+        )
 
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(QgsExpressionContextUtils.layerScope(t_troncon))
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.layerScope(t_troncon)
+        )
 
         exp_str = '"id_geom_troncon" IS NULL'
         exp = QgsExpression(exp_str)
@@ -81,7 +108,10 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
         r_ids = []  # identifiant des regards
@@ -90,21 +120,21 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         troncons = {}
         sorties = {}
         entrees = {}
-        for t in t_troncon.getFeatures(request):
+        for tro in t_troncon.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SEGMENT_CREATED: None}
 
-            segment_number = t['id']
-            r1 = t['id_regard1']
-            r2 = t['id_regard2']
+            segment_number = tro['id']
+            r1 = tro['id_regard1']
+            r2 = tro['id_regard2']
 
             if r1 not in r_ids:
                 r_ids.append(r1)
             if r2 not in r_ids:
                 r_ids.append(r2)
 
-            fid = t['id_file']
+            fid = tro['id_file']
             l_t_f[segment_number] = fid
             if fid in l_f_t:
                 l_f_t[fid] = l_f_t[fid] + [segment_number]
@@ -122,36 +152,55 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 entrees[r2] = [segment_number]
 
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(t_regard.createExpressionContextScope())
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            t_regard.createExpressionContextScope()
+        )
 
-        exp_str = '"id_geom_regard" IS NOT NULL AND "id" IN (%s)' % ','.join([str(i) for i in r_ids] + ['-1'])
+        exp_str = (
+            '"id_geom_regard" IS NOT NULL '
+            'AND '
+            '"id" IN ({})'
+        ).format(','.join([str(i) for i in r_ids] + ['-1']))
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
         g_ids = []  # identifiants des géométrie de regards
         l_r_g = {}  # lien regard geometrie
         l_g_r = {}  # lien geometrie regards
-        for t in t_regard.getFeatures(request):
+        for reg in t_regard.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SEGMENT_CREATED: None}
 
-            segment_number = t['id']
-            fid = t['id_file']
+            segment_number = reg['id']
+            fid = reg['id_file']
 
             if segment_number in sorties:
-                sorties[segment_number] = [trid for trid in sorties[segment_number] if l_t_f[trid] == fid]
+                sorties[segment_number] = [
+                    trid for trid in sorties[segment_number]
+                    if l_t_f[trid] == fid
+                ]
             if segment_number in entrees:
-                entrees[segment_number] = [trid for trid in entrees[segment_number] if l_t_f[trid] == fid]
+                entrees[segment_number] = [
+                    trid for trid in entrees[segment_number]
+                    if l_t_f[trid] == fid
+                ]
 
-            gid = t['id_geom_regard']
+            gid = reg['id_geom_regard']
             l_r_g[segment_number] = gid
             if gid not in g_ids:
                 g_ids.append(gid)
@@ -161,29 +210,40 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 l_g_r[gid] = [segment_number]
 
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(g_regard.createExpressionContextScope())
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            g_regard.createExpressionContextScope()
+        )
 
-        exp_str = '"id" IN (%s)' % ','.join([str(i) for i in g_ids] + ['-1'])
+        exp_str = '"id" IN ({})'.format(
+            ','.join([str(i) for i in g_ids] + ['-1'])
+        )
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
         points = {}
         pt_labels = {}
-        for g in g_regard.getFeatures(request):
+        for reg in g_regard.getFeatures(request):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SEGMENT_CREATED: None}
 
-            segment_number = g['id']
-            points[segment_number] = g.geometry().asPoint()
-            pt_labels[segment_number] = g['label']
+            segment_number = reg['id']
+            points[segment_number] = reg.geometry().asPoint()
+            pt_labels[segment_number] = reg['label']
 
         lines = {}
         for gid in points:
@@ -246,22 +306,34 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 return {self.SEGMENT_CREATED: None}
 
             exp_context = QgsExpressionContext()
-            exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-            exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-            exp_context.appendScope(QgsExpressionContextUtils.layerScope(g_troncon))
+            exp_context.appendScope(
+                QgsExpressionContextUtils.globalScope()
+            )
+            exp_context.appendScope(
+                QgsExpressionContextUtils.projectScope(context.project())
+            )
+            exp_context.appendScope(
+                QgsExpressionContextUtils.layerScope(g_troncon)
+            )
 
-            exp_str = '"id_geom_regard_amont" = %s AND "id_geom_regard_aval" = %s' % pts
+            exp_str = (
+                '"id_geom_regard_amont" = {} AND '
+                '"id_geom_regard_aval" = {}'
+            ).format(pts[0], pts[1])
             exp = QgsExpression(exp_str)
 
             exp.prepare(exp_context)
             if exp.hasEvalError():
                 raise QgsProcessingException(
-                    tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                    tr(
+                        '* ERROR: Expression {} has eval error: {}'
+                    ).format(exp.expression(), exp.evalErrorString())
+                )
 
             request = QgsFeatureRequest(exp, exp_context)
             request.setLimit(1)
-            for g in g_troncon.getFeatures(request):
-                l_t_g[tid] = g['id']
+            for tro in g_troncon.getFeatures(request):
+                l_t_g[tid] = tro['id']
                 continue
 
             if (pts[0], pts[1]) in geom_point_keys:
@@ -272,10 +344,20 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 geom_point_keys.append((pts[0], pts[1]))
 
             feat_t = QgsVectorLayerUtils.createFeature(g_troncon)
-            feat_t.setAttribute('label', str(pt_labels[pts[0]]) + '-' + str(pt_labels[pts[1]]))
+            feat_t.setAttribute(
+                'label',
+                '{}-{}'.format(
+                    pt_labels[pts[0]], pt_labels[pts[1]]
+                )
+            )
             feat_t.setAttribute('id_geom_regard_amont', pts[0])
             feat_t.setAttribute('id_geom_regard_aval', pts[1])
-            feat_t.setGeometry(QgsGeometry.fromPolylineXY([points[pts[0]], points[pts[1]]]))
+            feat_t.setGeometry(
+                QgsGeometry.fromPolylineXY([
+                    points[pts[0]],
+                    points[pts[1]]
+                ])
+            )
             features.append(feat_t)
 
         # Ajout des objets troncons
@@ -284,19 +366,31 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = g_troncon.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_troncon.dataProvider().errors()))
+                    tr(
+                        '* ERREUR: lors de l\'enregistrement '
+                        'des regards {}'
+                    ).format(
+                        ', '.join(g_troncon.dataProvider().errors()
+                    )
+                )
             if not g_troncon.commitChanges():
                 raise QgsProcessingException(
-                    tr('* ERROR: Commit %s.') % g_troncon.commitErrors())
+                    tr(
+                        '* ERROR: Commit {}.'
+                    ).format(g_troncon.commitErrors())
+                )
 
-            for g in outFeats:
+            for tro in outFeats:
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SEGMENT_CREATED: None}
 
-                if not g['id']:
+                if not tro['id']:
                     continue
-                key = (g['id_geom_regard_amont'], g['id_geom_regard_aval'])
+                key = (
+                    tro['id_geom_regard_amont'],
+                    tro['id_geom_regard_aval']
+                )
                 if key not in geom_point_keys:
                     continue
                 for tid in l_pts_t[(pts[0], pts[1])]:
@@ -313,17 +407,29 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             if tid in l_t_g:
                 continue
             exp_context = QgsExpressionContext()
-            exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-            exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-            exp_context.appendScope(QgsExpressionContextUtils.layerScope(g_troncon))
+            exp_context.appendScope(
+                QgsExpressionContextUtils.globalScope()
+            )
+            exp_context.appendScope(
+                QgsExpressionContextUtils.projectScope(context.project())
+            )
+            exp_context.appendScope(
+                QgsExpressionContextUtils.layerScope(g_troncon)
+            )
 
-            exp_str = '"id_geom_regard_amont" = %s AND "id_geom_regard_aval" = %s' % pts
+            exp_str = (
+                '"id_geom_regard_amont" = {} AND '
+                '"id_geom_regard_aval" = {}'
+            ).format(pts[0], pts[1])
             exp = QgsExpression(exp_str)
 
             exp.prepare(exp_context)
             if exp.hasEvalError():
                 raise QgsProcessingException(
-                    tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                    tr(
+                        '* ERROR: Expression {} has eval error: {}'
+                    ).format(exp.expression(), exp.evalErrorString())
+                )
 
             request = QgsFeatureRequest(exp, exp_context)
             request.setLimit(1)
@@ -335,21 +441,34 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
         if not l_t_g.keys():
             raise QgsProcessingException(
-                tr('* ERREUR: Aucune géométrie de tronçon'))
+                tr('* ERREUR: Aucune géométrie de tronçon')
+            )
 
         # Mise a jour de la table troncon
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(QgsExpressionContextUtils.layerScope(t_troncon))
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.layerScope(t_troncon)
+        )
 
-        exp_str = '"id_geom_troncon" IS NULL AND id IN (%s)' % ','.join([str(i) for i in l_t_g.keys()])
+        exp_str = (
+            '"id_geom_troncon" IS NULL AND '
+            'id IN ({})'
+        ).format(','.join([str(i) for i in l_t_g.keys()]))
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression %s has eval error: %s'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         # Mise a jour de la table de tronçon
         request = QgsFeatureRequest(exp, exp_context)

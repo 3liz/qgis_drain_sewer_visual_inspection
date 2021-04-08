@@ -105,16 +105,48 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
 
-        t_file = self.parameterAsVectorLayer(parameters, self.FILE_TABLE, context)
-        t_troncon = self.parameterAsVectorLayer(parameters, self.SEGMENTS_TABLE, context)
-        t_obs = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_TABLE, context)
-        t_regard = self.parameterAsVectorLayer(parameters, self.MANHOLES_TABLE, context)
+        t_file = self.parameterAsVectorLayer(
+            parameters,
+            self.FILE_TABLE,
+            context
+        )
+        t_troncon = self.parameterAsVectorLayer(
+            parameters,
+            self.SEGMENTS_TABLE,
+            context
+        )
+        t_obs = self.parameterAsVectorLayer(
+            parameters,
+            self.OBSERVATIONS_TABLE,
+            context
+        )
+        t_regard = self.parameterAsVectorLayer(
+            parameters,
+            self.MANHOLES_TABLE,
+            context
+        )
 
-        g_regard = self.parameterAsVectorLayer(parameters, self.GEOM_MANHOLES, context)
-        g_troncon = self.parameterAsVectorLayer(parameters, self.GEOM_SEGMENT, context)
-        g_obs = self.parameterAsVectorLayer(parameters, self.GEOM_OBSERVATION, context)
+        g_regard = self.parameterAsVectorLayer(
+            parameters,
+            self.GEOM_MANHOLES,
+            context
+        )
+        g_troncon = self.parameterAsVectorLayer(
+            parameters,
+            self.GEOM_SEGMENT,
+            context
+        )
+        g_obs = self.parameterAsVectorLayer(
+            parameters,
+            self.GEOM_OBSERVATION,
+            context
+        )
 
-        v_regard = self.parameterAsVectorLayer(parameters, self.VIEW_MANHOLES_GEOLOCALIZED, context)
+        v_regard = self.parameterAsVectorLayer(
+            parameters,
+            self.VIEW_MANHOLES_GEOLOCALIZED,
+            context
+        )
 
         # define variables
         variables = context.project().customVariables()
@@ -130,192 +162,230 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
         context.project().setCustomVariables(variables)
 
         # define relations
-        relations = [{
-            'id': 'fk_obs_id_file',
-            'name': tr('Link File - Observation'),
-            'referencingLayer': t_obs.id(),
-            'referencingField': 'id_file',
-            'referencedLayer': t_file.id(),
-            'referencedField': 'id'
-        }, {
-            'id': 'fk_regard_id_file',
-            'name': tr('Link File - Manhole'),
-            'referencingLayer': t_regard.id(),
-            'referencingField': 'id_file',
-            'referencedLayer': t_file.id(),
-            'referencedField': 'id'
-        }, {
-            'id': 'fk_troncon_id_file',
-            'name': tr('Link File - Pipe segment'),
-            'referencingLayer': t_troncon.id(),
-            'referencingField': 'id_file',
-            'referencedLayer': t_file.id(),
-            'referencedField': 'id'
-        }, {
-            'id': 'fk_obs_id_troncon',
-            'name': tr('Link Pipe segment - Observation'),
-            'referencingLayer': t_obs.id(),
-            'referencingField': 'id_troncon',
-            'referencedLayer': t_troncon.id(),
-            'referencedField': 'id'
-        }, {
-            'id': 'fk_regard_id_geom_regard',
-            'name': tr('Link Manhole inspection - Reference'),
-            'referencingLayer': t_regard.id(),
-            'referencingField': 'id_geom_regard',
-            'referencedLayer': g_regard.id(),
-            'referencedField': 'id'
-        }, {
-            'id': 'fk_troncon_id_geom_trononc',
-            'name': tr('Link Pipe segment inspection - Reference'),
-            'referencingLayer': t_troncon.id(),
-            'referencingField': 'id_geom_troncon',
-            'referencedLayer': g_troncon.id(),
-            'referencedField': 'id'
-        }]
+        relations = [
+            {
+                'id': 'fk_obs_id_file',
+                'name': tr('Link File - Observation'),
+                'referencingLayer': t_obs.id(),
+                'referencingField': 'id_file',
+                'referencedLayer': t_file.id(),
+                'referencedField': 'id'
+            }, {
+                'id': 'fk_regard_id_file',
+                'name': tr('Link File - Manhole'),
+                'referencingLayer': t_regard.id(),
+                'referencingField': 'id_file',
+                'referencedLayer': t_file.id(),
+                'referencedField': 'id'
+            }, {
+                'id': 'fk_troncon_id_file',
+                'name': tr('Link File - Pipe segment'),
+                'referencingLayer': t_troncon.id(),
+                'referencingField': 'id_file',
+                'referencedLayer': t_file.id(),
+                'referencedField': 'id'
+            }, {
+                'id': 'fk_obs_id_troncon',
+                'name': tr('Link Pipe segment - Observation'),
+                'referencingLayer': t_obs.id(),
+                'referencingField': 'id_troncon',
+                'referencedLayer': t_troncon.id(),
+                'referencedField': 'id'
+            }, {
+                'id': 'fk_regard_id_geom_regard',
+                'name': tr('Link Manhole inspection - Reference'),
+                'referencingLayer': t_regard.id(),
+                'referencingField': 'id_geom_regard',
+                'referencedLayer': g_regard.id(),
+                'referencedField': 'id'
+            }, {
+                'id': 'fk_troncon_id_geom_trononc',
+                'name': tr('Link Pipe segment inspection - Reference'),
+                'referencingLayer': t_troncon.id(),
+                'referencingField': 'id_geom_troncon',
+                'referencedLayer': g_troncon.id(),
+                'referencedField': 'id'
+            }
+        ]
 
         relation_manager = context.project().relationManager()
-        for r in relations:
-            feedback.pushInfo('Link: {}'.format(r['name']))
+        for rel_def in relations:
+            feedback.pushInfo(
+                'Link: {}'.format(rel_def['name'])
+            )
             rel = QgsRelation()
-            rel.setId(r['id'])
-            rel.setName(r['name'])
-            rel.setReferencingLayer(r['referencingLayer'])
-            rel.setReferencedLayer(r['referencedLayer'])
-            rel.addFieldPair(r['referencingField'], r['referencedField'])
+            rel.setId(rel_def['id'])
+            rel.setName(rel_def['name'])
+            rel.setReferencingLayer(rel_def['referencingLayer'])
+            rel.setReferencedLayer(rel_def['referencedLayer'])
+            rel.addFieldPair(
+                rel_def['referencingField'],
+                rel_def['referencedField']
+            )
             rel.setStrength(QgsRelation.Association)
             relation_manager.addRelation(rel)
-            feedback.pushInfo('Count relations {}'.format(len(relation_manager.relations())))
+            feedback.pushInfo(
+                'Count relations {}'.format(
+                    len(relation_manager.relations())
+                )
+            )
 
-        joins = [{
-            'layer': t_obs,
-            'targetField': 'id_troncon',
-            'joinLayer': t_troncon,
-            'joinField': 'id',
-            'fieldNamesSubset': ['ack']
-        }, {
-            'layer': g_obs,
-            'targetField': 'id',
-            'joinLayer': t_obs,
-            'joinField': 'id',
-            'fieldNamesSubset': []
-        }]
-        for j in joins:
-            layer = j['layer']
+        joins = [
+            {
+                'layer': t_obs,
+                'targetField': 'id_troncon',
+                'joinLayer': t_troncon,
+                'joinField': 'id',
+                'fieldNamesSubset': ['ack']
+            }, {
+                'layer': g_obs,
+                'targetField': 'id',
+                'joinLayer': t_obs,
+                'joinField': 'id',
+                'fieldNamesSubset': []
+            }
+        ]
+        for j_def in joins:
+            layer = j_def['layer']
 
             join = QgsVectorLayerJoinInfo()
-            join.setTargetFieldName(j['targetField'])
-            join.setJoinLayer(j['joinLayer'])
-            join.setJoinFieldName(j['joinField'])
+            join.setJoinFieldName(j_def['joinField'])
+            join.setJoinLayerId(j_def['joinLayer'].id())
+            join.setTargetFieldName(j_def['targetField'])
 
-            if j['fieldNamesSubset']:
-                join.setJoinFieldNamesSubset(j['fieldNamesSubset'])
+            if j_def['fieldNamesSubset']:
+                join.setJoinFieldNamesSubset(j_def['fieldNamesSubset'])
 
             join.setUsingMemoryCache(False)
             join.setPrefix('')
             join.setEditable(False)
             join.setCascadedDelete(False)
 
+            join.setJoinLayer(j_def['joinLayer'])
+
             layer.addJoin(join)
             layer.updateFields()
 
         # load styles
-        styles = [{
-            'layer': t_file,
-            'namedStyles': [{
-                'file': 'itv_file_fields.qml',
-                'type': QgsMapLayer.Fields
+        styles = [
+            {
+                'layer': t_file,
+                'namedStyles': [
+                    {
+                        'file': 'itv_file_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_file_actions.qml',
+                        'type': QgsMapLayer.Actions
+                    }
+                ]
             }, {
-                'file': 'itv_file_actions.qml',
-                'type': QgsMapLayer.Actions
-            }]
-        }, {
-            'layer': t_troncon,
-            'namedStyles': [{
-                'file': 'itv_troncon_fields.qml',
-                'type': QgsMapLayer.Fields
+                'layer': t_troncon,
+                'namedStyles': [
+                    {
+                        'file': 'itv_troncon_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_troncon_table.qml',
+                        'type': QgsMapLayer.AttributeTable
+                    }
+                ]
             }, {
-                'file': 'itv_troncon_table.qml',
-                'type': QgsMapLayer.AttributeTable
-            }]
-        }, {
-            'layer': t_obs,
-            'namedStyles': [{
-                'file': 'itv_obs_fields.qml',
-                'type': QgsMapLayer.Fields
+                'layer': t_obs,
+                'namedStyles': [
+                    {
+                        'file': 'itv_obs_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_obs_table.qml',
+                        'type': QgsMapLayer.AttributeTable
+                    }
+                ]
             }, {
-                'file': 'itv_obs_table.qml',
-                'type': QgsMapLayer.AttributeTable
-            }]
-        }, {
-            'layer': t_regard,
-            'namedStyles': [{
-                'file': 'itv_regard_fields.qml',
-                'type': QgsMapLayer.Fields
+                'layer': t_regard,
+                'namedStyles': [
+                    {
+                        'file': 'itv_regard_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_regard_forms.qml',
+                        'type': QgsMapLayer.Forms
+                    }, {
+                        'file': 'itv_regard_table.qml',
+                        'type': QgsMapLayer.AttributeTable
+                    }
+                ]
             }, {
-                'file': 'itv_regard_forms.qml',
-                'type': QgsMapLayer.Forms
+                'layer': g_regard,
+                'namedStyles': [
+                    {
+                        'file': 'itv_geom_regard_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_geom_regard_symbology.qml',
+                        'type': QgsMapLayer.Symbology
+                    }
+                ]
             }, {
-                'file': 'itv_regard_table.qml',
-                'type': QgsMapLayer.AttributeTable
-            }]
-        }, {
-            'layer': g_regard,
-            'namedStyles': [{
-                'file': 'itv_geom_regard_fields.qml',
-                'type': QgsMapLayer.Fields
+                'layer': g_troncon,
+                'namedStyles': [
+                    {
+                        'file': 'itv_geom_troncon_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_geom_troncon_symbology.qml',
+                        'type': QgsMapLayer.Symbology
+                    }, {
+                        'file': 'itv_geom_troncon_actions.qml',
+                        'type': QgsMapLayer.Actions
+                    }
+                ]
             }, {
-                'file': 'itv_geom_regard_symbology.qml',
-                'type': QgsMapLayer.Symbology
-            }]
-        }, {
-            'layer': g_troncon,
-            'namedStyles': [{
-                'file': 'itv_geom_troncon_fields.qml',
-                'type': QgsMapLayer.Fields
+                'layer': g_obs,
+                'namedStyles': [
+                    {
+                        'file': 'itv_geom_obs_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_geom_obs_symbology.qml',
+                        'type': QgsMapLayer.Symbology
+                    }
+                ]
             }, {
-                'file': 'itv_geom_troncon_symbology.qml',
-                'type': QgsMapLayer.Symbology
-            }, {
-                'file': 'itv_geom_troncon_actions.qml',
-                'type': QgsMapLayer.Actions
-            }]
-        }, {
-            'layer': g_obs,
-            'namedStyles': [{
-                'file': 'itv_geom_obs_fields.qml',
-                'type': QgsMapLayer.Fields
-            }, {
-                'file': 'itv_geom_obs_symbology.qml',
-                'type': QgsMapLayer.Symbology
-            }]
-        }, {
-            'layer': v_regard,
-            'namedStyles': [{
-                'file': 'itv_view_regard_fields.qml',
-                'type': QgsMapLayer.Fields
-            }, {
-                'file': 'itv_view_regard_symbology.qml',
-                'type': QgsMapLayer.Symbology
-            }, {
-                'file': 'itv_view_regard_labeling.qml',
-                'type': QgsMapLayer.Labeling
-            }]
-        }]
-        for s in styles:
-            layer = s['layer']
-            for n in s['namedStyles']:
-                layer.loadNamedStyle(resources_path('styles', n['file']), categories=n['type'])
+                'layer': v_regard,
+                'namedStyles': [
+                    {
+                        'file': 'itv_view_regard_fields.qml',
+                        'type': QgsMapLayer.Fields
+                    }, {
+                        'file': 'itv_view_regard_symbology.qml',
+                        'type': QgsMapLayer.Symbology
+                    }, {
+                        'file': 'itv_view_regard_labeling.qml',
+                        'type': QgsMapLayer.Labeling
+                    }
+                ]
+            }
+        ]
+        for style in styles:
+            layer = style['layer']
+            for n_style in style['namedStyles']:
+                layer.loadNamedStyle(
+                    resources_path('styles', n_style['file']),
+                    categories=n_style['type']
+                )
                 # layer.saveStyleToDatabase('style', 'default style', True, '')
                 layer.triggerRepaint()
 
         # Creation de la symbologie g_obs
-        g_obs_rules = ('BAA', 'BAB', 'BAC', 'BAD', 'BAF', 'BAG', 'BAI', 'BAJ',
-                       'BBA', 'BBB', 'BBC', 'BBE', 'BBF', 'BCB', 'BDC')
+        g_obs_rules = (
+            'BAA', 'BAB', 'BAC', 'BAD', 'BAF', 'BAG', 'BAI', 'BAJ',
+            'BBA', 'BBB', 'BBC', 'BBE', 'BBF', 'BCB', 'BDC'
+        )
         g_obs_rootrule = QgsRuleBasedRenderer.Rule(None)
-        for r in g_obs_rules:
+        for rule in g_obs_rules:
             # get svg path
-            svg_path = resources_path('styles', 'img_obs', r + '.svg')
+            svg_path = resources_path('styles', 'img_obs', rule + '.svg')
             # create svg symbol layer
             svg_symbol_layer = QgsSvgMarkerSymbolLayer(svg_path)
             # create white square symbol layer for the backend
@@ -332,12 +402,23 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
             # add svg symbol layer
             svg_marker.appendSymbolLayer(svg_symbol_layer)
             # create rule
-            svg_rule = QgsRuleBasedRenderer.Rule(svg_marker, 0, 10000, QgsExpression.createFieldEqualityExpression('a', r), r)
+            svg_rule = QgsRuleBasedRenderer.Rule(
+                svg_marker, 0, 10000,
+                QgsExpression.createFieldEqualityExpression('a', rule),
+                rule
+            )
             # add rule
             g_obs_rootrule.appendChild(svg_rule)
         g_obs_rootrule.appendChild(
             QgsRuleBasedRenderer.Rule(
-                QgsMarkerSymbol.createSimple({'name': 'circle', 'color': '#0000b2', 'outline_color': '#0000b2', 'size': '1'}),
+                QgsMarkerSymbol.createSimple(
+                    {
+                        'name': 'circle',
+                        'color': '#0000b2',
+                        'outline_color': '#0000b2',
+                        'size': '1'
+                    }
+                ),
                 0, 10000, 'ELSE', 'Autres'
             )
         )

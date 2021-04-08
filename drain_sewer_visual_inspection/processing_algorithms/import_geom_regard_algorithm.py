@@ -47,15 +47,32 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.MAN_HOLES, tr('Number of imported man holes')))
+        self.addOutput(
+            QgsProcessingOutputNumber(
+                self.MAN_HOLES,
+                tr('Number of imported man holes')
+            )
+        )
 
     def processAlgorithm(self, parameters, context, feedback):
         g_import = self.parameterAsSource(parameters, self.INPUT, context)
-        g_label = self.parameterAsString(parameters, self.MANHOLE_NAME_FIELD, context)
-        g_regard = self.parameterAsVectorLayer(parameters, self.GEOM_MANHOLES, context)
+        g_label = self.parameterAsString(
+            parameters,
+            self.MANHOLE_NAME_FIELD,
+            context
+        )
+        g_regard = self.parameterAsVectorLayer(
+            parameters,
+            self.GEOM_MANHOLES,
+            context
+        )
 
         # Construction des objets regards
-        xform = QgsCoordinateTransform(g_import.sourceCrs(), g_regard.crs(), context.project())
+        xform = QgsCoordinateTransform(
+            g_import.sourceCrs(),
+            g_regard.crs(),
+            context.project()
+        )
         features = []
         i = 0
         for feat in g_import.getFeatures():
@@ -86,22 +103,35 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = g_regard.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_regard.dataProvider().errors()))
+                    tr(
+                        '* ERREUR: lors de l\'enregistrement des regards {}'
+                    ).format(
+                        ', '.join(g_regard.dataProvider().errors())
+                    )
+                )
             if not g_regard.commitChanges():
                 raise QgsProcessingException(
-                    tr('* ERROR: Commit %s.') % g_regard.commitErrors())
+                    tr('* ERROR: Commit {}.').format(
+                        g_regard.commitErrors()
+                    )
+                )
 
         feedback.pushInfo('{} manholes have been imported'.format(i))
         return {self.MAN_HOLES: i}
 
     def shortHelpString(self) -> str:
-        return tr('It will import the geometry and the specified field into the layer "geom_regard".')
+        return tr(
+            'It will import the geometry and the specified field '
+            'into the layer "geom_regard".'
+        )
 
     def name(self):
         return 'import_geom_regard'
 
     def displayName(self):
-        return '{} {}'.format('10', tr('Import des géométries de regards'))
+        return '{} {}'.format(
+            '10', tr('Import des géométries de regards')
+        )
 
     def group(self):
         return tr('Configuration')

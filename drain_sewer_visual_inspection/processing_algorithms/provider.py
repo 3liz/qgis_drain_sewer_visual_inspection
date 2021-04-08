@@ -13,7 +13,9 @@ from .import_dsvi_file_algorithm import ImportDsviFileAlgorithm
 from .import_geom_regard_algorithm import ImportGeomRegardAlgorithm
 from .load_postgis_layers_algorithm import LoadPostgisTables
 
-# from .create_temp_geom_troncon_algorithm import CreateTempGeomTronconAlgorithm
+# from .create_temp_geom_troncon_algorithm import (
+#     CreateTempGeomTronconAlgorithm
+# )
 # from .create_temp_geom_obs_algorithm import CreateTempGeomObsAlgorithm
 
 __copyright__ = "Copyright 2019, 3Liz"

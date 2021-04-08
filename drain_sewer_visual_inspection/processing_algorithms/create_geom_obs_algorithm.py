@@ -62,20 +62,47 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.OBSERVATIONS_CREATED, tr('Succès')))
+        self.addOutput(
+            QgsProcessingOutputNumber(
+                self.OBSERVATIONS_CREATED,
+                tr('Succès')
+            )
+        )
 
     def processAlgorithm(self, parameters, context, feedback):
 
-        t_troncon = self.parameterAsSource(parameters, self.SEGMENTS_TABLE, context)
-        g_troncon = self.parameterAsSource(parameters, self.GEOM_SEGMENTS, context)
-        t_obs = self.parameterAsSource(parameters, self.OBSERVATION_TABLE, context)
-        g_obs = self.parameterAsVectorLayer(parameters, self.GEOM_OBSERVATION, context)
+        t_troncon = self.parameterAsSource(
+            parameters,
+            self.SEGMENTS_TABLE,
+            context
+        )
+        g_troncon = self.parameterAsSource(
+            parameters,
+            self.GEOM_SEGMENTS,
+            context
+        )
+        t_obs = self.parameterAsSource(
+            parameters,
+            self.OBSERVATION_TABLE,
+            context
+        )
+        g_obs = self.parameterAsVectorLayer(
+            parameters,
+            self.GEOM_OBSERVATION,
+            context
+        )
 
         # Get troncon ids and file ids
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(t_troncon.createExpressionContextScope())
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            t_troncon.createExpressionContextScope()
+        )
 
         exp_str = '"id_geom_troncon" IS NOT NULL'
         exp = QgsExpression(exp_str)
@@ -83,16 +110,25 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression %s has eval error: %s'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
-        request.setSubsetOfAttributes(['id', 'aab', 'aad', 'aaf', 'abq', 'id_file', 'id_geom_troncon'], t_troncon.fields())
+        request.setSubsetOfAttributes(
+            [
+                'id', 'aab', 'aad', 'aaf', 'abq',
+                'id_file', 'id_geom_troncon'
+            ],
+            t_troncon.fields()
+        )
         has_geo_troncon = False
         troncons = {}
         file_ids = []
-        for t in t_troncon.getFeatures(request):
-            troncons[t['id']] = t
-            file_ids.append(t['id_file'])
+        for tro in t_troncon.getFeatures(request):
+            troncons[tro['id']] = tro
+            file_ids.append(tro['id_file'])
             has_geo_troncon = True
 
             # Stop the algorithm if cancel button has been clicked
@@ -105,18 +141,32 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         # Get observation ids
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(t_obs.createExpressionContextScope())
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            t_obs.createExpressionContextScope()
+        )
 
-        exp_str = '"id_troncon" IN (%s)' % ','.join([str(i) for i in troncons.keys()])
-        exp_str += ' AND "id_file" IN (%s)' % ','.join([str(i) for i in file_ids])
+        exp_str = (
+            '"id_troncon" IN ({}) AND '
+            '"id_file" IN ({})'
+        ).format(
+            ','.join([str(i) for i in troncons.keys()]),
+            ','.join([str(i) for i in file_ids])
+        )
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         obs_ids = []
         request = QgsFeatureRequest(exp, exp_context)
@@ -139,22 +189,33 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         # Check observations already geolocalised on troncon
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(QgsExpressionContextUtils.layerScope(g_obs))
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.layerScope(g_obs)
+        )
 
-        exp_str = '"id" IN (%s)' % ','.join([str(i) for i in obs_ids])
+        exp_str = '"id" IN ({})'.format(
+            ','.join([str(i) for i in obs_ids])
+        )
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
         geo_observations = []
-        for g in g_obs.getFeatures(request):
-            geo_observations.append(g['id'])
+        for obs in g_obs.getFeatures(request):
+            geo_observations.append(obs['id'])
 
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
@@ -162,20 +223,36 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
         # build observation geometry based on table
         exp_context = QgsExpressionContext()
-        exp_context.appendScope(QgsExpressionContextUtils.globalScope())
-        exp_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        exp_context.appendScope(t_obs.createExpressionContextScope())
+        exp_context.appendScope(
+            QgsExpressionContextUtils.globalScope()
+        )
+        exp_context.appendScope(
+            QgsExpressionContextUtils.projectScope(context.project())
+        )
+        exp_context.appendScope(
+            t_obs.createExpressionContextScope()
+        )
 
-        exp_str = '"id_troncon" IN (%s)' % ','.join([str(i) for i in troncons.keys()])
-        exp_str += ' AND "id_file" IN (%s)' % ','.join([str(i) for i in file_ids])
+        exp_str = (
+            '"id_troncon" IN ({}) AND '
+            '"id_file" IN ({})'
+        ).format(
+            ','.join([str(i) for i in troncons.keys()]),
+            ','.join([str(i) for i in file_ids])
+        )
         if geo_observations:
-            exp_str += ' AND id NOT IN (%s)' % ','.join([str(i) for i in geo_observations])
+            exp_str += ' AND id NOT IN ({})'.format(
+                ','.join([str(i) for i in geo_observations])
+            )
         exp = QgsExpression(exp_str)
 
         exp.prepare(exp_context)
         if exp.hasEvalError():
             raise QgsProcessingException(
-                tr('* ERROR: Expression %s has eval error: %s') % (exp.expression(), exp.evalErrorString()))
+                tr(
+                    '* ERROR: Expression {} has eval error: {}'
+                ).format(exp.expression(), exp.evalErrorString())
+            )
 
         request = QgsFeatureRequest(exp, exp_context)
         features = []
@@ -193,17 +270,21 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
 
             geo_req = QgsFeatureRequest()
             geo_req.setFilterFid(troncon['id_geom_troncon'])
-            for g in g_troncon.getFeatures(geo_req):
+            for g_tro in g_troncon.getFeatures(geo_req):
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.OBSERVATIONS_CREATED: None}
 
-                geom = g.geometry()
+                geom = g_tro.geometry()
                 pt = None
                 if troncon['aab'] == troncon['aad']:
-                    pt = geom.interpolate(geom.length() * obs['i'] / troncon['abq'])
+                    pt = geom.interpolate(
+                        geom.length() * obs['i'] / troncon['abq']
+                    )
                 else:
-                    pt = geom.interpolate(geom.length() * (1 - obs['i'] / troncon['abq']))
+                    pt = geom.interpolate(
+                        geom.length() * (1 - obs['i'] / troncon['abq'])
+                    )
                 fet = QgsFeature(fields)
                 fet.setGeometry(pt)
                 fet.setAttribute('id', obs['id'])
@@ -215,10 +296,17 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             (res, outFeats) = g_obs.dataProvider().addFeatures(features)
             if not res or not outFeats:
                 raise QgsProcessingException(
-                    tr('* ERREUR: lors de l\'enregistrement des regards %s') % ', '.join(g_obs.dataProvider().errors()))
+                    tr(
+                        '* ERREUR: lors de l\'enregistrement '
+                        'des regards {}'
+                    ).format(', '.join(g_obs.dataProvider().errors()))
+                )
             if not g_obs.commitChanges():
                 raise QgsProcessingException(
-                    tr('* ERROR: Commit %s.') % g_obs.commitErrors())
+                    tr('* ERROR: Commit {}.').format(
+                        g_obs.commitErrors()
+                    )
+                )
 
         # Returns empty dict if no outputs
         return {self.OBSERVATIONS_CREATED: len(features)}
@@ -227,7 +315,9 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
         return 'create_geom_obs'
 
     def displayName(self):
-        return '{} {}'.format('10', tr('Create observations geometries'))
+        return '{} {}'.format(
+            '10', tr('Create observations geometries')
+        )
 
     def group(self):
         return tr('Drain Sewer Visual Inspection data')

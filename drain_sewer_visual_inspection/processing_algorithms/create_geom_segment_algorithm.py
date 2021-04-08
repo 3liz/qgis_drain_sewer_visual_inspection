@@ -394,7 +394,7 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
                 if key not in geom_point_keys:
                     continue
                 for tid in l_pts_t[(pts[0], pts[1])]:
-                    l_t_g[tid] = g['id']
+                    l_t_g[tid] = tro['id']
                     # Stop the algorithm if cancel button has been clicked
                     if feedback.isCanceled():
                         return {self.SEGMENT_CREATED: None}
@@ -433,8 +433,8 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
 
             request = QgsFeatureRequest(exp, exp_context)
             request.setLimit(1)
-            for g in g_troncon.getFeatures(request):
-                l_t_g[tid] = g['id']
+            for tro in g_troncon.getFeatures(request):
+                l_t_g[tid] = tro['id']
                 # Stop the algorithm if cancel button has been clicked
                 if feedback.isCanceled():
                     return {self.SEGMENT_CREATED: None}
@@ -474,9 +474,9 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
         request = QgsFeatureRequest(exp, exp_context)
         t_troncon.startEditing()
         segment_number = 0
-        for t in t_troncon.getFeatures(request):
-            t.setAttribute('id_geom_troncon', l_t_g[t['id']])
-            t_troncon.updateFeature(t)
+        for tro in t_troncon.getFeatures(request):
+            tro.setAttribute('id_geom_troncon', l_t_g[tro['id']])
+            t_troncon.updateFeature(tro)
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 return {self.SEGMENT_CREATED: None}

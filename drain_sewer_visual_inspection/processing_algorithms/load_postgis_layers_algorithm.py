@@ -28,7 +28,9 @@ MAPPING['regard'] = [None, QgsWkbTypes.NullGeometry, 'id']
 MAPPING['geom_regard'] = ['Point', QgsWkbTypes.PointGeometry, 'id']
 MAPPING['geom_troncon'] = ['LineString', QgsWkbTypes.LineGeometry, 'id']
 MAPPING['geom_obs'] = ['Point', QgsWkbTypes.PointGeometry, 'id']
-MAPPING['view_regard_geolocalized'] = ['Point', QgsWkbTypes.PointGeometry, 'id']
+MAPPING['view_regard_geolocalized'] = [
+    'Point', QgsWkbTypes.PointGeometry, 'id'
+]
 
 
 class LoadPostgisTables(QgsProcessingAlgorithm):
@@ -59,18 +61,30 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
             self.DATABASE,
             tr('Database (connection name)'),
         )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'}})
+        db_param.setMetadata(
+            {
+                'widget_wrapper': {
+                    'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
+                }
+            }
+        )
         self.addParameter(db_param)
 
         schema_param = QgsProcessingParameterString(
             self.SCHEMA,
-            tr('Schema (schema name)'), 'public', False, True)
-        schema_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.SchemaWidgetWrapper',
-                'connection_param': self.DATABASE}})
+            tr('Schema (schema name)'),
+            'public',
+            False,
+            True
+        )
+        schema_param.setMetadata(
+            {
+                'widget_wrapper': {
+                    'class': 'processing.gui.wrappers_postgis.SchemaWidgetWrapper',
+                    'connection_param': self.DATABASE
+                }
+            }
+        )
         self.addParameter(schema_param)
 
         self.addOutput(
@@ -101,18 +115,27 @@ class LoadPostgisTables(QgsProcessingAlgorithm):
             else:
                 uri_string = uri.uri(True)
                 if geom[0]:
-                    uri_string = uri_string.replace('table=""', 'table="{}" (geom)'.format(table))
+                    uri_string = uri_string.replace(
+                        'table=""', 'table="{}" (geom)'.format(table)
+                    )
                 else:
-                    uri_string = uri_string.replace('table=""', 'table="{}"'.format(table))
+                    uri_string = uri_string.replace(
+                        'table=""', 'table="{}"'.format(table)
+                    )
                 uri = QgsDataSourceUri(uri_string)
-            uri.setSchema(schema)  # Schema is updating the table name, so after search&replace
+            # Schema is updating the table name,
+            # so after search&replace
+            uri.setSchema(schema)
             uri.setKeyColumn(geom[2])
 
             dest_layer = QgsVectorLayer(uri.uri(False), table, 'postgres')
 
             if not dest_layer.isValid():
                 raise QgsProcessingException(
-                    tr('* ERROR: Can\'t load table "{}" in URI "{}"').format(table, uri.uri()))
+                    tr(
+                        '* ERROR: Can\'t load table "{}" in URI "{}"'
+                    ).format(table, uri.uri())
+                )
 
             feedback.pushInfo('The layer {} has been loaded'.format(table))
 

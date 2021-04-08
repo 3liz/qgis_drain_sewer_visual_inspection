@@ -49,7 +49,8 @@ class ImportGeomRegardAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.GEOM_MANHOLES,
                 tr('Couche des géométries de regards'),
-                [QgsProcessing.TypeVectorPoint]
+                [QgsProcessing.TypeVectorPoint],
+                defaultValue='regard'
             )
         )
 

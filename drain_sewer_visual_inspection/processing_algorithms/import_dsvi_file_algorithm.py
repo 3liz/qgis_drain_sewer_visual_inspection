@@ -54,7 +54,8 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.FILE_TABLE,
                 tr('Tableau des fichiers d\'ITV importés'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='file'
             )
         )
 
@@ -62,7 +63,8 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.SEGMENT_TABLE,
                 tr('Tableau des tronçons d\'ITV'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='troncon'
             )
         )
 
@@ -70,7 +72,8 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.OBSERVATIONS_TABLE,
                 tr('Tableau des observations d\'ITV'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='obs'
             )
         )
 
@@ -78,7 +81,8 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.MANHOLES_TABLE,
                 tr('Tableau des regards d\'ITV'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='regard'
             )
         )
 

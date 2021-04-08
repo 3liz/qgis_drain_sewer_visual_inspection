@@ -39,7 +39,8 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFeatureSource(
                 self.MANHOLES_TABLE,
                 tr('Tableau des regards d\'ITV'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='regard'
             )
         )
 
@@ -47,7 +48,8 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFeatureSource(
                 self.GEOM_MANHOLES,
                 tr('Couche des géométries de regards'),
-                [QgsProcessing.TypeVectorPoint]
+                [QgsProcessing.TypeVectorPoint],
+                defaultValue='geom_regard'
             )
         )
 
@@ -55,7 +57,8 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.SEGMENTS_TABLE,
                 tr('Tableau des tronçons d\'ITV'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='troncon'
             )
         )
 
@@ -63,7 +66,8 @@ class CreateGeomTronconAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.GEOM_SEGMENTS,
                 tr('Couche des géométries de tronçons'),
-                [QgsProcessing.TypeVectorLine]
+                [QgsProcessing.TypeVectorLine],
+                defaultValue='geom_troncon'
             )
         )
 

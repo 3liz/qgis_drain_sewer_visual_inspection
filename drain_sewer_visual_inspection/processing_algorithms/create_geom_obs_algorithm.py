@@ -38,7 +38,8 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFeatureSource(
                 self.SEGMENTS_TABLE,
                 tr('Tableau des tronçons d\'ITV'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='troncon'
             )
         )
 
@@ -46,7 +47,8 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFeatureSource(
                 self.GEOM_SEGMENTS,
                 tr('Couche des géométries de tronçons'),
-                [QgsProcessing.TypeVectorLine]
+                [QgsProcessing.TypeVectorLine],
+                defaultValue='geom_troncon'
             )
         )
 
@@ -54,7 +56,8 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFeatureSource(
                 self.OBSERVATION_TABLE,
                 tr('Tableau des observations'),
-                [QgsProcessing.TypeVector]
+                [QgsProcessing.TypeVector],
+                defaultValue='obs'
             )
         )
 
@@ -62,7 +65,8 @@ class CreateGeomObsAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.GEOM_OBSERVATION,
                 tr('Couche des géométries d\'observations'),
-                [QgsProcessing.TypeVectorPoint]
+                [QgsProcessing.TypeVectorPoint],
+                defaultValue='geom_obs'
             )
         )
 

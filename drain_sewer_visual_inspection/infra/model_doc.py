@@ -106,17 +106,18 @@ TEMPLATE_MERMAID = '''\'\'\'classDiagram
 # view_regard_geolocalized : id_geom_regard
 # view_regard_geolocalized : id_file
 
+
 def slug(table):
     return table.replace('_', '-')
 
 
-def find_relation(field_name, table):
-    for relation in relations:
-        relation: Relation
-        if relation.referencing_layer == table and relation.referencing_field == field_name:
-            return relation.referenced_layer
-        elif relation.referenced_layer == table and relation.referenced_field == field_name:
-            return relation.referencing_layer
+# def find_relation(field_name, table):
+#     for relation in relations:
+#         relation: Relation
+#         if relation.referencing_layer == table and relation.referencing_field == field_name:
+#             return relation.referenced_layer
+#         elif relation.referenced_layer == table and relation.referenced_field == field_name:
+#             return relation.referencing_layer
 
 def generate_model_doc():  # NOQA C901
     global TEMPLATE
@@ -168,12 +169,12 @@ def generate_model_doc():  # NOQA C901
                 display_name = '**' + display_name + '**'
                 mermaid_display_name += ' PK'
 
-            if display_name.endswith('_id'):
-                display_name = '[{title} FK](#{anchor})'.format(
-                    title=display_name,
-                    anchor=slug(find_relation(field['name'], table_name))
-                )
-                mermaid_display_name += ' FK'
+            # if display_name.endswith('_id'):
+            #     display_name = '[{title} FK](#{anchor})'.format(
+            #         title=display_name,
+            #         anchor=slug(find_relation(field['name'], table_name))
+            #     )
+            #     mermaid_display_name += ' FK'
 
             field_md = TEMPLATE_FIELDS.format(
                 id=field['idx'],

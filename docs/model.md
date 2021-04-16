@@ -19,6 +19,7 @@ geom_troncon
 obs
 file
 troncon
+geom_obs
 regard
 view_regard_geolocalized
 file <|-- obs
@@ -35,6 +36,8 @@ geom_troncon : id PK
 geom_troncon : label
 geom_troncon : id_geom_regard_amont
 geom_troncon : id_geom_regard_aval
+geom_obs <|-- geom_troncon
+geom_obs <|-- obs
 obs : id PK
 obs : a
 obs : b
@@ -65,6 +68,8 @@ troncon : aag
 troncon : aah
 troncon : aai
 troncon : ...
+geom_obs : geom Point
+geom_obs : id PK
 regard : id PK
 regard : caa
 regard : cab

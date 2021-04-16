@@ -1,11 +1,19 @@
 """Create geom segment algorithm."""
 
-from qgis.core import (QgsExpression, QgsExpressionContext,
-                       QgsExpressionContextUtils, QgsFeatureRequest,
-                       QgsGeometry, QgsProcessing, QgsProcessingAlgorithm,
-                       QgsProcessingException, QgsProcessingOutputNumber,
-                       QgsProcessingParameterFeatureSource,
-                       QgsProcessingParameterVectorLayer, QgsVectorLayerUtils)
+from qgis.core import (
+    QgsExpression,
+    QgsExpressionContext,
+    QgsExpressionContextUtils,
+    QgsFeatureRequest,
+    QgsGeometry,
+    QgsProcessing,
+    QgsProcessingAlgorithm,
+    QgsProcessingException,
+    QgsProcessingOutputNumber,
+    QgsProcessingParameterFeatureSource,
+    QgsProcessingParameterVectorLayer,
+    QgsVectorLayerUtils,
+)
 
 from ..qgis_plugin_tools.tools.i18n import tr
 

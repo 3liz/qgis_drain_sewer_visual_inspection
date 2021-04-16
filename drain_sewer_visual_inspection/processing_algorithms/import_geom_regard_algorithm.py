@@ -1,9 +1,14 @@
-from qgis.core import (QgsCoordinateTransform, QgsProcessing,
-                       QgsProcessingAlgorithm, QgsProcessingException,
-                       QgsProcessingOutputNumber,
-                       QgsProcessingParameterFeatureSource,
-                       QgsProcessingParameterField,
-                       QgsProcessingParameterVectorLayer, QgsVectorLayerUtils)
+from qgis.core import (
+    QgsCoordinateTransform,
+    QgsProcessing,
+    QgsProcessingAlgorithm,
+    QgsProcessingException,
+    QgsProcessingOutputNumber,
+    QgsProcessingParameterFeatureSource,
+    QgsProcessingParameterField,
+    QgsProcessingParameterVectorLayer,
+    QgsVectorLayerUtils,
+)
 
 from ..qgis_plugin_tools.tools.i18n import tr
 

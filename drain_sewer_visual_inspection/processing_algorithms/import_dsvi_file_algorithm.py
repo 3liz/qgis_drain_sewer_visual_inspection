@@ -5,13 +5,21 @@ import hashlib
 import io
 import os.path
 
-from qgis.core import (QgsExpression, QgsExpressionContext,
-                       QgsExpressionContextUtils, QgsFeatureRequest, QgsField,
-                       QgsProcessing, QgsProcessingAlgorithm,
-                       QgsProcessingException, QgsProcessingOutputNumber,
-                       QgsProcessingParameterFile,
-                       QgsProcessingParameterVectorLayer, QgsVectorLayerUtils,
-                       edit)
+from qgis.core import (
+    QgsExpression,
+    QgsExpressionContext,
+    QgsExpressionContextUtils,
+    QgsFeatureRequest,
+    QgsField,
+    QgsProcessing,
+    QgsProcessingAlgorithm,
+    QgsProcessingException,
+    QgsProcessingOutputNumber,
+    QgsProcessingParameterFile,
+    QgsProcessingParameterVectorLayer,
+    QgsVectorLayerUtils,
+    edit,
+)
 from qgis.PyQt.QtCore import QVariant
 
 from ..qgis_plugin_tools.tools.fields import provider_fields

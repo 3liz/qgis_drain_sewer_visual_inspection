@@ -1,0 +1,1776 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Visual Inspection NF EN 13508-2">
+      
+      
+      
+        <meta name="author" content="3Liz">
+      
+      
+        <link rel="canonical" href="https://docs.3liz.org/qgis_drain_sewer_visual_inspection/model/">
+      
+      <link rel="icon" href="../icon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.1">
+    
+    
+      
+        <title>Data model - Drain Sewer Visual Inspection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.9299cb39.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4cae4f">
+        
+      
+    
+    
+    
+      
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="deep-orange">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#modele-de-donnees" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Drain Sewer Visual Inspection" class="md-header__button md-logo" aria-label="Drain Sewer Visual Inspection" data-md-component="logo">
+      
+  <img src="../icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Drain Sewer Visual Inspection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/3liz/qgis_drain_sewer_visual_inspection/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../" class="md-tabs__link">
+      docs.3liz.org
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Data model
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../database/" class="md-tabs__link">
+      Database
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Drain Sewer Visual Inspection" class="md-nav__button md-logo" aria-label="Drain Sewer Visual Inspection" data-md-component="logo">
+      
+  <img src="../icon.png" alt="logo">
+
+    </a>
+    Drain Sewer Visual Inspection
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/3liz/qgis_drain_sewer_visual_inspection/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        docs.3liz.org
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Data model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Data model
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    Relations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    Tables
+  </a>
+  
+    <nav class="md-nav" aria-label="Tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geom-regard" class="md-nav__link">
+    Geom Regard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geom-troncon" class="md-nav__link">
+    Geom Troncon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obs" class="md-nav__link">
+    Obs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file" class="md-nav__link">
+    File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troncon" class="md-nav__link">
+    Troncon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geom-obs" class="md-nav__link">
+    Geom Obs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regard" class="md-nav__link">
+    Regard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        Database
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    Relations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    Tables
+  </a>
+  
+    <nav class="md-nav" aria-label="Tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geom-regard" class="md-nav__link">
+    Geom Regard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geom-troncon" class="md-nav__link">
+    Geom Troncon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obs" class="md-nav__link">
+    Obs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file" class="md-nav__link">
+    File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troncon" class="md-nav__link">
+    Troncon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geom-obs" class="md-nav__link">
+    Geom Obs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regard" class="md-nav__link">
+    Regard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/3liz/qgis_drain_sewer_visual_inspection/edit/master/docs/model.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="modele-de-donnees">Modèle de données<a class="headerlink" href="#modele-de-donnees" title="Permanent link">#</a></h1>
+<h2 id="relations">Relations<a class="headerlink" href="#relations" title="Permanent link">#</a></h2>
+<details class="info"><summary>Légende</summary><p>Flèche pleine : relation de projet</p>
+<p>Losange vide : jointure spatiale</p>
+</details>
+<div class="mermaid">classDiagram
+geom_regard
+geom_troncon
+obs
+file
+troncon
+geom_obs
+regard
+view_regard_geolocalized
+file &lt;|-- obs
+file &lt;|-- regard
+file &lt;|-- troncon
+troncon &lt;|-- obs
+geom_regard &lt;|-- regard
+geom_troncon &lt;|-- troncon
+geom_regard : geom Point
+geom_regard : id PK
+geom_regard : label
+geom_troncon : geom LineString
+geom_troncon : id PK
+geom_troncon : label
+geom_troncon : id_geom_regard_amont
+geom_troncon : id_geom_regard_aval
+geom_obs &lt;|-- geom_troncon
+geom_obs &lt;|-- obs
+obs : id PK
+obs : a
+obs : b
+obs : c
+obs : d
+obs : e
+obs : f
+obs : g
+obs : h
+obs : i
+obs : ...
+file : id PK
+file : basename
+file : encoding
+file : lang
+file : version
+file : hashcontent
+file : date_debut
+file : date_fin
+troncon : id PK
+troncon : aaa
+troncon : aab
+troncon : aac
+troncon : aad
+troncon : aae
+troncon : aaf
+troncon : aag
+troncon : aah
+troncon : aai
+troncon : ...
+geom_obs : geom Point
+geom_obs : id PK
+regard : id PK
+regard : caa
+regard : cab
+regard : caj
+regard : cal
+regard : cam
+regard : can
+regard : cao
+regard : cap
+regard : caq
+regard : ...</div>
+<h2 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">#</a></h2>
+<details class="info"><summary>Légende</summary><p>Champ géométrique en <em>italique</em></p>
+<p>Champ de clé primaire en <strong>gras</strong></p>
+<!-- Champ de clé étrangère cliquable avec la mention "FK" -->
+</details>
+<h3 id="geom-regard">Geom Regard<a class="headerlink" href="#geom-regard" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><em>geom</em></td>
+<td align="center">Point</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center"><strong>id</strong></td>
+<td align="center">qlonglong</td>
+<td align="center">Identifiant</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">label</td>
+<td align="center">QString</td>
+<td align="center">Référence</td>
+</tr>
+</tbody>
+</table>
+<h3 id="geom-troncon">Geom Troncon<a class="headerlink" href="#geom-troncon" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><em>geom</em></td>
+<td align="center">LineString</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center"><strong>id</strong></td>
+<td align="center">qlonglong</td>
+<td align="center">Identifiant</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">label</td>
+<td align="center">QString</td>
+<td align="center">Référence</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">id_geom_regard_amont</td>
+<td align="center">int</td>
+<td align="center">Identifiant de la géométrie de regard amont</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">id_geom_regard_aval</td>
+<td align="center">int</td>
+<td align="center">Identifiant de la géométrie de regard aval</td>
+</tr>
+</tbody>
+</table>
+<h3 id="obs">Obs<a class="headerlink" href="#obs" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center"><strong>id</strong></td>
+<td align="center">qlonglong</td>
+<td align="center">Identifiant</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">a</td>
+<td align="center">QString</td>
+<td align="center">Code principal</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">b</td>
+<td align="center">QString</td>
+<td align="center">Caractérisation 1</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">c</td>
+<td align="center">QString</td>
+<td align="center">Caractérisation 2</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">d</td>
+<td align="center">QString</td>
+<td align="center">Quantification 1</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">e</td>
+<td align="center">QString</td>
+<td align="center">Quantification 2</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">f</td>
+<td align="center">QString</td>
+<td align="center">Remarques</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">g</td>
+<td align="center">QString</td>
+<td align="center">Emplacement circonférentiel 1</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">h</td>
+<td align="center">QString</td>
+<td align="center">Emplacement circonférentiel 2</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">i</td>
+<td align="center">double</td>
+<td align="center">Emplacement longitudinal ou vertical</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">j</td>
+<td align="center">QString</td>
+<td align="center">Code de défaut continu</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">k</td>
+<td align="center">QString</td>
+<td align="center">Assemblage</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">l</td>
+<td align="center">QString</td>
+<td align="center">Champ de description de l'emplacement</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">m</td>
+<td align="center">QString</td>
+<td align="center">Référence de photographie</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">n</td>
+<td align="center">QString</td>
+<td align="center">Référence de vidéo</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">id_troncon</td>
+<td align="center">int</td>
+<td align="center">Identifiant de troncon</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">id_file</td>
+<td align="center">int</td>
+<td align="center">Identifiant de fichier</td>
+</tr>
+</tbody>
+</table>
+<h3 id="file">File<a class="headerlink" href="#file" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center"><strong>id</strong></td>
+<td align="center">qlonglong</td>
+<td align="center">Id</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">basename</td>
+<td align="center">QString</td>
+<td align="center">Nom</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">encoding</td>
+<td align="center">QString</td>
+<td align="center">Encodage</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">lang</td>
+<td align="center">QString</td>
+<td align="center">Langue</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">version</td>
+<td align="center">QString</td>
+<td align="center">Version</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">hashcontent</td>
+<td align="center">QString</td>
+<td align="center">Hash</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">date_debut</td>
+<td align="center">QString</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">date_fin</td>
+<td align="center">QString</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="troncon">Troncon<a class="headerlink" href="#troncon" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center"><strong>id</strong></td>
+<td align="center">qlonglong</td>
+<td align="center">Identifiant</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">aaa</td>
+<td align="center">QString</td>
+<td align="center">Référence de tronçon</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">aab</td>
+<td align="center">QString</td>
+<td align="center">Référence du nœud de départ</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">aac</td>
+<td align="center">QString</td>
+<td align="center">Coordonnées du nœud de départ</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">aad</td>
+<td align="center">QString</td>
+<td align="center">Référence du nœud 1</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">aae</td>
+<td align="center">QString</td>
+<td align="center">Coordonnées du nœud 1</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">aaf</td>
+<td align="center">QString</td>
+<td align="center">Référence du nœud 2</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">aag</td>
+<td align="center">QString</td>
+<td align="center">Coordonnées du nœud 2</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">aah</td>
+<td align="center">QString</td>
+<td align="center">Emplacement longitudinal du point de départ de la canalisation latérale</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">aai</td>
+<td align="center">QString</td>
+<td align="center">Emplacement circonférentiel du point de départ de la canalisation latérale</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">aaj</td>
+<td align="center">QString</td>
+<td align="center">Emplacement</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">aak</td>
+<td align="center">QString</td>
+<td align="center">Sens de l'écoulement</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">aal</td>
+<td align="center">QString</td>
+<td align="center">Type d'emplacement</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">aam</td>
+<td align="center">QString</td>
+<td align="center">Autorité responsable</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">aan</td>
+<td align="center">QString</td>
+<td align="center">Ville ou village</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">aao</td>
+<td align="center">QString</td>
+<td align="center">Quartier</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">aap</td>
+<td align="center">QString</td>
+<td align="center">Nom du réseau d'assainissement</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">aaq</td>
+<td align="center">QString</td>
+<td align="center">Propriété foncière</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">aat</td>
+<td align="center">QString</td>
+<td align="center">Référence du nœud 3</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">aau</td>
+<td align="center">QString</td>
+<td align="center">Coordonnées du nœud 3</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center">aav</td>
+<td align="center">QString</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">aba</td>
+<td align="center">QString</td>
+<td align="center">Norme</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">abb</td>
+<td align="center">QString</td>
+<td align="center">Système de codage initial</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td align="center">abc</td>
+<td align="center">QString</td>
+<td align="center">Point de référence longitudinal</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">abe</td>
+<td align="center">QString</td>
+<td align="center">Méthode d'inspection</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td align="center">abf</td>
+<td align="center">QString</td>
+<td align="center">Date d'inspection</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td align="center">abg</td>
+<td align="center">QString</td>
+<td align="center">Heure d'inspection</td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td align="center">abh</td>
+<td align="center">QString</td>
+<td align="center">Nom de l'inspecteur</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td align="center">abi</td>
+<td align="center">QString</td>
+<td align="center">Référence de fonction de l’inspecteur</td>
+</tr>
+<tr>
+<td align="center">30</td>
+<td align="center">abj</td>
+<td align="center">QString</td>
+<td align="center">Référence de fonction de l’employeur</td>
+</tr>
+<tr>
+<td align="center">31</td>
+<td align="center">abk</td>
+<td align="center">QString</td>
+<td align="center">Support de stockage des images vidéo</td>
+</tr>
+<tr>
+<td align="center">32</td>
+<td align="center">abl</td>
+<td align="center">QString</td>
+<td align="center">Support de stockage des photographies</td>
+</tr>
+<tr>
+<td align="center">33</td>
+<td align="center">abm</td>
+<td align="center">QString</td>
+<td align="center">Système de position sur la bande vidéo</td>
+</tr>
+<tr>
+<td align="center">34</td>
+<td align="center">abn</td>
+<td align="center">QString</td>
+<td align="center">Référence de photographie</td>
+</tr>
+<tr>
+<td align="center">35</td>
+<td align="center">abo</td>
+<td align="center">QString</td>
+<td align="center">Référence de vidéo</td>
+</tr>
+<tr>
+<td align="center">36</td>
+<td align="center">abp</td>
+<td align="center">QString</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">37</td>
+<td align="center">abq</td>
+<td align="center">double</td>
+<td align="center">Longueur</td>
+</tr>
+<tr>
+<td align="center">38</td>
+<td align="center">abr</td>
+<td align="center">QString</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">39</td>
+<td align="center">abs</td>
+<td align="center">QString</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">40</td>
+<td align="center">aca</td>
+<td align="center">QString</td>
+<td align="center">Forme</td>
+</tr>
+<tr>
+<td align="center">41</td>
+<td align="center">acb</td>
+<td align="center">QString</td>
+<td align="center">Hauteur</td>
+</tr>
+<tr>
+<td align="center">42</td>
+<td align="center">acc</td>
+<td align="center">QString</td>
+<td align="center">Largeur</td>
+</tr>
+<tr>
+<td align="center">43</td>
+<td align="center">acd</td>
+<td align="center">QString</td>
+<td align="center">Matériau</td>
+</tr>
+<tr>
+<td align="center">44</td>
+<td align="center">ace</td>
+<td align="center">QString</td>
+<td align="center">Type de revêtement</td>
+</tr>
+<tr>
+<td align="center">45</td>
+<td align="center">acf</td>
+<td align="center">QString</td>
+<td align="center">Matériau de revêtement</td>
+</tr>
+<tr>
+<td align="center">46</td>
+<td align="center">acg</td>
+<td align="center">QString</td>
+<td align="center">Longueur unitaire de conduite</td>
+</tr>
+<tr>
+<td align="center">47</td>
+<td align="center">ach</td>
+<td align="center">QString</td>
+<td align="center">Profondeur au nœud de départ</td>
+</tr>
+<tr>
+<td align="center">48</td>
+<td align="center">aci</td>
+<td align="center">QString</td>
+<td align="center">Profondeur au nœud d’arrivée</td>
+</tr>
+<tr>
+<td align="center">49</td>
+<td align="center">acj</td>
+<td align="center">QString</td>
+<td align="center">Type de branchement ou de collecteur</td>
+</tr>
+<tr>
+<td align="center">50</td>
+<td align="center">ack</td>
+<td align="center">QString</td>
+<td align="center">Utilisation du branchement ou du collecteur</td>
+</tr>
+<tr>
+<td align="center">51</td>
+<td align="center">acl</td>
+<td align="center">QString</td>
+<td align="center">Position stratégique</td>
+</tr>
+<tr>
+<td align="center">52</td>
+<td align="center">acm</td>
+<td align="center">QString</td>
+<td align="center">Nettoyage</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">acn</td>
+<td align="center">QString</td>
+<td align="center">Année de mise en service</td>
+</tr>
+<tr>
+<td align="center">54</td>
+<td align="center">ada</td>
+<td align="center">QString</td>
+<td align="center">Précipitations</td>
+</tr>
+<tr>
+<td align="center">55</td>
+<td align="center">adb</td>
+<td align="center">QString</td>
+<td align="center">Température</td>
+</tr>
+<tr>
+<td align="center">56</td>
+<td align="center">adc</td>
+<td align="center">QString</td>
+<td align="center">Régulation du débit</td>
+</tr>
+<tr>
+<td align="center">57</td>
+<td align="center">ade</td>
+<td align="center">QString</td>
+<td align="center">Remarque générale</td>
+</tr>
+<tr>
+<td align="center">58</td>
+<td align="center">aea</td>
+<td align="center">QString</td>
+<td align="center">Modification Référence de vidéo</td>
+</tr>
+<tr>
+<td align="center">59</td>
+<td align="center">aeb</td>
+<td align="center">QString</td>
+<td align="center">Modification Référence de photographie</td>
+</tr>
+<tr>
+<td align="center">60</td>
+<td align="center">aec</td>
+<td align="center">QString</td>
+<td align="center">Modification Section transversale</td>
+</tr>
+<tr>
+<td align="center">61</td>
+<td align="center">aed</td>
+<td align="center">QString</td>
+<td align="center">Modification Matériau</td>
+</tr>
+<tr>
+<td align="center">62</td>
+<td align="center">aee</td>
+<td align="center">QString</td>
+<td align="center">Modification Revêtement</td>
+</tr>
+<tr>
+<td align="center">63</td>
+<td align="center">aef</td>
+<td align="center">QString</td>
+<td align="center">Modification Longueur unitaire de conduite</td>
+</tr>
+<tr>
+<td align="center">64</td>
+<td align="center">aeg</td>
+<td align="center">QString</td>
+<td align="center">Modification Précipitations</td>
+</tr>
+<tr>
+<td align="center">65</td>
+<td align="center">id_regard1</td>
+<td align="center">int</td>
+<td align="center">Identifant regard 1</td>
+</tr>
+<tr>
+<td align="center">66</td>
+<td align="center">id_regard2</td>
+<td align="center">int</td>
+<td align="center">Identifant regard 2</td>
+</tr>
+<tr>
+<td align="center">67</td>
+<td align="center">id_regard3</td>
+<td align="center">int</td>
+<td align="center">Identifant regard 3</td>
+</tr>
+<tr>
+<td align="center">68</td>
+<td align="center">id_geom_troncon</td>
+<td align="center">int</td>
+<td align="center">Identifiant de la géométrie de troncon</td>
+</tr>
+<tr>
+<td align="center">69</td>
+<td align="center">id_file</td>
+<td align="center">int</td>
+<td align="center">Identifiant du fichier</td>
+</tr>
+</tbody>
+</table>
+<h3 id="geom-obs">Geom Obs<a class="headerlink" href="#geom-obs" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><em>geom</em></td>
+<td align="center">Point</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center"><strong>id</strong></td>
+<td align="center">qlonglong</td>
+<td align="center">Identifiant</td>
+</tr>
+</tbody>
+</table>
+<h3 id="regard">Regard<a class="headerlink" href="#regard" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center"><strong>id</strong></td>
+<td align="center">qlonglong</td>
+<td align="center">Identifiant</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">caa</td>
+<td align="center">QString</td>
+<td align="center">Référence de nœud</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">cab</td>
+<td align="center">QString</td>
+<td align="center">Coordonnées du nœud</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">caj</td>
+<td align="center">QString</td>
+<td align="center">Emplacement</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">cal</td>
+<td align="center">QString</td>
+<td align="center">Type d'emplacement</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">cam</td>
+<td align="center">QString</td>
+<td align="center">Autorité responsable</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">can</td>
+<td align="center">QString</td>
+<td align="center">Ville ou village</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">cao</td>
+<td align="center">QString</td>
+<td align="center">Quartier</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">cap</td>
+<td align="center">QString</td>
+<td align="center">Nom du réseau d’assainissement</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">caq</td>
+<td align="center">QString</td>
+<td align="center">Propriété foncière</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">car</td>
+<td align="center">QString</td>
+<td align="center">Type de nœud</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">cas</td>
+<td align="center">QString</td>
+<td align="center">Niveau du tampon</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">cba</td>
+<td align="center">QString</td>
+<td align="center">Norme</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">cbb</td>
+<td align="center">QString</td>
+<td align="center">Système de codage initial</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">cbc</td>
+<td align="center">QString</td>
+<td align="center">Point de référence vertical</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">cbd</td>
+<td align="center">QString</td>
+<td align="center">Point de référence circonférentiel</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">cbe</td>
+<td align="center">QString</td>
+<td align="center">Méthode d'inspection</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">cbf</td>
+<td align="center">QString</td>
+<td align="center">Date d'inspection</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">cbg</td>
+<td align="center">QString</td>
+<td align="center">Heure d'inspection</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">cbh</td>
+<td align="center">QString</td>
+<td align="center">Nom de l'inspecteur</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center">cbi</td>
+<td align="center">QString</td>
+<td align="center">Référence de fonction de l’inspecteur</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">cbj</td>
+<td align="center">QString</td>
+<td align="center">Référence de fonction de l’employeur</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">cbk</td>
+<td align="center">QString</td>
+<td align="center">Stockage des images vidéo</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td align="center">cbl</td>
+<td align="center">QString</td>
+<td align="center">Format de stockage des photographies</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">cbm</td>
+<td align="center">QString</td>
+<td align="center">Système d'enregistrement de la position sur bande</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td align="center">cbn</td>
+<td align="center">QString</td>
+<td align="center">Référence de photographie</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td align="center">cbo</td>
+<td align="center">QString</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td align="center">cca</td>
+<td align="center">QString</td>
+<td align="center">Forme de l’accès</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td align="center">ccb</td>
+<td align="center">QString</td>
+<td align="center">Largeur de l’accès</td>
+</tr>
+<tr>
+<td align="center">30</td>
+<td align="center">ccc</td>
+<td align="center">QString</td>
+<td align="center">Longueur de l’accès</td>
+</tr>
+<tr>
+<td align="center">31</td>
+<td align="center">ccd</td>
+<td align="center">QString</td>
+<td align="center">Matériau</td>
+</tr>
+<tr>
+<td align="center">32</td>
+<td align="center">ccg</td>
+<td align="center">QString</td>
+<td align="center">Longueur unitaire des éléments de chambre</td>
+</tr>
+<tr>
+<td align="center">33</td>
+<td align="center">cck</td>
+<td align="center">QString</td>
+<td align="center">Utilisation du réseau d'assainissement</td>
+</tr>
+<tr>
+<td align="center">34</td>
+<td align="center">ccl</td>
+<td align="center">QString</td>
+<td align="center">Position stratégique</td>
+</tr>
+<tr>
+<td align="center">35</td>
+<td align="center">ccm</td>
+<td align="center">QString</td>
+<td align="center">Nettoyage</td>
+</tr>
+<tr>
+<td align="center">36</td>
+<td align="center">ccn</td>
+<td align="center">QString</td>
+<td align="center">Année de mise en service</td>
+</tr>
+<tr>
+<td align="center">37</td>
+<td align="center">cco</td>
+<td align="center">QString</td>
+<td align="center">Forme du tampon</td>
+</tr>
+<tr>
+<td align="center">38</td>
+<td align="center">ccp</td>
+<td align="center">QString</td>
+<td align="center">Matériau du tampon</td>
+</tr>
+<tr>
+<td align="center">39</td>
+<td align="center">ccq</td>
+<td align="center">QString</td>
+<td align="center">Largeur du tampon</td>
+</tr>
+<tr>
+<td align="center">40</td>
+<td align="center">ccr</td>
+<td align="center">QString</td>
+<td align="center">Longueur du tampon</td>
+</tr>
+<tr>
+<td align="center">41</td>
+<td align="center">ccs</td>
+<td align="center">QString</td>
+<td align="center">Types de système de descente</td>
+</tr>
+<tr>
+<td align="center">42</td>
+<td align="center">cda</td>
+<td align="center">QString</td>
+<td align="center">Précipitations</td>
+</tr>
+<tr>
+<td align="center">43</td>
+<td align="center">cdb</td>
+<td align="center">QString</td>
+<td align="center">Température</td>
+</tr>
+<tr>
+<td align="center">44</td>
+<td align="center">cdc</td>
+<td align="center">QString</td>
+<td align="center">Régulation du débit</td>
+</tr>
+<tr>
+<td align="center">45</td>
+<td align="center">cdd</td>
+<td align="center">QString</td>
+<td align="center">Atmosphère</td>
+</tr>
+<tr>
+<td align="center">46</td>
+<td align="center">cde</td>
+<td align="center">QString</td>
+<td align="center">Remarque générale</td>
+</tr>
+<tr>
+<td align="center">47</td>
+<td align="center">cea</td>
+<td align="center">QString</td>
+<td align="center">Modification Référence de vidéo</td>
+</tr>
+<tr>
+<td align="center">48</td>
+<td align="center">ceb</td>
+<td align="center">QString</td>
+<td align="center">Modification Référence de photographie</td>
+</tr>
+<tr>
+<td align="center">49</td>
+<td align="center">ced</td>
+<td align="center">QString</td>
+<td align="center">Modification Matériau</td>
+</tr>
+<tr>
+<td align="center">50</td>
+<td align="center">cef</td>
+<td align="center">QString</td>
+<td align="center">Modification Longueur unitaire de chambre</td>
+</tr>
+<tr>
+<td align="center">51</td>
+<td align="center">ceg</td>
+<td align="center">QString</td>
+<td align="center">Modification Précipitations</td>
+</tr>
+<tr>
+<td align="center">52</td>
+<td align="center">ceh</td>
+<td align="center">QString</td>
+<td align="center">Modification Types de système de descente</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">id_geom_regard</td>
+<td align="center">int</td>
+<td align="center">Identifiant de la géométrie de regard</td>
+</tr>
+<tr>
+<td align="center">54</td>
+<td align="center">id_file</td>
+<td align="center">int</td>
+<td align="center">Identifiant du fichier</td>
+</tr>
+</tbody>
+</table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href=".." class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../database/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Database
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            <span class="copyleft">&copy;</span> 3Liz
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/3LIZ_news" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.linkedin.com/company/3liz" target="_blank" rel="noopener" title="www.linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/3liz/" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://hub.docker.com/u/3liz" target="_blank" rel="noopener" title="hub.docker.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.7353b375.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@8.6.4/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

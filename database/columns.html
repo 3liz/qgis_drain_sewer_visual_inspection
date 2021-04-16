@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>qgistest Database</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+        <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+        <!-- Code Mirror -->
+        <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+        <!-- Fonts -->
+        <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+        <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+        <!-- Salvattore -->
+        <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+        <!-- SchemaSpy -->
+        <link rel="stylesheet" href="schemaSpy.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="bower/html5shiv/html5shiv.min.js"></script>
+        <script src="bower/respond/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+    <body class="hold-transition skin-blue layout-top-nav">
+        <div class="wrapper">
+            <header class="main-header">
+                <nav class="navbar navbar-static-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a href="index.html" class="navbar-brand"><b>qgistest</b> Database</a>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+                                <li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+                                <li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+                                <li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+                                <li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>
+                                <li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+                                <li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                        <!-- Navbar Right Menu -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </header>
+            <!-- Main content -->
+            <!-- Full Width Column -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Columns</h1>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            <h3 class="box-title">Columns</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="column_table" class="table table-bordered table-striped dataTable" role="grid">
+                                <thead align='left'>
+                                    <tr>
+                                        <th>Table</th>
+                                        <th>Type</th>
+                                        <th>Column</th>
+                                        <th>Type</th>
+                                        <th>Size</th>
+                                        <th title='Are nulls allowed?'>Nullable</th>
+                                        <th title='Is column automatically updated?'>Auto</th>
+                                        <th title='Default value'>Default</th>
+                                        <th title='Comments' class="toggle"><span>Comments</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <script>
+                    var tableData = [
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aal",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "l",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abo",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "k",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aca",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acf",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "h",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "caq",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccp",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "j",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "date_fin",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aaj",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aci",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aap",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cal",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abc",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cda",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbl",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id_file",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abq",
+        "type": "numeric",
+        "length": 131089,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbd",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ada",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aee",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccn",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aau",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acg",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbg",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abe",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_obs",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_geom_regard_aval",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbm",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abg",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "f",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "view_regard_geolocalized",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_geom_regard",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_regard1",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id_geom_regard",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "e",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ace",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "version",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "geom",
+        "type": "geometry",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('sewer.obs_id_seq'::regclass)",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id_geom_troncon",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abl",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "date_debut",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_geom_regard_amont",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "d",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aab",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "geom",
+        "type": "geometry",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abp",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acj",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acl",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aaa",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acn",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "encoding",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbn",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aac",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ach",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "view_regard_geolocalized",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "caa",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "b",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abm",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aec",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbk",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_regard",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('sewer.geom_regard_id_seq'::regclass)",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abf",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbf",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abh",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "view_regard_geolocalized",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_file",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aea",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cde",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "view_regard_geolocalized",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccr",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbi",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ack",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "caj",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "m",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aao",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "n",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abn",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_regard3",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "geom",
+        "type": "geometry",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abj",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cef",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "label",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aan",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cao",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cdc",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cas",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cea",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "hashcontent",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abk",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbc",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_troncon",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('sewer.geom_troncon_id_seq'::regclass)",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aag",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cdd",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id_file",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abs",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aae",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "geom_regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "label",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "c",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acm",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccd",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ceb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aeb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbo",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abi",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aav",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "a",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "i",
+        "type": "numeric",
+        "length": 131089,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aai",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "caa",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ceg",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acd",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "view_regard_geolocalized",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "geom",
+        "type": "geometry",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ade",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "lang",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbj",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccm",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccs",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cck",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "adb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "can",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbh",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('sewer.file_id_seq'::regclass)",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cca",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aam",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccc",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cab",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aaq",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbe",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id_troncon",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cap",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccq",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "car",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cba",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "obs",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "g",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cam",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aad",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aaf",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ceh",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "file",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "basename",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cco",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccl",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id_file",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aeg",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "acc",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cdb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_regard2",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ccg",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aah",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aat",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "abr",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aak",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ced",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "adc",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aef",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aba",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "regard",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "cbb",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "troncon",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "aed",
+        "type": "varchar",
+        "length": 255,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    }
+];
+                    var config = {
+                        pagination: true
+                    };
+                </script>
+            </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div>
+                    <div class="pull-right hidden-xs">
+                        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+                        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+                    </div>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                </div>
+                <!-- /.container -->
+            </footer>
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery 2.2.3 -->
+        <script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+        <script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+        <script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+        <!-- SheetJS -->
+        <script src="bower/js-xlsx/xlsx.full.min.js"></script>
+        <!-- pdfmake -->
+        <script src="bower/pdfmake/pdfmake.min.js"></script>
+        <script src="bower/pdfmake/vfs_fonts.js"></script>
+        <!-- SlimScroll -->
+        <script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+        <!-- Salvattore -->
+        <script src="bower/salvattore/salvattore.min.js"></script>
+        <!-- AnchorJS -->
+        <script src="bower/anchor-js/anchor.min.js"></script>
+        <!-- CodeMirror -->
+        <script src="bower/codemirror/codemirror.js"></script>
+        <script src="bower/codemirror/sql.js"></script>
+        <!-- AdminLTE App -->
+        <script src="bower/admin-lte/dist/js/app.min.js"></script>
+        <script src="column.js"></script>
+        <script src="schemaSpy.js"></script>
+    </body>
+</html>

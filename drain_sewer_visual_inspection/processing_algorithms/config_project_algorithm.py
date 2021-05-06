@@ -387,15 +387,56 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
 
         # Creation de la symbologie g_obs
         g_obs_rules = (
-            'BAA', 'BAB', 'BAC', 'BAD', 'BAF', 'BAG', 'BAI', 'BAJ',
-            'BBA', 'BBB', 'BBC', 'BBE', 'BBF', 'BCB', 'BDC'
+            'BAA', 'BAB', 'BAC', 'BAD', 'BAE', 'BAF', 'BAG', 'BAH',
+            'BAI', 'BAJ', 'BAK', 'BAL', 'BAM', 'BAN', 'BAO', 'BAP',
+            'BBA', 'BBB', 'BBC', 'BBD', 'BBE', 'BBF', 'BBG', 'BBH',
+            'BCA', 'BCB', 'BCC', 'BDA', 'BDB', 'BDC', 'BDD', 'BDE',
+            'BDF', 'BDG'
         )
+        g_obs_rule_descs = {
+            'BAA': 'Déformation',
+            'BAB': 'Fissure',
+            'BAC': 'Rupture/Effondrement',
+            'BAD': 'Elt maçonnerie',
+            'BAE': 'Mortier manquant',
+            'BAF': 'Dégradation de surface',
+            'BAG': 'Branchement pénétrant',
+            'BAH': 'Raccordement défectueux',
+            'BAI': 'Joint étanchéité apparent',
+            'BAJ': 'Déplacement d\'assemblage',
+            'BAK': 'Défaut de révêtement',
+            'BAL': 'Réparation défectueuse',
+            'BAM': 'Défaut soudure',
+            'BAN': 'Conduite poreuse',
+            'BAO': 'Sol visible',
+            'BAP': 'Trou visible',
+            'BBA': 'Racines',
+            'BBB': 'Dépots Adhérents',
+            'BBC': 'Dépôts',
+            'BBD': 'Entrée de terre',
+            'BBE': 'Autres obstacles',
+            'BBF': 'Infiltration',
+            'BBG': 'Exfiltration',
+            'BBH': 'Vermine',
+            'BCA': 'Raccordement',
+            'BCB': 'Réparation',
+            'BCC': 'Courbure de collecteur',
+            'BDA': 'Photographie générale',
+            'BDB': 'Remarque générale',
+            'BDC': 'Inspection abandonnée',
+            'BDD': 'Niveau d\'eau',
+            'BDE': 'Ecoulement dans une canlisation entrante',
+            'BDF': 'Atmosphère canalisation',
+            'BDG': 'Perte de visibilité'
+        }
         g_obs_rootrule = QgsRuleBasedRenderer.Rule(None)
+        rendering_pass_idx = len(g_obs_rules)
         for rule in g_obs_rules:
             # get svg path
             svg_path = resources_path('styles', 'img_obs', rule + '.svg')
             # create svg symbol layer
             svg_symbol_layer = QgsSvgMarkerSymbolLayer(svg_path)
+            svg_symbol_layer.setRenderingPass(rendering_pass_idx)
             # create white square symbol layer for the backend
             simple_symbol_layer = QgsSimpleMarkerSymbolLayer(
                 shape=QgsSimpleMarkerSymbolLayerBase.Circle,
@@ -403,6 +444,7 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
                 color=QColor('white'),
                 strokeColor=QColor('white')
             )
+            simple_symbol_layer.setRenderingPass(rendering_pass_idx)
             # create marker
             svg_marker = QgsMarkerSymbol()
             # set the backend symbol layer
@@ -415,8 +457,15 @@ class ConfigProjectAlgorithm(QgsProcessingAlgorithm):
                 QgsExpression.createFieldEqualityExpression('a', rule),
                 rule
             )
+            if rule in g_obs_rule_descs:
+                svg_rule.setLabel(g_obs_rule_descs[rule])
+                svg_rule.setDescription('{}: {}'.format(
+                    rule,
+                    g_obs_rule_descs[rule]
+                ))
             # add rule
             g_obs_rootrule.appendChild(svg_rule)
+            rendering_pass_idx -= 1
         g_obs_rootrule.appendChild(
             QgsRuleBasedRenderer.Rule(
                 QgsMarkerSymbol.createSimple(

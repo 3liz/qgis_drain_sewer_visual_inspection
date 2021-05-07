@@ -4,7 +4,8 @@ QGIS plugin for drain and sewer systems visual inspection coding system (EN 1350
 
 The documentation is available on [docs.3liz.org](https://3liz.github.io/qgis_drain_sewer_visual_inspection/).
 
-* Travis status : [![Travis status](https://api.travis-ci.org/3liz/qgis_drain_sewer_visual_inspection.svg?branch=master)](https://travis-ci.org/3liz/qgis_drain_sewer_visual_inspection)
+* Translated on Transifex [![🗺 Translations](https://github.com/3liz/qgis_drain_sewer_visual_inspection/actions/workflows/transifex.yml/badge.svg)](https://github.com/3liz/qgis_drain_sewer_visual_inspection/actions/workflows/transifex.yml)
+* [![🎳 Tests](https://github.com/3liz/qgis_drain_sewer_visual_inspection/actions/workflows/tests.yml/badge.svg)](https://github.com/3liz/qgis_drain_sewer_visual_inspection/actions/workflows/tests.yml)
 * For testing with private confidential data, drop the ITV txt file into `test/data/confidential`
 
 ### SQL

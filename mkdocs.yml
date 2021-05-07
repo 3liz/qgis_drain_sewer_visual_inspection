@@ -11,7 +11,9 @@ site_dir: build
 nav:
     - docs.3liz.org: '../'
     - Home: index.md
+    - Installation: installation.md
     - Data model: model.md
+    - Changelog: changelog.md
     - Database: database/index.html
 
 markdown_extensions:

@@ -1,0 +1,122 @@
+name: 🎳 Tests
+
+on:
+  push:
+    paths:
+      - 'drain_sewer_visual_inspection/**'
+  pull_request:
+    paths:
+      - 'drain_sewer_visual_inspection/**'
+
+jobs:
+
+  unittests:
+    name: Tests QGIS
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .docker
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+
+      - name: Launching docker-compose
+        run: ./start.sh
+
+      - name: Running tests
+        run: ./exec.sh
+
+  flake8:
+    runs-on: ubuntu-latest
+    name: "Flake8"
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+          architecture: x64
+
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python requirements
+        run: pip install -r requirements/requirements-dev.txt
+
+      - name: Run flake8
+        run: flake8
+
+  release:
+    needs: [flake8, unittests]
+
+    runs-on: ubuntu-latest
+    if: github.repository == '3liz/qgis_drain_sewer_visual_inspection' && contains(github.ref, 'refs/tags/')
+
+    steps:
+    - name: Set env
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+    - name: Debug
+      run: |
+        echo ${{ env.RELEASE_VERSION }}
+        echo ${GITHUB_REF/refs\/tags\//}
+
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+
+    - name: Install qgis-plugin-ci
+      run: pip3 install git+https://github.com/opengisch/qgis-plugin-ci.git
+
+    - name: Install Qt lrelease
+      run: |
+        sudo apt-get update
+        sudo apt-get install qt5-default qttools5-dev-tools
+
+    - name : Fetch current changelog
+      run: |
+        qgis-plugin-ci changelog ${GITHUB_REF/refs\/tags\//} >> release.md
+        cat release.md
+
+    - name: Create release on GitHub
+      id: create_release
+      uses: ncipollo/release-action@v1.7.3
+      with:
+        bodyFile: release.md
+        token: ${{ secrets.BOT_HUB_TOKEN }}
+
+    - name: Package the plugin and deploy it in the release
+      run: >-
+        qgis-plugin-ci
+        release ${GITHUB_REF/refs\/tags\//}
+        --github-token ${{ secrets.BOT_HUB_TOKEN }}
+        --transifex-token ${{ secrets.TRANSIFEX_TOKEN }}
+        --create-plugin-repo
+
+    - name: Tweet
+      uses: mugi111/tweet-trigger-release@v1.1
+      with:
+        consumer_key: ${{ secrets.TWITTER_CONSUMER_KEY }}
+        consumer_secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+        access_token_key: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
+        access_token_secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+        tweet_body: 'New release Drain Sewer Visual Inspection ${{ env.RELEASE_VERSION }} for #QGIS Desktop, standard EN 13508-2 https://github.com/3liz/qgis_drain_sewer_visual_inspection/releases'
+
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.BOT_HUB_TOKEN }}
+        repository: 3liz/3liz.github.io
+        event-type: merge-plugins
+        client-payload: '{"name": "drain_sewer_visual_inspection", "version": "${{ env.RELEASE_VERSION }}", "url": "https://github.com/3liz/qgis_drain_sewer_visual_inspection/releases/latest/download/plugins.xml"}'

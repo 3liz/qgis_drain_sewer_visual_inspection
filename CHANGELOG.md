@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.2.0 - 2021-05-XX
+## 0.2.0 - 2021-05-07
 
 * Styles: update geom_obs symbologie
 * Algorithm: define default value for parameter feature source 

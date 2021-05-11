@@ -77,7 +77,7 @@ jobs:
         python-version: 3.9
 
     - name: Install qgis-plugin-ci
-      run: pip3 install git+https://github.com/opengisch/qgis-plugin-ci.git
+      run: python -m pip install -r requirements/requirements-release.txt
 
     - name: Install Qt lrelease
       run: |

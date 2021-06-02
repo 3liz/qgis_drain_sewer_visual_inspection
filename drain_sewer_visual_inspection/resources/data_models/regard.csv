@@ -25,31 +25,33 @@ idx,name,type,typeName,length,precision,comment,alias
 24,cbl,10,String,0,0,,Format de stockage des photographies
 25,cbm,10,String,0,0,,Système d'enregistrement de la position sur bande
 26,cbn,10,String,0,0,,Référence de photographie
-27,cbo,10,String,0,0,,
-28,cca,10,String,0,0,,Forme de l’accès
-29,ccb,10,String,0,0,,Largeur de l’accès
-30,ccc,10,String,0,0,,Longueur de l’accès
-31,ccd,10,String,0,0,,Matériau
-32,ccg,10,String,0,0,,Longueur unitaire des éléments de chambre
-33,cck,10,String,0,0,,Utilisation du réseau d'assainissement
-34,ccl,10,String,0,0,,Position stratégique
-35,ccm,10,String,0,0,,Nettoyage
-36,ccn,10,String,0,0,,Année de mise en service
-37,cco,10,String,0,0,,Forme du tampon
-38,ccp,10,String,0,0,,Matériau du tampon
-39,ccq,10,String,0,0,,Largeur du tampon
-40,ccr,10,String,0,0,,Longueur du tampon
-41,ccs,10,String,0,0,,Types de système de descente
-42,cda,10,String,0,0,,Précipitations
-43,cdb,10,String,0,0,,Température
-44,cdc,10,String,0,0,,Régulation du débit
-45,cdd,10,String,0,0,,Atmosphère
-46,cde,10,String,0,0,,Remarque générale
-47,cea,10,String,0,0,,Modification Référence de vidéo
-48,ceb,10,String,0,0,,Modification Référence de photographie
-49,ced,10,String,0,0,,Modification Matériau
-50,cef,10,String,0,0,,Modification Longueur unitaire de chambre
-51,ceg,10,String,0,0,,Modification Précipitations
-52,ceh,10,String,0,0,,Modification Types de système de descente
-53,id_geom_regard,2,Integer,0,0,,Identifiant de la géométrie de regard
-54,id_file,2,Integer,0,0,,Identifiant du fichier
+27,cbo,10,String,0,0,,Référence vidéo
+28,cbp,10,String,0,0,,Objet de l'inspection
+29,cca,10,String,0,0,,Forme de l’accès
+30,ccb,10,String,0,0,,Largeur de l’accès
+31,ccc,10,String,0,0,,Longueur de l’accès
+32,ccd,10,String,0,0,,Matériau
+33,ccg,10,String,0,0,,Longueur unitaire des éléments de chambre
+34,cck,10,String,0,0,,Utilisation du réseau d'assainissement
+35,ccl,10,String,0,0,,Position stratégique
+36,ccm,10,String,0,0,,Nettoyage
+37,ccn,10,String,0,0,,Année de mise en service
+38,cco,10,String,0,0,,Forme du tampon
+39,ccp,10,String,0,0,,Matériau du tampon
+40,ccq,10,String,0,0,,Largeur du tampon
+41,ccr,10,String,0,0,,Longueur du tampon
+42,ccs,10,String,0,0,,Types de système de descente
+43,cct,10,String,0,0,,Matériau des échelons
+44,cda,10,String,0,0,,Précipitations
+45,cdb,10,String,0,0,,Température
+46,cdc,10,String,0,0,,Régulation du débit
+47,cdd,10,String,0,0,,Atmosphère
+48,cde,10,String,0,0,,Remarque générale
+49,cea,10,String,0,0,,Modification Référence de vidéo
+50,ceb,10,String,0,0,,Modification Référence de photographie
+51,ced,10,String,0,0,,Modification Matériau
+52,cef,10,String,0,0,,Modification Longueur unitaire de chambre
+53,ceg,10,String,0,0,,Modification Précipitations
+54,ceh,10,String,0,0,,Modification Types de système de descente
+55,id_geom_regard,2,Integer,0,0,,Identifiant de la géométrie de regard
+56,id_file,2,Integer,0,0,,Identifiant du fichier

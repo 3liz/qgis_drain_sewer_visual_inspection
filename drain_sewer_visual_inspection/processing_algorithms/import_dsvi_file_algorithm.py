@@ -433,11 +433,19 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                 return {self.SUCCESS: 0}
 
             d_tr = dict(tro)
-            if d_tr['aad'] and \
+            # The nodes ref are stored in AAB, AAD, AAF and AAT
+            if 'aab' in d_tr and \
+                    d_tr['aab'] and \
+                    d_tr['aab'] not in regard_node_refs and \
+                    d_tr['aab'] not in node_refs:
+                node_refs.append(d_tr['aab'])
+            if 'aad' in d_tr and \
+                    d_tr['aad'] and \
                     d_tr['aad'] not in regard_node_refs and \
                     d_tr['aad'] not in node_refs:
                 node_refs.append(d_tr['aad'])
-            if d_tr['aaf'] and \
+            if 'aaf' in d_tr and \
+                    d_tr['aaf'] and \
                     d_tr['aaf'] not in regard_node_refs and \
                     d_tr['aaf'] not in node_refs:
                 node_refs.append(d_tr['aaf'])
@@ -467,6 +475,9 @@ class ImportDsviFileAlgorithm(QgsProcessingAlgorithm):
                 return {self.SUCCESS: 0}
 
             d_tr = dict(tro)
+            # If AAD is not defined then it is equal to AAB
+            if 'aad' not in d:
+                d['aad'] = d['aab']
             if d_tr['aad'] and \
                     d_tr['aad'] in regard_refs:
                 tro += [('id_regard1', regard_ref_id[d_tr['aad']])]

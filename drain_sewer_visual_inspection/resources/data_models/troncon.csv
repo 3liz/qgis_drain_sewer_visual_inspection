@@ -34,7 +34,7 @@ idx,name,type,typeName,length,precision,comment,alias
 33,abm,10,String,0,0,,Système de position sur la bande vidéo
 34,abn,10,String,0,0,,Référence de photographie
 35,abo,10,String,0,0,,Référence de vidéo
-36,abp,10,String,0,0,,
+36,abp,10,String,0,0,,Objet de l'inspection
 37,abq,6,Real,0,0,,Longueur
 38,abr,10,String,0,0,,
 39,abs,10,String,0,0,,
